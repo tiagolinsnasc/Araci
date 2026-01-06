@@ -3,7 +3,8 @@ extends Control
 @onready var coins_counter: Label = $container/coins_conteiner/coins_counter
 @onready var score_counter: Label = $container/score_container/score_counter
 @onready var life_counter: Label = $container/life_conteiner/life_counter
-
+@onready var ambient_sound: AudioStreamPlayer = $"../../ambient_sound"
+  
 
 func _ready():
 	coins_counter.text = str("%04d" % Globals.coins)
@@ -14,7 +15,7 @@ func _ready():
 	Globals.update_pet_visibility()
 	Globals.update_super_jump_visibility()
 	Globals.update_teleport_visibility()
-	
+	Globals.ambient_player = ambient_sound
 	
 func _process(_delta: float):
 	coins_counter.text = str("%04d" % Globals.coins)
@@ -24,6 +25,9 @@ func _process(_delta: float):
 @onready var notification_box = $notification_box
 @onready var notif_label = $notification_box/NinePatchRect/HBoxContainer/Label
 @onready var notif_icon = $notification_box/NinePatchRect/HBoxContainer/TextureRect
+@onready var audio_msg: AudioStreamPlayer = $"../../msg_audio"
+
+#Som da mensagem
 
 var is_showing := false
 var queue := []  # fila de mensagens
@@ -36,7 +40,11 @@ func show_notification(text: String, image: Texture2D = null, duration := 2.0):
 		return
 
 	is_showing = true
-
+	
+	#Toca o audio - Usado o AudioStreamPlayer (em mensagens do HUD) é adequado porque não têm relevância espacial dentro da cena, por isso não precisa de position
+	audio_msg.play()
+	
+	
 	# Preenche conteúdo
 	notif_label.text = text
 

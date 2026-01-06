@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://0gm58yjg820f"]
+
+[ext_resource type="Script" uid="uid://lkodaukxa0tq" path="res://scripts/sand_slow.gd" id="1_2a2ra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4elkt"]
+size = Vector2(16.415665, 19.666832)
+
+[node name="sand_slow" type="Area2D"]
+editor_description = "Área colocada sobre a areia (desertificação), reduz a velocidade e altura do pulo de Araci, enquanto na área."
+collision_layer = 2048
+script = ExtResource("1_2a2ra")
+
+[node name="sand_collision" type="CollisionShape2D" parent="."]
+scale = Vector2(32.164364, -15.5083475)
+shape = SubResource("RectangleShape2D_4elkt")
+debug_color = Color(0.5386891, 0.5382234, 0.5096867, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

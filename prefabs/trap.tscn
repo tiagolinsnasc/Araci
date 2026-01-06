@@ -41,7 +41,7 @@ collision_mask = 2
 [node name="collision" type="CollisionShape2D" parent="trap_area"]
 position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_6qpob")
-debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+debug_color = Color(0.972549, 0, 0.3137255, 0.41960785)
 
 [node name="anime" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jsfuh")

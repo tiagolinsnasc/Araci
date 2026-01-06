@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fp2fluhv4tkl"]
+[gd_scene load_steps=16 format=3 uid="uid://fp2fluhv4tkl"]
 
 [ext_resource type="Script" uid="uid://d23x1xcybo516" path="res://scripts/HUD_control.gd" id="1_d2vfn"]
 [ext_resource type="Texture2D" uid="uid://cqaffg3apibcq" path="res://n_assets/n_scenes/elements/evidence.png" id="2_4mrx2"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c0uwlw5hpsrs2" path="res://n_assets/n_scenes/elements/teleport_icon.png" id="6_oi3g5"]
 [ext_resource type="Shader" uid="uid://bbmgisch40bx7" path="res://shaders/transition_shader.gdshader" id="7_dwta8"]
 [ext_resource type="Script" uid="uid://1wrsvp04wutf" path="res://scripts/color_rect.gd" id="8_efhi4"]
+[ext_resource type="AudioStream" uid="uid://crd80dd1a6gmp" path="res://sounds/system/message_box.ogg" id="13_65w62"]
+[ext_resource type="AudioStream" uid="uid://beiop7ov4oi5w" path="res://sounds/system/forest_song_e1.ogg" id="13_dwta8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0d7r7"]
 shader = ExtResource("7_dwta8")
@@ -193,3 +195,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("8_efhi4")
+
+[node name="ambient_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_dwta8")
+
+[node name="msg_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_65w62")

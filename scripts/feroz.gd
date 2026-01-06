@@ -15,7 +15,7 @@ extends CharacterBody2D
 @export var stop_threshold: float = 50.0
 
 # Configurações de combate e raycasts
-@export var attack_distance: float = 200.0
+@export var attack_distance: float = 350.0
 @export var jump_force: float = -400.0
 @export var max_distance: float = 400.0
 
@@ -33,6 +33,19 @@ var current_target: Node = null
 
 # Estado de ativação do pet
 var active: bool = false
+
+#Sons de pet
+@onready var bark_sound: AudioStreamPlayer2D = $bark_sound
+@onready var atack_sound: AudioStreamPlayer2D = $atack_sound
+
+##Faz Feroz latir
+func bark():
+	bark_sound.play()
+
+#Faz Feroz rosnar
+func growl():
+	if not atack_sound.is_playing():#Previne sibescrita do som em loops
+		atack_sound.play()
 
 func _ready(): 
 	#Garante que o pet sempre recebe a instância atual do Player
@@ -85,6 +98,8 @@ func _physics_process(delta: float):
 
 	# --- Lógica de movimento ---
 	if current_target and is_instance_valid(current_target) and can_attack:
+		#Rosna para atacar
+		growl()
 		# Persegue inimigo
 		var dx = current_target.global_position.x - global_position.x
 		var dir = sign(dx)
@@ -128,7 +143,6 @@ func _physics_process(delta: float):
 
 	move_and_slide()
 
-
 func _input(event):
 	if event.is_action_pressed("call_feroz"):
 		if Globals.flag_pw_feroz_enable:
@@ -144,6 +158,11 @@ func _input(event):
 
 	if event.is_action_pressed("feroz_companion_attack") and active and can_attack:
 		_set_target_for_attack()
+	
+	if event.is_action_pressed("feroz_companion_attack") and active and !can_attack:
+		# Espera 2 segundos antes de executar o latido
+		await get_tree().create_timer(1.0).timeout
+		bark()
 
 
 func _set_target_for_attack():
@@ -173,6 +192,7 @@ func _attack(target: Node):
 	anime.play("attack")
 	if target.has_method("take_damage"):
 		target.take_damage()
+
 	velocity.x = 0
 
 	can_attack = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ba3xbkuiqhtyn"]
+[gd_scene load_steps=57 format=3 uid="uid://ba3xbkuiqhtyn"]
 
 [ext_resource type="Script" uid="uid://bb2ju11ra7y1h" path="res://scripts/araci.gd" id="1_wp837"]
 [ext_resource type="Texture2D" uid="uid://dsakuawpkov3a" path="res://n_assets/n_tiles_actors/Araci_machado.png" id="2_mtxgc"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bbkmjeo5br6x6" path="res://n_assets/n_tiles_actors/Araci_arco.png" id="4_bogxa"]
 [ext_resource type="Script" uid="uid://h1u85ekk7hxc" path="res://scripts/stompbox.gd" id="5_mtxgc"]
 [ext_resource type="AudioStream" uid="uid://drm6kb01i6ay6" path="res://sounds/araci/female_hurt.ogg" id="6_422x3"]
+[ext_resource type="AudioStream" uid="uid://d08hwshhp0sp" path="res://sounds/araci/level_up.ogg" id="7_scgmy"]
+[ext_resource type="AudioStream" uid="uid://bndgcqcxbj8ir" path="res://sounds/araci/whistle.ogg" id="8_5ifwc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtxgc"]
 atlas = ExtResource("2_mtxgc")
@@ -373,7 +375,7 @@ size = Vector2(31, 1.75)
 size = Vector2(32, 50)
 
 [node name="Araci" type="CharacterBody2D"]
-collision_mask = 400
+collision_mask = 2448
 script = ExtResource("1_wp837")
 teleport_distance = 128.0
 
@@ -429,6 +431,13 @@ hit_from_inside = true
 
 [node name="hurt_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_422x3")
+area_mask = 256
+
+[node name="upgrade_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_scgmy")
+
+[node name="whistle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_5ifwc")
 
 [connection signal="animation_finished" from="anime" to="." method="_on_anime_animation_finished"]
 [connection signal="body_entered" from="stompbox" to="stompbox" method="_on_body_entered"]

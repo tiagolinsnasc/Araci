@@ -31,8 +31,12 @@ extends CharacterBody2D
 ##Controle do PET (Feroz)
 @export var pet_scene: PackedScene = preload("res://actors/feroz.tscn")
 var pet_instance: Node = null
-#Fezor na nível 2. Instância já existe, não chamar novo
+#Feroz na nível 2. Instância já existe, não chamar novo
 @onready var feroz_s2: Node2D = get_node_or_null("../feroz")
+@onready var whistle: AudioStreamPlayer2D = $whistle
+
+func wistle_to_call():
+	whistle.play()
 
 # ============================================================
 # CANCEL WINDOW - Desativa o ataque quando inicia a animação e logo após pula
@@ -98,6 +102,12 @@ func _ready() -> void:
 # Funções do PET
 # ============================================================
 func spawn_pet():
+	
+	#Assobio
+	wistle_to_call()
+	# Espera 2 segundos antes de executar
+	await get_tree().create_timer(2.0).timeout
+	
 	pet_instance = pet_scene.instantiate()
 	get_parent().add_child(pet_instance)
 	pet_instance.global_position = global_position + Vector2(32, 0) # aparece ao lado
@@ -110,10 +120,12 @@ func despawn_pet():
 # ============================================================
 # ANIMAÇÃO UPGRADE - TOCADA QUANDO OBTEM NOVOS POWERUPS
 # ============================================================
+@onready var upgrade_sound: AudioStreamPlayer2D = $upgrade_sound
 
 func play_upgrade():
 	estado = "upgrade"
 	velocity = Vector2.ZERO   # trava movimento
+	upgrade_sound.play()
 	animation.play("upgrade")
 
 # ============================================================
@@ -124,7 +136,7 @@ func _physics_process(delta: float) -> void:
 	var on_floor := is_on_floor()
 
 	# --------------------------------------------------------
-	# ✅ BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
+	# BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
 	# --------------------------------------------------------
 	if is_hurt or estado == "upgrade":
 		#velocity = Vector2.ZERO
@@ -342,15 +354,16 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	is_hurt = true
 	estado = "hurt"
 	
-	print("Deve tocar o som!")
+	############ Som do dano ################
 	if hurt_sound.stream:
+		print("Deve tocar o som!")	
 		hurt_sound.volume_db = 0
 		hurt_sound.play()
 	else:
 		print("Nenhum stream configurado em $hurt_sound")
 	
 	#print("Chamou take damage, deveria mudar de cor")
-	# ✅ reduz vida
+	# reduz vida
 	if Globals.player_life > 0:
 		Globals.player_life -= 1
 	else:
