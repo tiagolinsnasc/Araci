@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsecwsynxsn8y"]
+[gd_scene load_steps=17 format=3 uid="uid://bsecwsynxsn8y"]
 
 [ext_resource type="Script" uid="uid://bnba5jujc64mx" path="res://scripts/feroz.gd" id="1_hc8tf"]
 [ext_resource type="Texture2D" uid="uid://d26l4lavhgd13" path="res://n_assets/n_tiles_actors/feroz.png" id="1_lp83t"]
+[ext_resource type="AudioStream" uid="uid://bpf6iv3tb0bkh" path="res://sounds/animals/dog_bark.ogg" id="3_6tll0"]
+[ext_resource type="AudioStream" uid="uid://brgbpddb7t7s0" path="res://sounds/animals/dog_atack.ogg" id="4_ct3uc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5p3gg"]
 size = Vector2(37, 21)
@@ -122,13 +124,11 @@ shape = SubResource("RectangleShape2D_5p3gg")
 
 [node name="anime" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_5p3gg")
-animation = &"attack"
+animation = &"idlle"
 autoplay = "idlle"
-frame = 1
-frame_progress = 0.34630197
 
 [node name="enemy_detect" type="RayCast2D" parent="CharacterBody2D"]
-target_position = Vector2(243, 0)
+target_position = Vector2(339, 0)
 collision_mask = 272
 
 [node name="ground_check" type="RayCast2D" parent="CharacterBody2D"]
@@ -139,3 +139,9 @@ collision_mask = 272
 position = Vector2(0, 7)
 target_position = Vector2(22, 0)
 collision_mask = 272
+
+[node name="bark_sound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("3_6tll0")
+
+[node name="atack_sound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("4_ct3uc")

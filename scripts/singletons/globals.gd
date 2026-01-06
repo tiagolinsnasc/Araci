@@ -4,16 +4,17 @@ var coins := 0
 var score := 0
 var player_life := 3
 
-#Flags que auxiliam na exibição das primeira informações sobre os ítens coletados
+#Flags que auxiliam na exibição das primeira informações sobre os ítens coletados/gatilhos
 var flag_grab_one_life = false
 var flag_grab_one_evidence = false
 var flag_grab_one_checkpoint = false
 var flag_grab_one_information = false
 var flag_grab_one_animal_in_trap = false
+var flag_stay_on_sand = false
 
 #Controle de powerups
-var flag_pw_feroz_enable = true
-var flag_pw_superjump = true
+var flag_pw_feroz_enable = false
+var flag_pw_superjump = false
 var flag_pw_teletransport = false
 
 #Criados para permitir o mecanismo de checkpoint:
@@ -78,7 +79,7 @@ func give_points_to_player(i_score: int, position: Vector2, parent: Node):
 	var audio_player = AudioStreamPlayer2D.new()
 	audio_player.stream = preload("res://sounds/coletables/points_gained.ogg")
 	get_tree().current_scene.add_child(audio_player) # nó persistente
-	audio_player.position = position #Importante: deve definir a posição ou o som fica distante (não toca)
+	audio_player.position = position
 	audio_player.play()
 	
 	var popup_scene = preload("res://prefabs/score_popup.tscn")
@@ -163,3 +164,12 @@ func update_teleport_visibility():
 		#print("Atualizou a visibilidade:",flag_pw_feroz_enable)
 		var teleport_icon = hud.get_node("container/powerups_container/powerupIcon3")
 		teleport_icon.visible = flag_pw_teletransport
+
+### Som ambiente
+var ambient_player: AudioStreamPlayer = null
+
+func play_ambient(path: String):
+	if ambient_player and ambient_player.is_inside_tree():
+		ambient_player.stop()
+		ambient_player.stream = load(path)
+		ambient_player.play()

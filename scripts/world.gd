@@ -4,6 +4,7 @@ extends Node2D
 @onready var camera: Camera2D = $camera
 
 @onready var araci_scene = preload("res://actors/araci.tscn")
+@export var ambient_sound_path: String = "res://sounds/system/forest_song_e1.ogg"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 	Globals.araci.player_has_died.connect(reload_game)
 	#Associa Araci ao pet
 	Globals.set_player(araci)
+	Globals.play_ambient(ambient_sound_path)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
