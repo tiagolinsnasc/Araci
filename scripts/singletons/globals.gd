@@ -37,7 +37,7 @@ var stage_sounds = {
 	1: preload("res://sounds/system/forest_song_e1.ogg"),
 	2: preload("res://sounds/system/forest_song_e1.ogg"),
 	3: preload("res://sounds/system/wind_e3.ogg"),
-	#3: preload("res://sounds/system/mountain_song_e3.ogg"),
+	4: preload("res://sounds/system/caatinga_song.ogg"),
 }
 var current_stage: int = 1
 
