@@ -1,0 +1,162 @@
+[gd_scene load_steps=18 format=3 uid="uid://cn7r8wjv67770"]
+
+[ext_resource type="Texture2D" uid="uid://dd7x4jss1wwkt" path="res://n_assets/n_scenes/elements/machine_truck_action.png" id="1_3fvgm"]
+[ext_resource type="Texture2D" uid="uid://cuhpbefn81e47" path="res://n_assets/n_scenes/elements/machine_truck.png" id="2_hmqic"]
+[ext_resource type="Texture2D" uid="uid://bv86gaw3eq844" path="res://n_assets/n_scenes/elements/machine_truck_loaded.png" id="3_hmqic"]
+[ext_resource type="AudioStream" uid="uid://bvo37b58lhp6r" path="res://sounds/machines/truck_move.ogg" id="3_xop7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(226, 126)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snc74"]
+atlas = ExtResource("1_3fvgm")
+region = Rect2(0, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcn20"]
+atlas = ExtResource("1_3fvgm")
+region = Rect2(256, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pije4"]
+atlas = ExtResource("1_3fvgm")
+region = Rect2(512, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44gik"]
+atlas = ExtResource("1_3fvgm")
+region = Rect2(768, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58a38"]
+atlas = ExtResource("2_hmqic")
+region = Rect2(0, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp8tk"]
+atlas = ExtResource("2_hmqic")
+region = Rect2(256, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xop7u"]
+atlas = ExtResource("3_hmqic")
+region = Rect2(0, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8uj5"]
+atlas = ExtResource("3_hmqic")
+region = Rect2(256, 0, 256, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snc74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcn20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pije4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44gik")
+}],
+"loop": false,
+"name": &"action",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58a38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp8tk")
+}],
+"loop": true,
+"name": &"move_empty",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xop7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8uj5")
+}],
+"loop": true,
+"name": &"move_loaded",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_hmqic"]
+resource_name = "move"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("machine_area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 29.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1000, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(29.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xop7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("machine_area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58a38"]
+_data = {
+&"RESET": SubResource("Animation_xop7u"),
+&"move": SubResource("Animation_hmqic")
+}
+
+[node name="machine_truck_traveler" type="Node2D"]
+
+[node name="machine_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="machine_area"]
+position = Vector2(-1, 36)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="machine_area"]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"move_loaded"
+autoplay = "move_loaded"
+frame_progress = 0.21434942
+
+[node name="move_sound" type="AudioStreamPlayer2D" parent="machine_area"]
+stream = ExtResource("3_xop7u")
+autoplay = true
+parameters/looping = true
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_58a38")
+}
+autoplay = "move"

@@ -2392,6 +2392,7 @@ size = Vector2(20, 144)
 editor_description = "Estágio 2: Grande área de espinhos, armadilhas e libertação de animais, início da obtenção de pontos. Evento de poluição do lençol freático através dos resíduos do lixo. Ganha o cachorro feroz."
 position = Vector2(134, 135)
 script = ExtResource("1_n1cxq")
+stage_number = 2
 
 [node name="Paralax2D" type="Node2D" parent="."]
 

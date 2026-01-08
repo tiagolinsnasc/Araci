@@ -34,9 +34,15 @@ var pet_instance: Node = null
 #Feroz na nível 2. Instância já existe, não chamar novo
 @onready var feroz_s2: Node2D = get_node_or_null("../feroz")
 @onready var whistle: AudioStreamPlayer2D = $whistle
+@onready var teleport: AudioStreamPlayer2D = $teleport
 
+##Assobia para chama o pet
 func wistle_to_call():
 	whistle.play()
+
+##Som do teletransporte
+func teleport_sound():
+	teleport.play()
 
 # ============================================================
 # CANCEL WINDOW - Desativa o ataque quando inicia a animação e logo após pula
@@ -101,17 +107,28 @@ func _ready() -> void:
 # ============================================================
 # Funções do PET
 # ============================================================
+var is_spawning_pet := false   # flag de bloqueio - evita que o pet seja chamado 2x enquanto aguarda após o assovio
+#Chama o pet
 func spawn_pet():
-	
-	#Assobio
+	if is_spawning_pet: 
+		return   # já está em processo de spawn, ignora
+
+	is_spawning_pet = true
+
+	# Assobio
 	wistle_to_call()
+
 	# Espera 2 segundos antes de executar
 	await get_tree().create_timer(2.0).timeout
-	
-	pet_instance = pet_scene.instantiate()
-	get_parent().add_child(pet_instance)
-	pet_instance.global_position = global_position + Vector2(32, 0) # aparece ao lado
-	
+
+	# Cria o pet apenas se ainda não existe
+	if pet_instance == null:
+		pet_instance = pet_scene.instantiate()
+		get_parent().add_child(pet_instance)
+		pet_instance.global_position = global_position + Vector2(32, 0)
+
+	is_spawning_pet = false   # libera novamente
+
 func despawn_pet():
 	if pet_instance != null:
 		pet_instance.queue_free()
@@ -449,6 +466,30 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		var knockback:Vector2 = Vector2(600 * direction_jump, -350)
 		take_damage(knockback)
 
+#func _teleport():
+	#var dir = sign(animation.scale.x)
+	#if dir == 0:
+		#dir = 1
+#
+	#var target_pos = global_position + Vector2(teleport_distance * dir, 0)
+#
+	#visible = false
+	#await get_tree().create_timer(teleport_delay).timeout
+#
+	#global_position = target_pos
+	#velocity.x = 0
+#
+	#visible = true
+#
+	## volta para idle ou run imediatamente
+	#if is_on_floor():
+		#if abs(velocity.x) > 10:
+			#estado = "run"
+		#else:
+			#estado = "idle"
+	#else:
+		#estado = "jump"
+
 func _teleport():
 	var dir = sign(animation.scale.x)
 	if dir == 0:
@@ -456,19 +497,29 @@ func _teleport():
 
 	var target_pos = global_position + Vector2(teleport_distance * dir, 0)
 
-	visible = false
-	await get_tree().create_timer(teleport_delay).timeout
+	var space_state = get_world_2d().direct_space_state
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = target_pos
+	params.exclude = [self]
+	params.collide_with_bodies = true
+	params.collide_with_areas = true
 
-	global_position = target_pos
-	velocity.x = 0
+	var result = space_state.intersect_point(params)
 
-	visible = true
+	if result.is_empty():
+		teleport_sound()
+		# destino livre - teleporta
+		visible = false
+		await get_tree().create_timer(teleport_delay).timeout
+		global_position = target_pos
+		velocity.x = 0
+		visible = true
+	else:
+		# destino dentro de parede - cancela
+		print("Teleport cancelado: destino bloqueado")
 
-	# volta para idle ou run imediatamente
+	# Ajusta estado
 	if is_on_floor():
-		if abs(velocity.x) > 10:
-			estado = "run"
-		else:
-			estado = "idle"
+		estado = "run" if abs(velocity.x) > 10 else "idle"
 	else:
 		estado = "jump"

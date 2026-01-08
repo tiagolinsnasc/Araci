@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://r2fp7tkx4vvm"]
+[gd_scene load_steps=8 format=3 uid="uid://r2fp7tkx4vvm"]
 
 [ext_resource type="Texture2D" uid="uid://54ildq3qdxk4" path="res://n_assets/n_scenes/elements/trap.png" id="1_6qpob"]
 [ext_resource type="Script" uid="uid://duor6p05ybjox" path="res://scripts/trap.gd" id="1_qscck"]
+[ext_resource type="AudioStream" uid="uid://7mu78kqwv3pc" path="res://sounds/enemies/trap.ogg" id="3_l2l1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qpob"]
 size = Vector2(29, 22)
@@ -47,5 +48,8 @@ debug_color = Color(0.972549, 0, 0.3137255, 0.41960785)
 sprite_frames = SubResource("SpriteFrames_jsfuh")
 animation = &"action"
 frame_progress = 1.0
+
+[node name="trap_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l2l1q")
 
 [connection signal="area_entered" from="trap_area" to="." method="_on_trap_area_area_entered"]

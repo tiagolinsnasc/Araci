@@ -1588,7 +1588,7 @@ position = Vector2(4274, -26)
 position = Vector2(1918, 166)
 
 [node name="checkpoint2" parent="checkpoints" instance=ExtResource("25_hhdoi")]
-position = Vector2(4452, -29)
+position = Vector2(4452, -27)
 
 [node name="goal" parent="." instance=ExtResource("26_15tky")]
 editor_description = "Objetivo final. Marcado indicando que o estágio chegou ao fim."
@@ -1634,7 +1634,7 @@ position = Vector2(8138, 194)
 dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as avidências.", "A floresta precisa de você!"])
 
 [node name="Araci" parent="." instance=ExtResource("13_brbtt")]
-position = Vector2(-43, 167)
+position = Vector2(-95, 153)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"

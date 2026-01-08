@@ -63,7 +63,7 @@ func _physics_process(delta: float):
 	var dist = global_position.distance_to(player.global_position)
 	if dist > max_distance:
 		visible = false
-		print("Eliminou o pet da cena!")
+		#print("Eliminou o pet da cena!")
 		#Resolve o problema de ter que pressionar Q 2x, mas cria várias instâncias de Feroz (resolver depois)
 		#Globals.araci.pet_instance = null
 		#queue_free()

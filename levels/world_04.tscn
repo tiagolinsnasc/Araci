@@ -1973,6 +1973,7 @@ size = Vector2(6.839837, 16.378277)
 editor_description = "Estágio 4: Eventos de criação de gado e solo desgastado."
 position = Vector2(134, 135)
 script = ExtResource("1_fexhl")
+stage_number = 4
 
 [node name="Paralax2D" type="Node2D" parent="."]
 

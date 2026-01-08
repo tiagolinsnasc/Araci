@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2ckrlnq10s5w"]
+
+[ext_resource type="Script" uid="uid://dkw0xe5bu4l6f" path="res://scripts/red_poison.gd" id="1_qtfge"]
+[ext_resource type="Texture2D" uid="uid://cwadcu777kp11" path="res://n_assets/Mini FX, Items & UI/Effects/Bright_Sparkle (16 x 16).png" id="2_81sev"]
+[ext_resource type="Texture2D" uid="uid://chbvoxl2q2wj3" path="res://n_assets/n_scenes/elements/red_poison.png" id="2_248ju"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v34kk"]
+atlas = ExtResource("2_81sev")
+region = Rect2(0, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcci3"]
+atlas = ExtResource("2_81sev")
+region = Rect2(20, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcds0"]
+atlas = ExtResource("2_81sev")
+region = Rect2(40, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co5gy"]
+atlas = ExtResource("2_81sev")
+region = Rect2(60, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtfge"]
+atlas = ExtResource("2_248ju")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81sev"]
+atlas = ExtResource("2_248ju")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdhhf"]
+atlas = ExtResource("2_248ju")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akjbj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v34kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcci3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcds0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co5gy")
+}],
+"loop": false,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtfge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81sev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdhhf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d2mm"]
+size = Vector2(8, 6)
+
+[node name="red_poison" type="Node2D"]
+
+[node name="red_poison" type="Area2D" parent="."]
+collision_layer = 512
+script = ExtResource("1_qtfge")
+
+[node name="anime" type="AnimatedSprite2D" parent="red_poison"]
+scale = Vector2(0.41666666, 0.39999998)
+sprite_frames = SubResource("SpriteFrames_akjbj")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="red_poison"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_2d2mm")
+
+[connection signal="body_shape_entered" from="red_poison" to="red_poison" method="_on_body_shape_entered"]
+[connection signal="animation_finished" from="red_poison/anime" to="red_poison" method="_on_anime_animation_finished"]
