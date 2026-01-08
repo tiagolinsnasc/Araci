@@ -10,6 +10,8 @@ collision_layer = 1024
 script = ExtResource("1_6tchp")
 
 [node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_le3as")
+debug_color = Color(0.93848145, 0, 0.38698193, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -43,7 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://br1aa6lq88kcq" path="res://prefabs/falling_plataform.tscn" id="42_y6s1s"]
 [ext_resource type="PackedScene" uid="uid://cnrioc3pxgi53" path="res://prefabs/checkpoint.tscn" id="43_u6qp6"]
 [ext_resource type="PackedScene" uid="uid://bk5df6g8sayri" path="res://prefabs/generic_damage_area.tscn" id="44_4cqjh"]
-[ext_resource type="PackedScene" uid="uid://yvg3rnxn2nf6" path="res://prefabs/poison_pw_azul.tscn" id="45_7r0q1"]
+[ext_resource type="PackedScene" uid="uid://yvg3rnxn2nf6" path="res://prefabs/poison_pw_blue.tscn" id="45_7r0q1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rwgp"]
 shader = ExtResource("4_2xmc4")
@@ -2602,6 +2602,7 @@ size = Vector2(208.77783, 28)
 editor_description = "Estágio 3: Eventos impotantes eliminação dos gafanhotos, chamando os pássaros através do plantio de árvores. Ganho o superpulo ao final do estágio."
 position = Vector2(134, 135)
 script = ExtResource("1_u6qp6")
+stage_number = 3
 
 [node name="Paralax2D" type="Node2D" parent="."]
 

@@ -1,8 +1,8 @@
 extends ColorRect
 
 var threshold = 0.0
+@onready var rect: ColorRect = $"."
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	material.set("shader_parameter/threshold", threshold)
+func _process(delta: float) -> void:
+	if rect.material:
+		rect.material.set_shader_parameter("threshold", threshold)

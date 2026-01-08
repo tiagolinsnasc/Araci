@@ -1,6 +1,7 @@
 extends Node2D
 
 var active_trap := true
+@onready var trap_sound: AudioStreamPlayer2D = $trap_sound
 
 func _on_trap_area_area_entered(area: Area2D) -> void:
 	#print("Contato com a armadilha!", area.name)
@@ -8,7 +9,7 @@ func _on_trap_area_area_entered(area: Area2D) -> void:
 		#print("Araci na armadilha!")
 		$anime.play("action")
 		active_trap = false
-		
+		trap_sound.play() #Toca o som do desarme
 		var player = area.get_parent()  # sobe um nível para pegar o CharacterBody2D
 		if player.has_method("take_damage"):
 			var direction_jump:float = sign(player.global_position.x - area.global_position.x)

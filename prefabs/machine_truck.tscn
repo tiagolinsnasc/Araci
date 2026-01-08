@@ -1,0 +1,153 @@
+[gd_scene load_steps=15 format=3 uid="uid://2j1j416vgidt"]
+
+[ext_resource type="Texture2D" uid="uid://cuhpbefn81e47" path="res://n_assets/n_scenes/elements/machine_truck.png" id="1_4nspo"]
+[ext_resource type="Texture2D" uid="uid://dd7x4jss1wwkt" path="res://n_assets/n_scenes/elements/machine_truck_action.png" id="1_58a38"]
+[ext_resource type="AudioStream" uid="uid://bvo37b58lhp6r" path="res://sounds/machines/truck_move.ogg" id="3_snc74"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(226, 126)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snc74"]
+atlas = ExtResource("1_58a38")
+region = Rect2(0, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcn20"]
+atlas = ExtResource("1_58a38")
+region = Rect2(256, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pije4"]
+atlas = ExtResource("1_58a38")
+region = Rect2(512, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44gik"]
+atlas = ExtResource("1_58a38")
+region = Rect2(768, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58a38"]
+atlas = ExtResource("1_4nspo")
+region = Rect2(0, 0, 256, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp8tk"]
+atlas = ExtResource("1_4nspo")
+region = Rect2(256, 0, 256, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snc74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcn20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pije4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44gik")
+}],
+"loop": false,
+"name": &"action",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58a38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp8tk")
+}],
+"loop": true,
+"name": &"move",
+"speed": 2.0
+}]
+
+[sub_resource type="Animation" id="Animation_58a38"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("machine_area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4nspo"]
+resource_name = "move"
+length = 16.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("machine_area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.98, 4.99, 15.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(250, 0), Vector2(300, 0), Vector2(300, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("machine_area/anime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 4.8999996, 5, 7.833333, 11.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [&"move", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"move", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [&"action", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"action"],
+"method": &"play_backwards"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58a38"]
+_data = {
+&"RESET": SubResource("Animation_58a38"),
+&"move": SubResource("Animation_4nspo")
+}
+
+[node name="machine_truck" type="Node2D"]
+
+[node name="machine_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="machine_area"]
+position = Vector2(-1, 36)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="machine_area"]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+
+[node name="move_sound" type="AudioStreamPlayer2D" parent="machine_area"]
+stream = ExtResource("3_snc74")
+autoplay = true
+parameters/looping = true
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_58a38")
+}
+autoplay = "move"

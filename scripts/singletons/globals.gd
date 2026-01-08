@@ -13,9 +13,9 @@ var flag_grab_one_animal_in_trap = false
 var flag_stay_on_sand = false
 
 #Controle de powerups
-var flag_pw_feroz_enable = false
-var flag_pw_superjump = false
-var flag_pw_teletransport = false
+var flag_pw_feroz_enable = true
+var flag_pw_superjump = true
+var flag_pw_teletransport = true
 
 #Criados para permitir o mecanismo de checkpoint:
 var araci = null #Carregado
@@ -30,6 +30,16 @@ var max_planted_trees_w3 = 5
 ##Retorna true se a quantidade de árvores plantadas for maior ou igual ao mínimo necessário para eliminar os gafanhotos
 func eliminate_locust():
 	return count_planted_trees_w3 >= max_planted_trees_w3
+
+
+#####Sons dos estgios
+var stage_sounds = {
+	1: preload("res://sounds/system/forest_song_e1.ogg"),
+	2: preload("res://sounds/system/forest_song_e1.ogg"),
+	3: preload("res://sounds/system/wind_e3.ogg"),
+	#3: preload("res://sounds/system/mountain_song_e3.ogg"),
+}
+var current_stage: int = 1
 
 func respaw_player():
 	#if is_instance_valid(araci):
@@ -168,8 +178,24 @@ func update_teleport_visibility():
 ### Som ambiente
 var ambient_player: AudioStreamPlayer = null
 
-func play_ambient(path: String):
-	if ambient_player and ambient_player.is_inside_tree():
-		ambient_player.stop()
-		ambient_player.stream = load(path)
-		ambient_player.play()
+func play_ambient(stream_or_path):
+	if ambient_player == null:
+		ambient_player = AudioStreamPlayer.new()
+		add_child(ambient_player)
+
+	# Aceita tanto String quanto AudioStream
+	if typeof(stream_or_path) == TYPE_STRING:
+		ambient_player.stream = load(stream_or_path) as AudioStream
+	elif stream_or_path is AudioStream:
+		ambient_player.stream = stream_or_path
+	else:
+		push_error("play_ambient recebeu tipo inválido: %s" % typeof(stream_or_path))
+		return
+
+	# Ajuste de volume (mais baixo)
+	ambient_player.volume_db = -10   # por exemplo, -10 dB deixa mais suave
+
+	# Loop ativado
+	ambient_player.stream.loop = true
+
+	ambient_player.play()

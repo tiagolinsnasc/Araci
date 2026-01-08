@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbrv4fueectoj"]
+
+[ext_resource type="Texture2D" uid="uid://dqw1w51lctln8" path="res://n_assets/n_scenes/elements/machine_wagon.png" id="1_7078d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(138, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dynoj"]
+atlas = ExtResource("1_7078d")
+region = Rect2(0, 0, 143, 91)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dynoj")
+}],
+"loop": true,
+"name": &"action",
+"speed": 2.0
+}]
+
+[node name="machine_wagon" type="Node2D"]
+
+[node name="body" type="StaticBody2D" parent="."]
+collision_layer = 256
+
+[node name="collision" type="CollisionShape2D" parent="body"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="body"]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+autoplay = "action"
+frame_progress = 0.82546407

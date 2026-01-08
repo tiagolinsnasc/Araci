@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv3xakt8vj86t"]
+
+[ext_resource type="AudioStream" uid="uid://qrkoibdakkrc" path="res://sounds/machines/drill.ogg" id="2_22wca"]
+[ext_resource type="Texture2D" uid="uid://cpdknfkuu2bhj" path="res://n_assets/n_scenes/elements/machine_drill.png" id="2_ih4u6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(223, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih4u6"]
+atlas = ExtResource("2_ih4u6")
+region = Rect2(0, 0, 255, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22wca"]
+atlas = ExtResource("2_ih4u6")
+region = Rect2(255, 0, 255, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s114n"]
+atlas = ExtResource("2_ih4u6")
+region = Rect2(510, 0, 255, 225)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih4u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22wca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s114n")
+}],
+"loop": true,
+"name": &"action",
+"speed": 2.0
+}]
+
+[node name="machine_drill" type="Node2D"]
+
+[node name="machine_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="machine_area"]
+position = Vector2(3.5, 6.5)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+autoplay = "action"
+frame = 2
+frame_progress = 0.864074
+
+[node name="drill_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_22wca")
+autoplay = true
+parameters/looping = true

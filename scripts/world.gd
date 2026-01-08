@@ -4,8 +4,8 @@ extends Node2D
 @onready var camera: Camera2D = $camera
 
 @onready var araci_scene = preload("res://actors/araci.tscn")
-@export var ambient_sound_path: String = "res://sounds/system/forest_song_e1.ogg"
-
+#@export var ambient_sound_path: String = "res://sounds/system/forest_song_e1.ogg"
+@export var stage_number: int = 1 #Auxilia na escolha do som do estário em Globals
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Salva o player antes da modificações a seguir (útil para o checkpoint)
@@ -17,7 +17,11 @@ func _ready() -> void:
 	Globals.araci.player_has_died.connect(reload_game)
 	#Associa Araci ao pet
 	Globals.set_player(araci)
-	Globals.play_ambient(ambient_sound_path)
+	
+	# pega o som certo do dicionário
+	var ambient_stream = Globals.stage_sounds.get(stage_number, null)
+	if ambient_stream:
+		Globals.play_ambient(ambient_stream)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
