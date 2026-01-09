@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://disrnmbi1psf"]
+[gd_scene load_steps=75 format=4 uid="uid://disrnmbi1psf"]
 
 [ext_resource type="Script" uid="uid://rrcccix26aeh" path="res://scripts/world.gd" id="1_fexhl"]
 [ext_resource type="Texture2D" uid="uid://cfmvolocmwr6i" path="res://n_assets/n_scenes/bgs/5 - Sky_color.png" id="2_dm8ns"]
@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://3yl7x7apjdgw" path="res://actors/female_guard.tscn" id="38_x5xw5"]
 [ext_resource type="PackedScene" uid="uid://0gm58yjg820f" path="res://prefabs/sand_slow.tscn" id="39_4elkt"]
 [ext_resource type="PackedScene" uid="uid://cnrioc3pxgi53" path="res://prefabs/checkpoint.tscn" id="40_cvsy2"]
+[ext_resource type="PackedScene" uid="uid://coarmqx54kxug" path="res://prefabs/trigger_off_sound.tscn" id="41_fexhl"]
 [ext_resource type="PackedScene" uid="uid://bjp0412nixqac" path="res://prefabs/cabure_popup.tscn" id="43_q8t3g"]
 [ext_resource type="PackedScene" uid="uid://c738o3mpr3is3" path="res://prefabs/goal.tscn" id="44_5gpcm"]
 
@@ -1969,6 +1970,9 @@ size = Vector2(7.243992, 16.378277)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8t3g"]
 size = Vector2(6.839837, 16.378277)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm8ns"]
+size = Vector2(169.5, 66)
+
 [node name="World-04" type="Node2D"]
 editor_description = "Estágio 4: Eventos de criação de gado e solo desgastado."
 position = Vector2(134, 135)
@@ -2483,6 +2487,13 @@ position = Vector2(17573, 8)
 [node name="sand_collision" parent="objects/sand_slow3" index="0"]
 shape = SubResource("RectangleShape2D_q8t3g")
 
+[node name="trigger_off_sound" parent="objects" instance=ExtResource("41_fexhl")]
+position = Vector2(7800, 302)
+
+[node name="collision" parent="objects/trigger_off_sound" index="0"]
+position = Vector2(35.25, 2)
+shape = SubResource("RectangleShape2D_dm8ns")
+
 [node name="traps" type="Node2D" parent="."]
 
 [node name="trap" parent="traps" instance=ExtResource("33_fdk5e")]
@@ -2513,4 +2524,5 @@ position = Vector2(19507, 671)
 
 [editable path="objects/sand_slow2"]
 [editable path="objects/sand_slow3"]
+[editable path="objects/trigger_off_sound"]
 [editable path="messages/cabure_popup"]

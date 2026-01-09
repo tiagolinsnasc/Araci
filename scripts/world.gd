@@ -27,10 +27,31 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+#func reload_game():
+	#await get_tree().create_timer(1.0).timeout
+	#araci = araci_scene.instantiate()
+	#add_child(araci)
+	#Globals.araci = araci
+	#Globals.araci.follow_camera(camera)
+	#Globals.araci.player_has_died.connect(reload_game)
+	#
+	#Globals.coins = 0
+	#Globals.score = 0
+	#Globals.player_life = 3
+	#
+	#Globals.respaw_player()
+	##get_tree().reload_current_scene()
+	
+##Evita acúmulo de instância de Araci
 func reload_game():
 	await get_tree().create_timer(1.0).timeout
+	
+	if is_instance_valid(araci):
+		araci.queue_free()  # remove o antigo antes de recriar
+	
 	araci = araci_scene.instantiate()
 	add_child(araci)
+	
 	Globals.araci = araci
 	Globals.araci.follow_camera(camera)
 	Globals.araci.player_has_died.connect(reload_game)
@@ -40,5 +61,3 @@ func reload_game():
 	Globals.player_life = 3
 	
 	Globals.respaw_player()
-	#get_tree().reload_current_scene()
-	

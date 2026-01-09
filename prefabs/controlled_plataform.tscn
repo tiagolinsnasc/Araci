@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://v372i80luqpq"]
+
+[ext_resource type="Script" uid="uid://wluw3iprkqxn" path="res://scripts/controlled_plataform.gd" id="1_2cxrv"]
+[ext_resource type="Texture2D" uid="uid://nmlio6wec7nb" path="res://n_assets/n_scenes/elements/plataform_metal_01.png" id="2_umv86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erebb"]
+size = Vector2(82, 14)
+
+[node name="controlled_plataform" type="Node2D"]
+script = ExtResource("1_2cxrv")
+
+[node name="plataform" type="AnimatableBody2D" parent="."]
+collision_layer = 256
+
+[node name="sprite_plataform" type="Sprite2D" parent="plataform"]
+texture = ExtResource("2_umv86")
+region_rect = Rect2(2, 192, 72, 16)
+
+[node name="collision" type="CollisionShape2D" parent="plataform"]
+shape = SubResource("RectangleShape2D_erebb")
+one_way_collision = true
