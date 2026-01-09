@@ -13,8 +13,10 @@ func _ready() -> void:
 @onready var anime2: AnimatedSprite2D = $"../../machines/machine_truck_traveler2/machine_area/anime"
 @onready var animation2: AnimationPlayer = $"../../machines/machine_truck_traveler2/animation"
 
+var active = true
+
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if body.name == "Araci" and active:
 		print("Gatilho ativo")
 		anime.play("move_loaded")
 		animation.play("move")
@@ -24,3 +26,4 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		anime2.play("move_loaded")
 		animation2.play("move")
+		active = false

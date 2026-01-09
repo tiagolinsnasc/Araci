@@ -41,17 +41,18 @@ func _ready() -> void:
 #Cria uma instância da bala (BULLET)
 func shoot_bullet():
 	anime.play("shot")
-	shoot_sound.play()
+	
 	# espera 0.5 segundos antes de criar a bala
 	# recalcula o tempo para o próximo tiro
 	var shoot_delay = randf_range(0.5, 1.0)
 	await get_tree().create_timer(shoot_delay).timeout
 	
-	
 	# checa se ainda está atacando
 	if not attacking:
 		return
-		
+	
+	shoot_sound.play()
+	
 	var bullet_instance = BULLET_SCENE.instantiate()
 	# direção baseada na orientação do Marker2D (eixo X global)
 	var dir := bullet_position.global_transform.x.normalized()

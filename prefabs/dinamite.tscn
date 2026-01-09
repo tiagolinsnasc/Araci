@@ -1,0 +1,125 @@
+[gd_scene load_steps=16 format=3 uid="uid://cq4di0hqoxfcb"]
+
+[ext_resource type="Texture2D" uid="uid://dahrwkhtqt2qk" path="res://n_assets/n_scenes/elements/dinamite.png" id="1_ivuxx"]
+[ext_resource type="Script" uid="uid://cuivghk7jbcwr" path="res://scripts/dinamite_active.gd" id="1_rj2ow"]
+[ext_resource type="AudioStream" uid="uid://gy5rgmvubq00" path="res://sounds/enemies/wick_burning.ogg" id="3_tg8i3"]
+[ext_resource type="AudioStream" uid="uid://bnhonyg6ek11y" path="res://sounds/enemies/explosion.ogg" id="4_b7f0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(65, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj2ow"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(112, 52, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8fgv"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(128, 52, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg8i3"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7f0j"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6emn"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asp0y"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhcp3"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(252, 48, 42, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjlr4"]
+atlas = ExtResource("1_ivuxx")
+region = Rect2(96, 56, 16, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj2ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8fgv")
+}],
+"loop": true,
+"name": &"action",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg8i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7f0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6emn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asp0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhcp3")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjlr4")
+}],
+"loop": true,
+"name": &"stay",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj2ow"]
+radius = 56.008926
+
+[node name="dinamite" type="Node2D"]
+editor_description = "Dinamite, explode quando o player chaga a uma distância específica, mas depende de um ocntadoe (em segundos), 5 segundos é o máximo para adequar ao final do som de fogo no pavio."
+script = ExtResource("1_rj2ow")
+
+[node name="activation_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="activation_area"]
+position = Vector2(0.5, 5)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+autoplay = "stay"
+
+[node name="damage_area" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+monitoring = false
+
+[node name="damage_collision" type="CollisionShape2D" parent="damage_area"]
+position = Vector2(-1, -7)
+shape = SubResource("CircleShape2D_rj2ow")
+debug_color = Color(0.973368, 0, 0.437854, 0.41960785)
+
+[node name="wick_fire_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tg8i3")
+max_distance = 200.0
+
+[node name="explosion_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_b7f0j")
+
+[connection signal="area_entered" from="activation_area" to="." method="_on_activation_area_area_entered"]
+[connection signal="animation_finished" from="anime" to="." method="_on_anime_animation_finished"]
+[connection signal="area_entered" from="damage_area" to="." method="_on_damage_area_area_entered"]

@@ -38,6 +38,7 @@ var stage_sounds = {
 	2: preload("res://sounds/system/forest_song_e1.ogg"),
 	3: preload("res://sounds/system/wind_e3.ogg"),
 	4: preload("res://sounds/system/caatinga_song.ogg"),
+	5: preload("res://sounds/system/caatinga_song.ogg"),
 }
 var current_stage: int = 1
 
@@ -199,3 +200,16 @@ func play_ambient(stream_or_path):
 	ambient_player.stream.loop = true
 
 	ambient_player.play()
+
+#Religar som ambiente
+#var ambient_stream = Globals.stage_sounds.get(stage_number, null)
+ #if ambient_stream:
+ #Globals.play_ambient(ambient_stream)
+##Para o som ambiente (útil em cavernas)
+func stop_ambient_sound():
+	if ambient_player and ambient_player.playing:
+		ambient_player.stop()
+
+##Verifica se o som ambiente está tocando
+func is_ambient_playing() -> bool:
+	return ambient_player != null and ambient_player.playing
