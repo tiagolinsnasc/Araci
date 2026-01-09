@@ -13,9 +13,9 @@ var flag_grab_one_animal_in_trap = false
 var flag_stay_on_sand = false
 
 #Controle de powerups
-var flag_pw_feroz_enable = true
-var flag_pw_superjump = true
-var flag_pw_teletransport = true
+var flag_pw_feroz_enable = false
+var flag_pw_superjump = false
+var flag_pw_teletransport = false
 
 #Criados para permitir o mecanismo de checkpoint:
 var araci = null #Carregado
