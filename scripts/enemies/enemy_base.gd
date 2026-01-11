@@ -51,7 +51,7 @@ func _on_direction_changed() -> void:
 func stomped() -> void:
 	take_damage()
 
-# ✅ Dano genérico
+# Dano genérico
 func take_damage() -> void:
 	if is_dead:
 		return

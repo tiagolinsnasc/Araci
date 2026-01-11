@@ -1342,15 +1342,6 @@ texture = ExtResource("9_gmex4")
 [sub_resource type="TileSet" id="TileSet_av01a"]
 sources/0 = SubResource("TileSetAtlasSource_lqgom")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vmtb"]
-size = Vector2(12, 13.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ub3r"]
-size = Vector2(17.000061, 131.78635)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lp4ay"]
-size = Vector2(7, 283)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovq2m"]
 size = Vector2(1234, 46.5)
 
@@ -1443,6 +1434,15 @@ size = Vector2(35.875, 16.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14a6h"]
 size = Vector2(9299, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vmtb"]
+size = Vector2(12, 13.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ub3r"]
+size = Vector2(17.000061, 131.78635)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lp4ay"]
+size = Vector2(7, 283)
 
 [node name="World-01" type="Node2D"]
 position = Vector2(134, 135)
@@ -1596,44 +1596,6 @@ position = Vector2(4452, -27)
 editor_description = "Objetivo final. Marcado indicando que o estágio chegou ao fim."
 position = Vector2(8918, 221)
 next_level = "res://levels/world_02.tscn"
-
-[node name="popup" type="StaticBody2D" parent="."]
-position = Vector2(472, 148)
-collision_layer = 2048
-
-[node name="Sprite2D" type="Sprite2D" parent="popup"]
-texture = ExtResource("19_7k4mt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="popup"]
-position = Vector2(8, -28)
-shape = SubResource("RectangleShape2D_3vmtb")
-
-[node name="hit_pop" type="Area2D" parent="popup"]
-position = Vector2(0, -28)
-scale = Vector2(1, 0.18970104)
-collision_layer = 2
-script = ExtResource("17_ln80i")
-dialog_texts = Array[String](["O aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "As espécie nativas são inofensivas, mas os animais invasores são agressivos, tenha cuidado!"])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="popup/hit_pop"]
-position = Vector2(7.500061, 18.450073)
-rotation = -3.1415925
-shape = SubResource("RectangleShape2D_4ub3r")
-
-[node name="first_contact" type="Area2D" parent="popup"]
-editor_description = "Área para ativar a informação do que é a coruja (informações) e como ela deve ser ativada."
-position = Vector2(-158, -75)
-script = ExtResource("17_yftww")
-
-[node name="collision" type="CollisionShape2D" parent="popup/first_contact"]
-shape = SubResource("RectangleShape2D_lp4ay")
-debug_color = Color(0, 0.9647059, 0.5176471, 0.49803922)
-
-[node name="cabure_popup" parent="." instance=ExtResource("18_brbtt")]
-position = Vector2(8138, 194)
-
-[node name="hit_pop" parent="cabure_popup" index="2"]
-dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as avidências.", "A floresta precisa de você!"])
 
 [node name="Araci" parent="." instance=ExtResource("13_brbtt")]
 position = Vector2(-47, 170)
@@ -2067,9 +2029,47 @@ collision_mask = 256
 
 [node name="informations" type="Node2D" parent="."]
 
-[connection signal="body_entered" from="popup/hit_pop" to="popup/hit_pop" method="_on_body_entered"]
-[connection signal="body_entered" from="popup/first_contact" to="popup/first_contact" method="_on_body_entered"]
+[node name="popup" type="StaticBody2D" parent="informations"]
+position = Vector2(472, 148)
+collision_layer = 2048
 
-[editable path="cabure_popup"]
+[node name="Sprite2D" type="Sprite2D" parent="informations/popup"]
+texture = ExtResource("19_7k4mt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="informations/popup"]
+position = Vector2(8, -28)
+shape = SubResource("RectangleShape2D_3vmtb")
+
+[node name="hit_pop" type="Area2D" parent="informations/popup"]
+position = Vector2(0, -28)
+scale = Vector2(1, 0.18970104)
+collision_layer = 2
+script = ExtResource("17_ln80i")
+dialog_texts = Array[String](["O aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "Pressione i quando estiver próximo e de frente com  um animal para saber mais sobre ele.", "As espécie nativas são inofensivas, mas os animais invasores são agressivos, tenha cuidado!"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="informations/popup/hit_pop"]
+position = Vector2(7.500061, 18.450073)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_4ub3r")
+
+[node name="first_contact" type="Area2D" parent="informations/popup"]
+editor_description = "Área para ativar a informação do que é a coruja (informações) e como ela deve ser ativada."
+position = Vector2(-158, -75)
+script = ExtResource("17_yftww")
+
+[node name="collision" type="CollisionShape2D" parent="informations/popup/first_contact"]
+shape = SubResource("RectangleShape2D_lp4ay")
+debug_color = Color(0, 0.9647059, 0.5176471, 0.49803922)
+
+[node name="cabure_popup" parent="informations" instance=ExtResource("18_brbtt")]
+position = Vector2(8138, 194)
+
+[node name="hit_pop" parent="informations/cabure_popup" index="2"]
+dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as avidências.", "A floresta precisa de você!"])
+
+[connection signal="body_entered" from="informations/popup/hit_pop" to="informations/popup/hit_pop" method="_on_body_entered"]
+[connection signal="body_entered" from="informations/popup/first_contact" to="informations/popup/first_contact" method="_on_body_entered"]
+
 [editable path="enemies/maina3"]
 [editable path="peaceful_animals/tie4"]
+[editable path="informations/cabure_popup"]

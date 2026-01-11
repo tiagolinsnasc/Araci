@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://o7bv3h7sv70y"]
+[gd_scene load_steps=18 format=3 uid="uid://o7bv3h7sv70y"]
 
 [ext_resource type="Script" uid="uid://b81xk14dpsmpi" path="res://scripts/enemies/enemy_drone.gd" id="1_xrf1e"]
 [ext_resource type="Texture2D" uid="uid://dus568dvh23q" path="res://n_assets/n_scenes/elements/drone.png" id="2_xrf1e"]
+[ext_resource type="AudioStream" uid="uid://b4i56nj05q5by" path="res://sounds/enemies/drone.ogg" id="3_t5og5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qpob"]
 size = Vector2(42, 27)
@@ -132,7 +133,7 @@ animation = &"shake"
 autoplay = "fly"
 
 [node name="detect_area" type="Area2D" parent="."]
-collision_layer = 128
+collision_layer = 2048
 collision_mask = 2
 
 [node name="collision_detect" type="CollisionShape2D" parent="detect_area"]
@@ -140,6 +141,12 @@ shape = SubResource("CircleShape2D_xrf1e")
 debug_color = Color(0.16094005, 0.6192763, 0.5128252, 0.41960785)
 
 [node name="attack_timer" type="Timer" parent="."]
+
+[node name="drone_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t5og5")
+autoplay = true
+max_distance = 500.0
+parameters/looping = true
 
 [connection signal="area_entered" from="damage_area" to="." method="_on_damage_area_area_entered"]
 [connection signal="area_entered" from="detect_area" to="." method="_on_detect_area_area_entered"]
