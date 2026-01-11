@@ -7,7 +7,7 @@ extends Control
   
 
 func _ready():
-	coins_counter.text = str("%04d" % Globals.coins)
+	coins_counter.text = str("%02d" % Globals.coins)
 	score_counter.text = str("%06d" % Globals.score)
 	life_counter.text = str("%02d" % Globals.player_life)
 	#Passa o hud para o Globals para controle dos cooldowns
@@ -18,7 +18,7 @@ func _ready():
 	Globals.ambient_player = ambient_sound
 	
 func _process(_delta: float):
-	coins_counter.text = str("%04d" % Globals.coins)
+	coins_counter.text = str("%02d" % Globals.coins)
 	score_counter.text = str("%06d" % Globals.score)
 	life_counter.text = str("%02d" % Globals.player_life)
 

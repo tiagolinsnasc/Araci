@@ -129,4 +129,5 @@ autoplay = "move"
 stream = ExtResource("2_1tq73")
 volume_db = -12.117
 autoplay = true
+max_distance = 700.0
 parameters/looping = true

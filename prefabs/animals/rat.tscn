@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4tm6lbvn4p23"]
+
+[ext_resource type="Script" uid="uid://bfgbfdfu0phq1" path="res://scripts/enemies/animal_enemy_rat.gd" id="1_kpqgc"]
+[ext_resource type="Texture2D" uid="uid://dfrjb7rvrmku" path="res://n_assets/n_scenes/elements/rat.png" id="2_kpqgc"]
+[ext_resource type="AudioStream" uid="uid://b5ku47l3qoyxi" path="res://sounds/animals/rat.ogg" id="3_dfu7p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfu7p"]
+atlas = ExtResource("2_kpqgc")
+region = Rect2(0, 0, 46, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqsrs"]
+atlas = ExtResource("2_kpqgc")
+region = Rect2(46, 0, 46, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5snv5"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"atack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfu7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqsrs")
+}],
+"loop": true,
+"name": &"run",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tbcpb"]
+radius = 7.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrgn4"]
+size = Vector2(42, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3w5c"]
+size = Vector2(46, 20)
+
+[node name="rat" type="CharacterBody2D" groups=["animals", "enemies"]]
+collision_layer = 16
+collision_mask = 257
+script = ExtResource("1_kpqgc")
+speed = 1500.0
+
+[node name="anime" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5snv5")
+animation = &"run"
+autoplay = "run"
+frame = 1
+frame_progress = 0.822185
+
+[node name="body" type="CollisionShape2D" parent="."]
+visible = false
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_tbcpb")
+
+[node name="wall_detector" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(33, 0)
+collision_mask = 256
+hit_from_inside = true
+
+[node name="ground_detector" type="RayCast2D" parent="."]
+position = Vector2(1, 1)
+target_position = Vector2(29, 22)
+collision_mask = 256
+hit_from_inside = true
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="enemy_hitbox"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_qrgn4")
+debug_color = Color(0.90198725, 0.028006515, 0.7500692, 0.41960785)
+
+[node name="aux_area" type="Area2D" parent="."]
+editor_description = "Área utilizada para que o player detecte os animais, consigo mi"
+visible = false
+collision_layer = 32768
+collision_mask = 2
+
+[node name="colision" type="CollisionShape2D" parent="aux_area"]
+shape = SubResource("RectangleShape2D_o3w5c")
+debug_color = Color(0.7921569, 0.42745098, 0.8980392, 0.41960785)
+
+[node name="rat_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dfu7p")
+autoplay = true
+max_distance = 100.0
+parameters/looping = true

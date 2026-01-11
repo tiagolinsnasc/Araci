@@ -158,6 +158,12 @@ func play_upgrade():
 func _physics_process(delta: float) -> void:
 	var on_floor := is_on_floor()
 
+	#Trata da aniamção de leitura na interação com i
+	if estado == "read":
+		velocity = Vector2.ZERO
+		#move_and_slide()
+		#return
+
 	# --------------------------------------------------------
 	# BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
 	# --------------------------------------------------------
@@ -260,13 +266,13 @@ func _physics_process(delta: float) -> void:
 				estado = "run"
 
 			# Só define run se não estiver em ações prioritárias
-			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack"]:
+			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
 				estado = "run"
 		else:
 			velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
 
 			# Se está no chão, parado e não está em outra ação, fica idle
-			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack"]:
+			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
 				estado = "idle"
 
 	# --------------------------------------------------------
@@ -354,6 +360,8 @@ func _physics_process(delta: float) -> void:
 			animation.play("pet_attack")
 		"teleport":
 			animation.play("teleport")
+		"read":
+			animation.play("read")
 	
 
 
@@ -454,7 +462,7 @@ func follow_camera(camera: Node2D) -> void:
 	remote_transform.remote_path = camera.get_path()
 
 func _on_anime_animation_finished() -> void:
-	if estado in ["shoot", "atack", "pet_attack", "teleport", "upgrade"]:
+	if estado in ["shoot", "atack", "pet_attack", "teleport", "upgrade", "read"]:
 		var input_dir := Input.get_axis("ui_left", "ui_right")
 		if input_dir != 0 and is_on_floor():
 			estado = "run"
@@ -477,6 +485,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		var knockback:Vector2 = Vector2(600 * direction_jump, -350)
 		take_damage(knockback)
 
+
 #func _teleport():
 	#var dir = sign(animation.scale.x)
 	#if dir == 0:
@@ -484,22 +493,36 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 #
 	#var target_pos = global_position + Vector2(teleport_distance * dir, 0)
 #
-	#visible = false
-	#await get_tree().create_timer(teleport_delay).timeout
+	#var space_state = get_world_2d().direct_space_state
+	#var params = PhysicsPointQueryParameters2D.new()
+	#params.position = target_pos
+	#params.exclude = [self]
+	#params.collide_with_bodies = true
+	#params.collide_with_areas = false #Ingnora areas 2D
 #
-	#global_position = target_pos
-	#velocity.x = 0
+	## Só checar colisões com camadas 5, 6 e 9 (Sem funcionar)
+	#params.collision_mask = (1 << 4) | (1 << 5) | (1 << 8)
+	#
+	#var result = space_state.intersect_point(params)
 #
-	#visible = true
+	#if result.is_empty():
+		#teleport_sound()
+		## destino livre - teleporta
+		#visible = false
+		#await get_tree().create_timer(teleport_delay).timeout
+		#global_position = target_pos
+		#velocity.x = 0
+		#visible = true
+	#else:
+		## destino dentro de parede - cancela
+		#print("Teleport cancelado: destino bloqueado")
 #
-	## volta para idle ou run imediatamente
+	## Ajusta estado
 	#if is_on_floor():
-		#if abs(velocity.x) > 10:
-			#estado = "run"
-		#else:
-			#estado = "idle"
+		#estado = "run" if abs(velocity.x) > 10 else "idle"
 	#else:
 		#estado = "jump"
+
 
 func _teleport():
 	var dir = sign(animation.scale.x)
@@ -509,25 +532,37 @@ func _teleport():
 	var target_pos = global_position + Vector2(teleport_distance * dir, 0)
 
 	var space_state = get_world_2d().direct_space_state
-	var params = PhysicsPointQueryParameters2D.new()
-	params.position = target_pos
+
+	# Usar um pequeno círculo para checar espaço alvo
+	var shape = CircleShape2D.new()
+	shape.radius = 4.0
+
+	var params = PhysicsShapeQueryParameters2D.new()
+	params.shape = shape
+	params.transform = Transform2D(0, target_pos)
 	params.exclude = [self]
 	params.collide_with_bodies = true
-	params.collide_with_areas = true
+	params.collide_with_areas = true   # ignora áreas de detecção
+	params.collision_mask = (1 << 4) | (1 << 5) | (1 << 8)  # camadas 5, 6 e 9
 
-	var result = space_state.intersect_point(params)
+	var result = space_state.intersect_shape(params)
 
 	if result.is_empty():
 		teleport_sound()
-		# destino livre - teleporta
 		visible = false
 		await get_tree().create_timer(teleport_delay).timeout
 		global_position = target_pos
 		velocity.x = 0
 		visible = true
 	else:
-		# destino dentro de parede - cancela
 		print("Teleport cancelado: destino bloqueado")
+		# Debug para ver quem está bloqueando
+		for r in result:
+			var collider = r.collider
+			if collider is PhysicsBody2D or collider is Area2D:
+				print("Colidiu com:", collider.name, "camada:", collider.collision_layer)
+			else:
+				print("Colidiu com:", collider.name, "(sem collision_layer)")
 
 	# Ajusta estado
 	if is_on_floor():
@@ -633,6 +668,11 @@ var animals_info := {
 		"descricao": "Tiê-sangue, nativo da Mata Atlântica, ave de plumagem vermelha intensa.",
 		"icone": "res://icon.svg",
 		"tempo": 5.0
+	},
+	"rato doméstico": {
+	"descricao": "Rato doméstico, pequeno roedor urbano, adaptável e associado a ambientes humanos.",
+	"icone": "res://icon.svg",
+	"tempo": 3.0
 	}
 }
 
@@ -643,8 +683,14 @@ func _process(_delta: float) -> void:
 		var info = animals_info.get(current_animal_name, null)
 		if info != null:
 			var icon = load(info["icone"])
-			if info:
-				Globals.show_side_mensage(info["descricao"], icon, info["tempo"])
+			#if info:
+			Globals.show_side_mensage(info["descricao"], icon, info["tempo"])
+			
+			if is_on_floor():#Só toca a animação de ler se estiver no chão
+				#Ajuste: toca a animação de leitura
+				estado = "read"
+				velocity = Vector2.ZERO   # trava movimento enquanto lê
+				#animation.play("read")
 
 func _on_curiosity_area_entered(area: Area2D) -> void:
 	var parent = area.get_parent()

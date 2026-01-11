@@ -87,7 +87,7 @@ debug_color = Color(0.90198725, 0.028006515, 0.7500692, 0.41960785)
 [node name="wild_boar_song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_p4edo")
 autoplay = true
-max_distance = 500.0
+max_distance = 400.0
 attenuation = 0.9012505
 parameters/looping = true
 
