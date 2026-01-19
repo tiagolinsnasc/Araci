@@ -5,7 +5,7 @@ extends Area2D
 var information_image := preload("res://n_assets/n_scenes/elements/cabureIcon.png")
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		if !Globals.flag_grab_one_information and is_instance_valid(Globals.hud):
 			Globals.hud.show_notification(
 				"O caburé trará informações relevantes para a sua jornada!",

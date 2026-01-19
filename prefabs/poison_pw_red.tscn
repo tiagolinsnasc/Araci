@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c2ckrlnq10s5w"]
 
-[ext_resource type="Script" uid="uid://dkw0xe5bu4l6f" path="res://scripts/red_poison.gd" id="1_qtfge"]
+[ext_resource type="Script" uid="uid://dkw0xe5bu4l6f" path="res://scripts/pw_red_poison.gd" id="1_qtfge"]
 [ext_resource type="Texture2D" uid="uid://cwadcu777kp11" path="res://n_assets/Mini FX, Items & UI/Effects/Bright_Sparkle (16 x 16).png" id="2_81sev"]
 [ext_resource type="Texture2D" uid="uid://chbvoxl2q2wj3" path="res://n_assets/n_scenes/elements/red_poison.png" id="2_248ju"]
 
@@ -85,5 +85,5 @@ autoplay = "idle"
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_2d2mm")
 
-[connection signal="body_shape_entered" from="red_poison" to="red_poison" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="red_poison" to="red_poison" method="_on_body_entered"]
 [connection signal="animation_finished" from="red_poison/anime" to="red_poison" method="_on_anime_animation_finished"]

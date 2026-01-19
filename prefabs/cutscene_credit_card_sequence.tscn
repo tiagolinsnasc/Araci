@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://bco1w4sj2qdi2"]
+
+[ext_resource type="Script" uid="uid://boxitix36c80r" path="res://scripts/credit_card_sequence.gd" id="1_4qgiy"]
+[ext_resource type="FontFile" uid="uid://cusalemk0k0kb" path="res://general_fonts/Comic_Sans_MS.ttf" id="2_4qgiy"]
+[ext_resource type="FontFile" uid="uid://b4ufdn4liosy6" path="res://general_fonts/Comic_Sans_MS_Bold.ttf" id="3_2vtag"]
+
+[sub_resource type="Animation" id="Animation_1xvye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h0rux"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f57nv"]
+resource_name = "text_fade_in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f57nv"]
+_data = {
+&"RESET": SubResource("Animation_1xvye"),
+&"fade_in": SubResource("Animation_h0rux"),
+&"text_fade_in": SubResource("Animation_f57nv")
+}
+
+[node name="credit_card_sequence" type="Control"]
+editor_description = "Cena final com os cards e textos apresentando o desfecho da história."
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4qgiy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 602.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+editor_description = "Sem uso"
+libraries = {
+&"": SubResource("AnimationLibrary_f57nv")
+}
+
+[node name="Label" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(580, 300)
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 200.0
+theme_override_fonts/normal_font = ExtResource("2_4qgiy")
+theme_override_fonts/bold_font = ExtResource("3_2vtag")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+autowrap_mode = 2
+
+[node name="Label_instructions" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.11858138, 0.11858138, 0.11858138, 1)
+theme_override_font_sizes/font_size = 8
+text = "Pressione ESC para sair"
+autowrap_mode = 2
+
+[node name="background_music" type="AudioStreamPlayer" parent="."]
+autoplay = true

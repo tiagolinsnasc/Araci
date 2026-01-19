@@ -40,7 +40,7 @@ func _ready() -> void:
 
 #Cria uma instância da bala (BULLET)
 func shoot_bullet():
-	anime.play("shot")
+	anime.play("shoot")
 	
 	# espera 0.5 segundos antes de criar a bala
 	# recalcula o tempo para o próximo tiro
@@ -67,13 +67,15 @@ func _process(_delta):
 	var collider = null
 	if player_detect_left.is_colliding():
 		collider = player_detect_left.get_collider()
-		if collider != null and collider.name == "Araci":
+		#if collider != null and collider.name == "Araci":
+		if collider != null and Globals.is_player(collider):
 			player = collider
 			sees_player = true
 	
 	if player_detect_right.is_colliding():
 		collider = player_detect_right.get_collider()
-		if collider != null and collider.name == "Araci":
+		#if collider != null and collider.name == "Araci":
+		if collider != null and Globals.is_player(collider):
 			player = collider
 			sees_player = true
 	
@@ -96,7 +98,7 @@ func start_attack():
 	else: 
 		anime.scale.x = abs(original_scale_x)   # vira sprite para direita
 	
-	anime.play("idlle")   # ou "shot" quando for atirar
+	anime.play("idle")   # ou "shot" quando for atirar
 	shoot_timer.start()       # começa a atirar
 	
 	#Atira

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		print("Player na área de reportagem!")
 		body.paralyze_player()
 		animator.play("report")

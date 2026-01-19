@@ -3,6 +3,6 @@ extends Area2D
 var flag_said = false
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" and not flag_said:
+	if Globals.is_player(body) and not flag_said:
 		speech_bubble.show_message("Bom trabalho, Araci. Há muito tempo investigamos a quadrilha e agora chegamos ao chefe!",8.0)
 		flag_said = true

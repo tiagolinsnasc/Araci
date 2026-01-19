@@ -80,7 +80,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_7argo")
 }],
 "loop": true,
-"name": &"idlle",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -124,8 +124,8 @@ shape = SubResource("RectangleShape2D_5p3gg")
 
 [node name="anime" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_5p3gg")
-animation = &"idlle"
-autoplay = "idlle"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="enemy_detect" type="RayCast2D" parent="CharacterBody2D"]
 target_position = Vector2(339, 0)

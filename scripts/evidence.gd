@@ -15,16 +15,19 @@ func _process(_delta: float) -> void:
 var evid_image := preload("res://n_assets/n_scenes/elements/evidence.png")
 @onready var audio: AudioStreamPlayer2D = $audio
 
-func _on_body_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
-	#print("Araci coletou!")
-	$amination_evidence.play("collect")
-	await $CollisionShape2D.call_deferred("queue_free") #Espera a colisão acabar (impede que uma coin seja coletada duas vezes)
-	Globals.coins += coins
-	audio.play()
-	#print("Coletou evidência")
-	if Globals.coins == 1 and !Globals.flag_grab_one_evidence:
-		Globals.show_side_mensage("Você coletou uma evidência! Elas são importantes para finalizar a fase.", evid_image, 10.0)
-		Globals.flag_grab_one_evidence = true
-
 func _on_amination_coin_animation_finished():
 	queue_free()
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if Globals.is_player(body):
+		#print("Araci coletou!")
+		$amination_evidence.play("collect")
+		await $CollisionShape2D.call_deferred("queue_free") 
+		#Espera a colisão acabar (impede que uma coin seja coletada duas vezes)
+		Globals.add_coin()
+		audio.play()
+		#print("Coletou evidência")
+		if Globals.coins == 1 and !Globals.flag_grab_one_evidence:
+			Globals.show_side_mensage("Você coletou uma evidência! Elas são importantes para finalizar a fase.", evid_image, 8.0)
+			Globals.flag_grab_one_evidence = true

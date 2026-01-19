@@ -8,7 +8,7 @@ extends Area2D
 var turn_on = false
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" and !turn_on:
+	if Globals.is_player(body) and !turn_on:
 		turn_on = true
 		anime.play("on")
 		click.play()

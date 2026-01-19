@@ -90,5 +90,5 @@ shape = SubResource("RectangleShape2D_uv4cb")
 stream = ExtResource("4_wweys")
 volume_db = 3.029
 
-[connection signal="body_shape_entered" from="evidence" to="evidence" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="evidence" to="evidence" method="_on_body_entered"]
 [connection signal="animation_finished" from="evidence/amination_evidence" to="evidence" method="_on_amination_coin_animation_finished"]

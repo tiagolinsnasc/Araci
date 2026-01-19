@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D):
 	print("Objetivo atingido!")
-	if body.name == "Araci" and !next_level == "":
+	if Globals.is_player(body) and !next_level == "":
 		end_stage_sound.play()
 		#await end_stage_sound.finished
 		transition.change_scene(next_level)

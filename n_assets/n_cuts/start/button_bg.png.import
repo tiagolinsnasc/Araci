@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://difhr0v8xt0hy"
-path="res://.godot/imported/Araci_completo.png-661c126f22f1e1d2ee73dc9705934c7c.ctex"
+uid="uid://cf51w43animtq"
+path="res://.godot/imported/button_bg.png-fab879d7008c5e2abd4d5ec4e5b6134b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://n_assets/n_tiles_actors/Araci_completo.png"
-dest_files=["res://.godot/imported/Araci_completo.png-661c126f22f1e1d2ee73dc9705934c7c.ctex"]
+source_file="res://n_assets/n_cuts/start/button_bg.png"
+dest_files=["res://.godot/imported/button_bg.png-fab879d7008c5e2abd4d5ec4e5b6134b.ctex"]
 
 [params]
 

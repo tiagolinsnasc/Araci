@@ -4,8 +4,9 @@ var active_fire := true
 
 func _on_fire_area_area_entered(area: Area2D) -> void:
 	print("Contato com o fogo!", area.name)
-	if area.name == "hurtbox" and active_fire: #hutbox é o nome do nó que recebe danos em Araci
-		print("Araci no fogo!")
+	#if area.name == "hurtbox" and active_fire: #hutbox é o nome do nó que recebe danos em Araci
+	if Globals.is_player_hurtbox(area) and active_fire:
+		#print("Araci no fogo!")
 		$anime.play("action")
 		var player = area.get_parent()  # sobe um nível para pegar o CharacterBody2D
 		if player.has_method("take_damage"):

@@ -44,13 +44,14 @@ func _ready():
 	idle()
 
 func _on_detect_area_area_entered(area: Area2D) -> void:
-	if area.name == "hurtbox" and not is_attacking_cycle and not is_dying:
+	#if area.name == "hurtbox" and not is_attacking_cycle and not is_dying:
+	if Globals.is_player(area) and not is_attacking_cycle and not is_dying:
 		target = area.get_parent()
 		if target:
 			_start_attack_cycle()
 
 func _on_detect_area_area_exited(area: Area2D) -> void:
-	if area.name == "hurtbox" and not is_dying:
+	if Globals.is_player(area) and not is_dying:
 		target = null
 		cooldown_timer.stop()
 		is_attacking_cycle = false
@@ -86,7 +87,7 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.move_toward(target.global_position, speed * delta)
 
 func _on_damage_area_area_entered(area: Area2D) -> void:
-	if area.name == "hurtbox" and is_attacking_cycle and not is_dying:
+	if Globals.is_player(area) and is_attacking_cycle and not is_dying:
 		var player = area.get_parent()
 		if player.has_method("take_damage"):
 			var direction_jump: float = sign(player.global_position.x - global_position.x)

@@ -1,22 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cti7di40xb4ed"]
+[gd_scene load_steps=8 format=3 uid="uid://cti7di40xb4ed"]
 
 [ext_resource type="Script" uid="uid://ccg8u5fc78dkw" path="res://scripts/final_card_sequence.gd" id="1_h0rux"]
 [ext_resource type="AudioStream" uid="uid://spx4tb0wt17r" path="res://n_assets/n_cuts/sounds/guardian_da_floresta.ogg" id="2_1xvye"]
-
-[sub_resource type="Animation" id="Animation_h0rux"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
+[ext_resource type="FontFile" uid="uid://14xl3hhhht3o" path="res://n_assets/n_cuts/fonts/Comic_Sans_MS.ttf" id="2_f57nv"]
 
 [sub_resource type="Animation" id="Animation_1xvye"]
 length = 0.001
@@ -33,10 +19,29 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_h0rux"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f57nv"]
+resource_name = "text_fade_in"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f57nv"]
 _data = {
 &"RESET": SubResource("Animation_1xvye"),
-&"fade_in": SubResource("Animation_h0rux")
+&"fade_in": SubResource("Animation_h0rux"),
+&"text_fade_in": SubResource("Animation_f57nv")
 }
 
 [node name="final_card_sequence" type="Control"]
@@ -49,10 +54,11 @@ script = ExtResource("1_h0rux")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 640.0
+offset_bottom = 360.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,9 +70,28 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+editor_description = "Sem uso"
 libraries = {
 &"": SubResource("AnimationLibrary_f57nv")
 }
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_f57nv")
+autowrap_mode = 2
+
+[node name="Label_instructions" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.11858138, 0.11858138, 0.11858138, 1)
+theme_override_font_sizes/font_size = 8
+text = "Pressione barra de espaço para avançar e ESC para sair"
+autowrap_mode = 2
 
 [node name="background_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_1xvye")

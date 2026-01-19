@@ -28,7 +28,7 @@ func _ready():
 	start_position = global_position
 		
 	# conecta ao sinal do player
-	var player = get_tree().get_first_node_in_group("player")
+	var player = get_tree().get_first_node_in_group("player") #Pega o player pelo grupo
 	if player:
 		player.connect("player_has_died", Callable(self, "_on_player_died"))
 		

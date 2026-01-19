@@ -6,7 +6,8 @@ var is_tree= false
 @export var score = 100
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name != "Araci" or is_tree:
+	#if body.name != "Araci" or is_tree:
+	if !Globals.is_player(body) or is_tree:
 		return
 	grow()
 
@@ -23,6 +24,7 @@ var imagem_embauba_planted = preload("res://n_assets/n_scenes/elements/tree_plan
 func call_birds() -> void:
 	#Lembrar de começar com os pássaros invisíveis, isso não desabilita a colisão, então cuidado quando fizer isso com inimigos
 	hided_birds.visible = true
+	hided_birds._unmute_recursive(hided_birds)
 
 func grow():
 	print("Araci plantou a árvore!")

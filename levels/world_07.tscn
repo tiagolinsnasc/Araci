@@ -3430,7 +3430,6 @@ script = ExtResource("1_sejcc")
 stage_number = 6
 
 [node name="Paralax2D" type="Node2D" parent="."]
-visible = false
 
 [node name="BG_5_blue_sky" type="Parallax2D" parent="Paralax2D"]
 texture_repeat = 3
@@ -3556,7 +3555,7 @@ position = Vector2(3423.352, -128)
 tile_set = SubResource("TileSet_av01a")
 
 [node name="Araci" parent="." instance=ExtResource("20_sllfr")]
-position = Vector2(2515, 155)
+position = Vector2(10, 164)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
@@ -3580,7 +3579,7 @@ visible = false
 
 [node name="goal" parent="." instance=ExtResource("38_rnpiw")]
 position = Vector2(2646, 195)
-next_level = "res://prefabs/final_card_sequence.tscn"
+next_level = "res://prefabs/cutscene_final_card_sequence.tscn"
 
 [node name="actors" type="Node2D" parent="."]
 

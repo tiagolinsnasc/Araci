@@ -5,7 +5,7 @@ var active_trap := true
 
 func _on_trap_area_area_entered(area: Area2D) -> void:
 	#print("Contato com a armadilha!", area.name)
-	if area.name == "hurtbox" and active_trap: #hutbox é o nome do nó que recebe danos em Araci
+	if Globals.is_player_hurtbox(area) and active_trap: #hutbox é o nome do nó que recebe danos em Araci
 		#print("Araci na armadilha!")
 		$anime.play("action")
 		active_trap = false

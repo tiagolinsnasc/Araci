@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=4 uid="uid://b4ac07chpkwuh"]
+[gd_scene load_steps=91 format=4 uid="uid://b4ac07chpkwuh"]
 
 [ext_resource type="Script" uid="uid://rrcccix26aeh" path="res://scripts/world.gd" id="1_gmex4"]
 [ext_resource type="Texture2D" uid="uid://cfmvolocmwr6i" path="res://n_assets/n_scenes/bgs/5 - Sky_color.png" id="2_gmex4"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://x1yhxbdj4y7t" path="res://prefabs/animals/sabia.tscn" id="30_lqgom"]
 [ext_resource type="PackedScene" uid="uid://fp2fluhv4tkl" path="res://prefabs/interface.tscn" id="32_0uwfl"]
 [ext_resource type="PackedScene" uid="uid://dqt0jckn53c02" path="res://prefabs/animals/tie.tscn" id="34_ud1nb"]
+[ext_resource type="Script" uid="uid://bcvkvcie5c316" path="res://scripts/game_start_instructions.gd" id="35_av01a"]
 [ext_resource type="PackedScene" uid="uid://d2ux85q33ohvw" path="res://actors/yaguarete.tscn" id="35_lqgom"]
 [ext_resource type="PackedScene" uid="uid://cuu1ef4eo0cx0" path="res://prefabs/animals/macuco.tscn" id="38_q0cxt"]
 [ext_resource type="PackedScene" uid="uid://nqgw18mplheq" path="res://prefabs/animals/african_snail.tscn" id="40_0aqq2"]
@@ -1444,6 +1445,9 @@ size = Vector2(17.000061, 131.78635)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lp4ay"]
 size = Vector2(7, 283)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ln4kl"]
+size = Vector2(344, 9)
+
 [node name="World-01" type="Node2D"]
 position = Vector2(134, 135)
 script = ExtResource("1_gmex4")
@@ -1458,6 +1462,14 @@ repeat_size = Vector2(700, 0)
 [node name="05" type="Sprite2D" parent="Paralax2D/BG_5_blue_sky"]
 texture_repeat = 2
 position = Vector2(159.00003, -96.218735)
+scale = Vector2(701, 645.5625)
+texture = ExtResource("2_gmex4")
+region_enabled = true
+region_rect = Rect2(0, 0, 1, 1)
+
+[node name="06" type="Sprite2D" parent="Paralax2D/BG_5_blue_sky"]
+texture_repeat = 2
+position = Vector2(160, -571.00006)
 scale = Vector2(701, 645.5625)
 texture = ExtResource("2_gmex4")
 region_enabled = true
@@ -1485,6 +1497,13 @@ repeat_size = Vector2(700, 0)
 texture_repeat = 2
 material = SubResource("ShaderMaterial_8rwgp")
 position = Vector2(164.00002, -29.5)
+scale = Vector2(2.4652777, 1.7740384)
+texture = ExtResource("5_imfvm")
+
+[node name="03_top_clouds2" type="Sprite2D" parent="Paralax2D/BG_3_top_clouds"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_8rwgp")
+position = Vector2(165.00002, -278)
 scale = Vector2(2.4652777, 1.7740384)
 texture = ExtResource("5_imfvm")
 
@@ -2045,7 +2064,7 @@ position = Vector2(0, -28)
 scale = Vector2(1, 0.18970104)
 collision_layer = 2
 script = ExtResource("17_ln80i")
-dialog_texts = Array[String](["O aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "Pressione i quando estiver próximo e de frente com  um animal para saber mais sobre ele.", "As espécie nativas são inofensivas, mas os animais invasores são agressivos, tenha cuidado!"])
+dialog_texts = Array[String](["Olá, aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "Pressione i quando estiver próximo e de frente com  um animal para saber mais sobre ele.", "As espécie nativas são inofensivas, mas os animais invasores e são agressivos, tenha cuidado!"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="informations/popup/hit_pop"]
 position = Vector2(7.500061, 18.450073)
@@ -2067,8 +2086,17 @@ position = Vector2(8138, 194)
 [node name="hit_pop" parent="informations/cabure_popup" index="2"]
 dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as avidências.", "A floresta precisa de você!"])
 
+[node name="instructions" type="Area2D" parent="informations"]
+editor_description = "Área com informações preliminares de andar e pular."
+script = ExtResource("35_av01a")
+
+[node name="instructions" type="CollisionShape2D" parent="informations/instructions"]
+position = Vector2(39, 208.5)
+shape = SubResource("RectangleShape2D_ln4kl")
+
 [connection signal="body_entered" from="informations/popup/hit_pop" to="informations/popup/hit_pop" method="_on_body_entered"]
 [connection signal="body_entered" from="informations/popup/first_contact" to="informations/popup/first_contact" method="_on_body_entered"]
+[connection signal="body_entered" from="informations/instructions" to="informations/instructions" method="_on_body_entered"]
 
 [editable path="enemies/maina3"]
 [editable path="peaceful_animals/tie4"]

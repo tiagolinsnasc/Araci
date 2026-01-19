@@ -3,7 +3,7 @@ extends Node2D
 
 func _on_fence_area_area_entered(area: Area2D) -> void:
 	#print("Contato com a armadilha!", area.name)
-	if area.name == "hurtbox": #hutbox é o nome do nó que recebe danos em Araci
+	if Globals.is_player_hurtbox(area): #hutbox é o nome do nó que recebe danos em Araci
 		var player = area.get_parent()  # sobe um nível para pegar o CharacterBody2D
 		if player.has_method("take_damage"):
 			var direction_jump:float = sign(player.global_position.x - area.global_position.x)

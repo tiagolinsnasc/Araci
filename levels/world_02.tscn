@@ -2609,10 +2609,10 @@ position = Vector2(10150, 165)
 [node name="goal" parent="." instance=ExtResource("14_st4sk")]
 editor_description = "Objetivo final. Marcado indicando que o estágio chegou ao fim."
 position = Vector2(16982, 30)
-next_level = "res://levels/world_02.tscn"
+next_level = "res://levels/world_03.tscn"
 
 [node name="Araci" parent="." instance=ExtResource("19_6ki2q")]
-position = Vector2(-57, 144)
+position = Vector2(-75, 162)
 
 [node name="feroz" parent="." instance=ExtResource("31_wjrim")]
 position = Vector2(9421, 361)
@@ -2816,7 +2816,6 @@ position = Vector2(7278, 305)
 
 [node name="african_snail" parent="animals_agressives" instance=ExtResource("33_ncdwf")]
 position = Vector2(6698, 313)
-flip_sprite = false
 
 [node name="macuco" parent="animals_agressives" instance=ExtResource("25_qauss")]
 position = Vector2(7794, 319)
@@ -2968,7 +2967,7 @@ z_index = 3
 position = Vector2(9209, 307)
 
 [node name="hit_pop" parent="messages/cabure_popup2" index="2"]
-dialog_texts = Array[String](["Olá, Araci", "Os papéis que você encontrou no chão, mostram a imagem de Anna Harvey.", "Anna investiga grandes corporações que ameaçam o meio ambiente.", "Você deve conseguir mais evidências e levar até Anna.", "Anna corre risco de vida e sua única chance é desmascarando todos os responsáveis pelos danos ambientais ocorridos aqui.", "O cachorro chama-se Feroz, provavelmente foi trazido por algum caçador.", "Apesar do nome ele parece ter simpatizado com você. Pressione Q para adotá-lo.", "Sempre que quiser chamá-lo ou dispensá-lo, pressione Q. Para mandar ele atacar um inimigo, pressione P quando ele tiver perto do inimigo. Leva um tempo, após um ataque, para que Feroz consiga atacar novamente.", "Boa sorte em sua jornada!"])
+dialog_texts = Array[String](["Olá, Araci", "Os papéis que você encontrou no chão, mostram a imagem de Anna Harvey.", "Anna investiga grandes corporações que ameaçam o meio ambiente.", "Você deve conseguir mais evidências e levar até Anna.", "Anna corre risco de vida e sua única chance é desmascarando todos os responsáveis pelos danos ambientais ocorridos aqui.", "O cachorro chama-se Feroz, provavelmente foi trazido por algum caçador.", "Apesar do nome, ele parece ter simpatizado com você.", "Sempre que quiser chamá-lo ou dispensá-lo, pressione Q. Para mandar ele atacar um inimigo, pressione P quando ele tiver perto do inimigo. Leva um tempo, após um ataque, para que Feroz consiga atacar novamente.", "Boa sorte em sua jornada!"])
 
 [connection signal="body_entered" from="spikes_area" to="spikes_area" method="_on_body_entered"]
 [connection signal="body_entered" from="spikes_area2" to="spikes_area2" method="_on_body_entered"]

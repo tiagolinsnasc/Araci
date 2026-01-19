@@ -3,7 +3,7 @@ extends Node2D
 @export var score := 100
 
 func _on_area_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		Globals.give_points_to_player(score,global_position,self)
 		queue_free()
 	if not Globals.flag_grab_one_animal_in_trap:
