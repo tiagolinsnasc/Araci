@@ -39,7 +39,6 @@ text = "Carregar"
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_eib0j")
-disabled = true
 text = "Instruções"
 
 [node name="but_sair" type="Button" parent="VBoxContainer"]

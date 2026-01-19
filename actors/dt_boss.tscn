@@ -1,10 +1,12 @@
-[gd_scene load_steps=37 format=3 uid="uid://b3yywnh2pcj1d"]
+[gd_scene load_steps=39 format=3 uid="uid://b3yywnh2pcj1d"]
 
 [ext_resource type="Script" uid="uid://chs3p5oyp4583" path="res://scripts/enemies/enemy_dt_boss.gd" id="1_pfupr"]
 [ext_resource type="Texture2D" uid="uid://biy584jjdb31l" path="res://n_assets/n_tiles_actors/dt_boss.png" id="2_pfupr"]
 [ext_resource type="AudioStream" uid="uid://bgdosgrtn8yjm" path="res://sounds/enemies/boss_laughter.ogg" id="3_chu5h"]
 [ext_resource type="AudioStream" uid="uid://cslnf42umx8da" path="res://sounds/enemies/boss_hurt.ogg" id="4_1gvpi"]
 [ext_resource type="AudioStream" uid="uid://u07h00ymhlfi" path="res://sounds/enemies/boss_neutralized.ogg" id="5_b2sa2"]
+[ext_resource type="Script" uid="uid://8t3yjl0tupj7" path="res://scripts/speech_bubble.gd" id="6_nh6ib"]
+[ext_resource type="Texture2D" uid="uid://55wal77uprt1" path="res://n_assets/n_scenes/elements/speech_bubble.png" id="7_7vmys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6pl7"]
 atlas = ExtResource("2_pfupr")
@@ -258,7 +260,6 @@ frame = 1
 frame_progress = 0.5892491
 
 [node name="body" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_pfupr")
 
@@ -274,7 +275,6 @@ target_position = Vector2(18, 9)
 collision_mask = 256
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 32
 collision_mask = 2
 
@@ -284,7 +284,6 @@ shape = SubResource("RectangleShape2D_a0fep")
 debug_color = Color(0.86362183, 0.15356258, 0.7897774, 0.41960785)
 
 [node name="enemy_head" type="Area2D" parent="."]
-visible = false
 collision_layer = 64
 collision_mask = 4
 
@@ -305,7 +304,6 @@ stream = ExtResource("5_b2sa2")
 volume_db = 11.107
 
 [node name="life_bar" type="Node2D" parent="."]
-visible = false
 
 [node name="progress_bar" type="ProgressBar" parent="life_bar"]
 offset_left = -13.0
@@ -315,6 +313,43 @@ offset_bottom = -18.56474
 max_value = 3.0
 step = 1.0
 show_percentage = false
+
+[node name="speech_bubble" type="Node2D" parent="."]
+editor_description = "Serve para manter a fala em balões em qualquer personagem. (mantenha o script, ele é universal)"
+script = ExtResource("6_nh6ib")
+
+[node name="background" type="NinePatchRect" parent="speech_bubble"]
+offset_left = -87.0
+offset_top = -61.0
+offset_right = 97.0
+offset_bottom = -26.0
+texture = ExtResource("7_7vmys")
+region_rect = Rect2(0, 0, 16.087046, 16)
+patch_margin_left = 2
+patch_margin_top = 3
+patch_margin_right = 2
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="speech_bubble/background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.043
+anchor_top = 0.177
+anchor_right = 0.95100003
+anchor_bottom = 0.76400006
+offset_left = 0.08799982
+offset_top = 0.007999897
+offset_right = 0.015991211
+offset_bottom = 0.0099983215
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 3
+justification_flags = 161
 
 [connection signal="animation_finished" from="anime" to="." method="_on_anime_animation_finished"]
 [connection signal="area_entered" from="enemy_head" to="." method="_on_enemy_head_area_entered"]

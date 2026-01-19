@@ -4,7 +4,7 @@ var coins := 1 #No jogo as coins serão chamadas de evidências
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Globals.stat_disponible_evidences += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

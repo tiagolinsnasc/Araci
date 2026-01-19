@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var hurt: AudioStreamPlayer2D = $hurt
 @onready var neutralized: AudioStreamPlayer2D = $neutralized
 @onready var life_progress_bar: ProgressBar = $life_bar/progress_bar
-
+@onready var speech_bubble: Node2D = $speech_bubble
 
 
 var IS_ACTIVE = true
@@ -42,6 +42,7 @@ func _ready():
 	life_progress_bar.add_theme_stylebox_override("background", bg)
 
 func _physics_process(delta: float) -> void:
+	speech_bubble.scale.x = self.scale.x * -1 #gira o balão de fala
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	velocity.x = 0
@@ -78,7 +79,7 @@ func _on_enemy_head_area_entered(area: Area2D) -> void:
 		await anime.animation_finished
 		await laughter.finished
 		anime.play("idle")
-	else:
+	else:#Morre
 		IS_ACTIVE = false
 		anime.stop()
 		remove_from_group("enemies")  # deixa de ser considerado inimigo
@@ -88,6 +89,9 @@ func _on_enemy_head_area_entered(area: Area2D) -> void:
 		disable_all_collisions(enemy_head)
 		disable_all_collisions(enemy_hitbox)
 		eliminate_all_enemies()
+		await get_tree().create_timer(3.0).timeout
+		#Fala final
+		speech_bubble.show_message("Isso não vai ficar assim! Minha corporação é gigante, eu me vingarei.",5.0)
 
 	is_invulnerable = false
 

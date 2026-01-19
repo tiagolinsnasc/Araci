@@ -15,6 +15,10 @@ class_name EnemyBase
 var direction := 1
 var is_dead := false
 
+func _ready() -> void:
+	Globals.stat_disponible_score += enemy_score
+	Globals.stat_disponible_enemy += 1
+
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
@@ -49,6 +53,7 @@ func _on_direction_changed() -> void:
 
 ##Stomp do player
 func stomped() -> void:
+	Globals.stat_enemy_eliminated += 1
 	take_damage()
 
 # Dano genérico

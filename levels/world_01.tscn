@@ -1617,7 +1617,7 @@ position = Vector2(8918, 221)
 next_level = "res://levels/world_02.tscn"
 
 [node name="Araci" parent="." instance=ExtResource("13_brbtt")]
-position = Vector2(-47, 170)
+position = Vector2(-101, 173)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
