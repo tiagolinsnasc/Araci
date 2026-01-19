@@ -33,6 +33,6 @@ func _on_credits_pressed():
 
 func _on_load_instructions():
 	print("Instruções")
-
+	get_tree().change_scene_to_file("res://prefabs/cutscene_instructions_card.tscn")
 func _on_quit_pressed():
 	get_tree().quit()

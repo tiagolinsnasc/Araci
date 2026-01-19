@@ -9,6 +9,25 @@ var cards = [
 	preload("res://n_assets/n_cuts/final/s6.png"),
 	preload("res://n_assets/n_cuts/final/s7.png")
 ]
+func get_sentence():
+	var evidence_percent = 0
+	if Globals.stat_disponible_evidences > 0:
+		evidence_percent = int(round((float(Globals.coins) / float(Globals.stat_disponible_evidences)) * 100.0))
+		
+	if evidence_percent < 30:
+		return """Condenação leve (%s%% das evidências)
+				"Victor Grand escapa com punição branda"
+				Com poucas provas, o tribunal aplicou apenas multas simbólicas e restrições menores.""" % int(round(evidence_percent))
+	elif evidence_percent < 70:
+		return """Condenação moderada (%s%% das evidências)
+				"Victor Grand sofre, mas ainda mantém poder"
+				Com provas razoáveis, o tribunal aplicou 10 anos de prisão e multas pesadas.""" % int(round(evidence_percent))
+	else:
+		return """Condenação severa (%s%% das evidências)
+			"Victor Grand pega pena pesada no tribunal"
+			Com base em provas robustas, mas não completas, o tribunal condenou Victor Grand a 20 anos de prisão e ao pagamento de multas milionárias. Apesar de não ter sido a pena máxima, especialistas afirmam que a decisão representa um duro golpe contra a VGR Holdings e suas práticas ilegais.""" % int(round(evidence_percent))
+	
+		
 
 var texts = [
 	"Em uma ação conjunta desnecadeada pela jovem Araci, autoridades ambientais e policiais, Victor Grand, magnata e fundador da VGR Holdings, foi detido nesta manhã sob acusações graves de crimes ambientais.",
@@ -27,16 +46,17 @@ var texts = [
 	Educação e vigilância guardam o amanhã.
 	Araci sorri. A natureza começa a se recuperar.",
 	
-	"Com base em provas robustas, mas não completas, o tribunal condenou Victor Grand a 20 anos de prisão e ao pagamento de multas milionárias. Apesar de não ter sido a pena máxima, especialistas afirmam que a decisão representa um duro golpe contra a VGR Holdings e suas práticas ilegais.",
+	get_sentence(),
 	
 	"Araci, protagonista de uma jornada marcada pela defesa da natureza, decidiu seguir um novo caminho. Motivada pelas experiências vividas durante a luta contra crimes ambientais, ela ingressou na universidade e, após anos de dedicação, conquistou o diploma de Bacharel em Direito.",
+	Globals.get_stats_text(),
     "Fim"
 ]
 
 var left :Vector2 = Vector2(40, 40)
 var right :Vector2 = Vector2(300, 40)
 var center :Vector2 = Vector2(450, 300)
-
+var left_top :Vector2 = Vector2(35, 35)
 var positions = [
 	right, 
 	left, 
@@ -44,6 +64,7 @@ var positions = [
 	right,
 	right,
 	left,
+	left_top,
 	center
 ]
 

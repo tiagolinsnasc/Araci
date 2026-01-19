@@ -56,8 +56,10 @@ func reload_game():
 	Globals.araci.follow_camera(camera)
 	Globals.araci.player_has_died.connect(reload_game)
 	
-	Globals.coins = 0
-	Globals.score = 0
+	#Não reiniciar, ver comportamento
+	#Globals.coins = 0
+	#Globals.score = 0
 	Globals.player_life = 3
+	Globals.stat_disponible_lifes += 3
 	
 	Globals.respaw_player()

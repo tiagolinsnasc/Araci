@@ -92,6 +92,7 @@ size = Vector2(11, 17)
 editor_description = "Dinamite, explode quando o player chaga a uma distância específica, mas depende de um ocntadoe (em segundos), 5 segundos é o máximo para adequar ao final do som de fogo no pavio."
 
 [node name="dinamite" type="CharacterBody2D" parent="."]
+collision_layer = 16384
 collision_mask = 65792
 script = ExtResource("1_rj2ow")
 

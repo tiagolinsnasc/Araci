@@ -4,6 +4,23 @@ var coins := 0
 var score := 0
 var player_life := 3
 
+#Variáveis de estatisticas
+var stat_game_time := 0.0 #Em segundos
+var stat_disponible_score := 0 
+var stat_disponible_evidences := 0 #ok
+
+var stat_disponible_lifes := 0 #ok
+var stat_colectable_lifes := 0 #ok
+
+var stat_disponible_animal_traps := 0 #ok
+var stat_saved_animals_traps := 0 #ok
+var stat_disponible_firecamp := 0 #ok
+var stat_firecamp_eliminated := 0 #ok
+
+var stat_die_number := 0 
+var stat_enemy_eliminated := 0
+var stat_disponible_enemy := 0
+
 #Flags que auxiliam na exibição das primeira informações sobre os ítens coletados/gatilhos
 var flag_grab_one_life = false
 var flag_grab_one_evidence = false
@@ -16,9 +33,9 @@ var flag_stay_on_sand = false
 var flag_message_active = false 
 
 #Controle de powerups
-var flag_pw_feroz_enable = false
-var flag_pw_superjump = false
-var flag_pw_teletransport = false
+var flag_pw_feroz_enable = true
+var flag_pw_superjump = true
+var flag_pw_teletransport = true
 
 #Criados para permitir o mecanismo de checkpoint:
 var araci = null #Carregado
@@ -96,6 +113,8 @@ func is_player_hurtbox(node: Node) -> bool:
 	
 	return false
 
+func _process(delta: float) -> void:
+	stat_game_time += delta
 
 func respaw_player():
 		
@@ -256,3 +275,56 @@ func stop_ambient_sound():
 ##Verifica se o som ambiente está tocando
 func is_ambient_playing() -> bool:
 	return ambient_player != null and ambient_player.playing
+
+
+func get_stats_text() -> String:
+	# tempo formatado
+	var minutes = int(stat_game_time) / 60
+	var seconds = int(stat_game_time) % 60
+	var time_str = "%d:%02ds" % [minutes, seconds]
+
+	# porcentagens
+	#Estatísticas de fogueira foram removidas por falta de espaço (+ irrelevantes)
+	#var firecamp_percent = 0
+	#if stat_disponible_firecamp > 0:
+		#firecamp_percent = int(round((float(stat_firecamp_eliminated) / float(stat_disponible_firecamp)) * 100.0))
+
+	var animals_percent = 0
+	if stat_disponible_animal_traps > 0:
+		animals_percent = int(round((float(stat_saved_animals_traps) / float(stat_disponible_animal_traps)) * 100.0))
+
+	var lifes_percent = 0
+	if stat_disponible_lifes > 0:
+		lifes_percent = int(round((float(stat_colectable_lifes) / float(stat_disponible_lifes)) * 100.0))
+
+	var enemy_percent = 0
+	if stat_disponible_enemy > 0:
+		enemy_percent = int(round((float(stat_enemy_eliminated) / float(stat_disponible_enemy)) * 100.0))
+		
+	var evidence_percent = 0
+	if stat_disponible_evidences > 0:
+		evidence_percent = int(round((float(coins) / float(stat_disponible_evidences)) * 100.0))
+
+	return """Tempo de jogo: %s
+Pontuação: %s
+Evidências disponíveis: %s
+Evidências coletadas: %s (%s%%)
+Vidas disponíveis: %s
+Vidas coletadas: %s (%s%%)
+Animais em armadilhas: %s
+Animais salvos: %s (%s%%)
+Vidas perdidas: %s
+Inimigos eliminados: %s (%s%%)
+Inimigos: %s""" % [
+		time_str,
+		stat_disponible_score,
+		stat_disponible_evidences,
+		coins, evidence_percent,
+		stat_disponible_lifes,
+		stat_colectable_lifes, lifes_percent,
+		stat_disponible_animal_traps,
+		stat_saved_animals_traps, animals_percent,
+		stat_die_number,
+		stat_enemy_eliminated, enemy_percent,
+		stat_disponible_enemy
+	]

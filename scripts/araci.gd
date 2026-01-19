@@ -422,6 +422,8 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	if invincible:
 		return
 
+	Globals.stat_die_number += 1
+
 	invincible = true
 	is_hurt = true
 	estado = "hurt"
@@ -476,14 +478,21 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	await get_tree().create_timer(invincible_time).timeout
 	invincible = false
 
-
 # ============================================================
 # OUTROS
 # ============================================================
 
 func handle_death_zone() -> void:
-	if Globals.player_life > 0:
-		Globals.player_life -= 1
+	if Globals.player_life >= 0:
+		
+		if Globals.player_life > 0:
+			Globals.player_life -= 1
+			Globals.stat_die_number += 1
+		else:
+			Globals.stat_die_number += 1
+			Globals.stat_colectable_lifes = 3
+			Globals.player_life = 3
+			
 		visible = false
 		set_physics_process(false)
 		await get_tree().create_timer(1.0).timeout

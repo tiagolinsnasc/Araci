@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2d37lp6sidfm"]
+[gd_scene load_steps=14 format=3 uid="uid://d2d37lp6sidfm"]
 
 [ext_resource type="Texture2D" uid="uid://5tql15msm3j5" path="res://n_assets/n_scenes/elements/arara.png" id="1_72oo4"]
 [ext_resource type="Script" uid="uid://fbwuwqffdat4" path="res://scripts/peaceful_animals/animal_arara.gd" id="1_cn6o7"]
+[ext_resource type="AudioStream" uid="uid://chgtto5ie7frb" path="res://sounds/animals/arara_song.ogg" id="3_4tucc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_72oo4"]
 atlas = ExtResource("1_72oo4")
@@ -122,6 +123,12 @@ collision_mask = 2
 position = Vector2(-2.5, 2.5)
 shape = SubResource("RectangleShape2D_72oo4")
 debug_color = Color(0.7921569, 0.42745098, 0.8980392, 0.41960785)
+
+[node name="song" type="AudioStreamPlayer2D" parent="arara"]
+stream = ExtResource("3_4tucc")
+autoplay = true
+max_distance = 700.0
+parameters/looping = true
 
 [node name="animator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../arara")
