@@ -9,8 +9,9 @@ var tree_image := preload("res://n_assets/n_scenes/elements/checkPointIcon.png")
 @onready var collect_sound: AudioStreamPlayer2D = $collect_sound
 
 func _on_body_entered(body: Node2D):
-	if body.name != "Araci" or is_active:
+	if !Globals.is_player(body) or is_active:
 		return
+	
 	activate_checkpoit()
 	
 	if !Globals.flag_grab_one_checkpoint and is_instance_valid(Globals.hud):

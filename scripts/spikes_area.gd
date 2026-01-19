@@ -9,7 +9,7 @@ func _ready():
 
 #Cuidado aqui o dano está associado ao body do player e não à hurtbox
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" && body.has_method("take_damage"):
+	if Globals.is_player(body) && body.has_method("take_damage"):
 		print("player nos espinhos")
 		#morre de uma vez e vai para o início ou último checkpoint
 		body.handle_death_zone()

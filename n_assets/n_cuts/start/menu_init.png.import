@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsakuawpkov3a"
-path="res://.godot/imported/Araci_machado.png-c81a5ef11be42fc80a53e07a11a4800e.ctex"
+uid="uid://dyndjgnxg6nli"
+path="res://.godot/imported/menu_init.png-82444db27ac359e3ab3d46061b49ad19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://n_assets/n_tiles_actors/Araci_machado.png"
-dest_files=["res://.godot/imported/Araci_machado.png-c81a5ef11be42fc80a53e07a11a4800e.ctex"]
+source_file="res://n_assets/n_cuts/start/menu_init.png"
+dest_files=["res://.godot/imported/menu_init.png-82444db27ac359e3ab3d46061b49ad19.ctex"]
 
 [params]
 

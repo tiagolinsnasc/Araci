@@ -6,12 +6,12 @@ extends CharacterBody2D
 var started = false
 
 func _on_detect_player_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" and not started:
+	if Globals.is_player(body) and not started:
 		anime.play("move")
 		animation.play("move")
 
 
 func _on_detect_player_body_exited(body: Node2D) -> void:
-	if body.name == "Araci" and started:
+	if Globals.is_player(body) and started:
 		anime.stop()
 		animation.pause()

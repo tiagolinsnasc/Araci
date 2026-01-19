@@ -16,7 +16,7 @@ func _ready() -> void:
 var active = true
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" and active:
+	if Globals.is_player(body) and active:
 		print("Gatilho ativo")
 		anime.play("move_loaded")
 		animation.play("move")

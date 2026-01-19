@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg11bhk0wi2wr"
-path="res://.godot/imported/Araci_com_livro.png-2fbf21c9491c1b54020e458f36e17b80.ctex"
+uid="uid://cvngw0ed6hcyj"
+path="res://.godot/imported/history_s1.png-5ccd3e30d0b100c65db93e7517d47aba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://n_assets/n_tiles_actors/Araci_com_livro.png"
-dest_files=["res://.godot/imported/Araci_com_livro.png-2fbf21c9491c1b54020e458f36e17b80.ctex"]
+source_file="res://n_assets/n_cuts/start/history_s1.png"
+dest_files=["res://.godot/imported/history_s1.png-5ccd3e30d0b100c65db93e7517d47aba.ctex"]
 
 [params]
 

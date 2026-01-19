@@ -16,9 +16,9 @@ var flag_stay_on_sand = false
 var flag_message_active = false 
 
 #Controle de powerups
-var flag_pw_feroz_enable = true
-var flag_pw_superjump = true
-var flag_pw_teletransport = true
+var flag_pw_feroz_enable = false
+var flag_pw_superjump = false
+var flag_pw_teletransport = false
 
 #Criados para permitir o mecanismo de checkpoint:
 var araci = null #Carregado
@@ -34,6 +34,21 @@ var max_planted_trees_w3 = 5
 func eliminate_locust():
 	return count_planted_trees_w3 >= max_planted_trees_w3
 
+##Retorna o número de evidências
+func get_coins():
+	return coins
+	
+##Adiciona as evidências (coins), se não hover parâmetro adiciona apenas 1 evidência
+func add_coin(add_coins:=1):
+		coins += add_coins
+
+##Retorna o número de vidas
+func get_life():
+	return player_life
+	
+##Adiciona vidas, se não hover parâmetro adiciona apenas 1 vida
+func add_life(life_adicted:=1):
+		player_life += life_adicted
 
 #####Sons dos estgios
 var stage_sounds = {
@@ -46,19 +61,43 @@ var stage_sounds = {
 }
 var current_stage: int = 1
 
+##Utilitário para verificar se um colisionshape ou area2d é do player - evita repetir sempre if node.name == "Araci":
+func is_player(node: Node) -> bool:
+	if node.name == "Araci":
+		return true
+	
+	# Verifica se o nó está dentro do player
+	if node.get_parent() and node.get_parent().name == "Araci":
+		return true
+	
+	# Verifica se o nó tem um ancestral chamado Araci
+	var current = node
+	while current:
+		if current.name == "Araci":
+			return true
+		current = current.get_parent()
+	
+	return false
+
+##Veriffica se é a área de dano do player
+func is_player_hurtbox(node: Node) -> bool:
+	# Verifica se o nó é a hurtbox
+	if node.name == "hurtbox":
+		# E se o pai é o player Araci
+		if node.get_parent() and node.get_parent().name == "Araci":
+			return true
+	
+	# Verifica se algum ancestral é Araci e o nó é hurtbox
+	var current = node
+	while current:
+		if current.name == "hurtbox" and current.get_parent() and current.get_parent().name == "Araci":
+			return true
+		current = current.get_parent()
+	
+	return false
+
+
 func respaw_player():
-	#if is_instance_valid(araci):
-		#if current_checkpoint != null and is_instance_valid(current_checkpoint):
-			## Player volta para o último checkpoint válido
-			#araci.global_position = current_checkpoint.global_position
-		#else:
-			## Se não há checkpoint, volta para posição inicial
-			#araci.global_position = araci_start_position
-	#else:
-		#print("Araci não está válido, não foi possível reposicionar.")
-	 ## Atualiza o pet para seguir o novo player
-	#if is_instance_valid(pet):
-		#set_player(araci)
 		
 	if not is_instance_valid(araci):
 		print("Araci não está válido, recrie o player antes de respawnar.")

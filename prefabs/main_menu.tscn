@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2x517ahg4s5y"]
+
+[ext_resource type="Texture2D" uid="uid://dyndjgnxg6nli" path="res://n_assets/n_cuts/start/menu_init.png" id="1_1n3ne"]
+[ext_resource type="Script" uid="uid://dpg0wt5dn4tvc" path="res://scripts/main_menu.gd" id="1_fuj45"]
+[ext_resource type="FontFile" uid="uid://b4ufdn4liosy6" path="res://general_fonts/Comic_Sans_MS_Bold.ttf" id="2_eib0j"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fuj45")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1n3ne")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 50.0
+offset_right = 611.0
+offset_bottom = 221.0
+
+[node name="but_init" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eib0j")
+text = "Iniciar"
+
+[node name="but_load" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eib0j")
+disabled = true
+text = "Carregar"
+
+[node name="but_instructions" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eib0j")
+disabled = true
+text = "Instruções"
+
+[node name="but_sair" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eib0j")
+text = "Sair"
+
+[node name="but_credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eib0j")
+text = "Créditos"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

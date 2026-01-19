@@ -138,8 +138,8 @@ func _physics_process(delta: float):
 			if anime.animation != "run":
 				anime.play("run")
 		else:
-			if anime.animation != "idlle":
-				anime.play("idlle")
+			if anime.animation != "idle":
+				anime.play("idle")
 
 	move_and_slide()
 
@@ -201,7 +201,7 @@ func _attack(target: Node):
 
 
 func _sit_and_bark():
-	anime.play("sit_bark")
+	anime.play("barking")
 
 
 func _start_attack_cooldown():

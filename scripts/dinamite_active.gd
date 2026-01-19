@@ -21,7 +21,8 @@ func detone():
 	damage_area.monitoring = true
 
 func _on_activation_area_area_entered(area: Area2D) -> void:
-	if area.name == "hurtbox":
+	#if area.name == "hurtbox":
+	if Globals.is_player_hurtbox(area):
 		print("Ativou dinamite")
 		wick_fire_sound.play()
 		anime.play("action")
@@ -36,7 +37,7 @@ func _on_anime_animation_finished() -> void:
 		queue_free()
 
 func _on_damage_area_area_entered(area: Area2D) -> void:
-	if area.name == "hurtbox":
+	if Globals.is_player_hurtbox(area):
 		print("Está na área de dano!")
 		var player = area.get_parent()
 		if player.has_method("take_damage"):

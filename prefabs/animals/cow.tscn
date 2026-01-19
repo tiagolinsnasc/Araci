@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://chcxpiv3gxllw"]
+[gd_scene load_steps=11 format=3 uid="uid://chcxpiv3gxllw"]
 
-[ext_resource type="Script" uid="uid://5spc03ha7onb" path="res://scripts/peaceful_animals/animal_anteater.gd" id="1_f4due"]
+[ext_resource type="Script" uid="uid://lxwlx45wxlku" path="res://scripts/cow.gd" id="1_q82a1"]
 [ext_resource type="Texture2D" uid="uid://bfsyssr4oybit" path="res://n_assets/n_scenes/elements/cow.png" id="2_f4due"]
+[ext_resource type="AudioStream" uid="uid://che775htojsep" path="res://sounds/animals/cow_sound.ogg" id="3_q82a1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q82a1"]
 atlas = ExtResource("2_f4due")
@@ -40,9 +41,8 @@ size = Vector2(120, 80)
 [node name="cow" type="CharacterBody2D" groups=["animals", "enemies"]]
 collision_layer = 8208
 collision_mask = 257
-script = ExtResource("1_f4due")
+script = ExtResource("1_q82a1")
 animal_name = "boi"
-SPEED = 2000.0
 
 [node name="anime" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4xaqy")
@@ -94,6 +94,11 @@ collision_mask = 2
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_4lry6")
 debug_color = Color(0.61000425, 0.6385198, 0.071236975, 0.41960785)
+
+[node name="cow_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_q82a1")
+volume_db = -9.984
+max_distance = 500.0
 
 [connection signal="body_entered" from="detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="detect" to="." method="_on_detect_body_exited"]

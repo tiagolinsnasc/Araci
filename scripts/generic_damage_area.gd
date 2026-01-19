@@ -8,8 +8,8 @@ func _ready():
 
 #Cuidado aqui o dano está associado ao body do player e não à hurtbox
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci" && body.has_method("take_damage"):
-		print("Na área de dano")
+	if Globals.is_player(body) && body.has_method("take_damage"):
+		#print("Na área de dano")
 		#morre de uma vez e vai para o início ou último checkpoint
 		#body.handle_death_zone()
 		body.take_damage(Vector2(0,-250))

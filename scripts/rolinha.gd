@@ -5,7 +5,7 @@ extends Node2D
 @onready var wings_sound: AudioStreamPlayer2D = $wings_sound
 
 func _on_on_fly_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		anime.play("fly")
 		animator.play("fly_out")
 		wings_sound.play()

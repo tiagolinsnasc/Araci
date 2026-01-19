@@ -3343,7 +3343,7 @@ shape = SubResource("RectangleShape2D_sy8p5")
 [node name="checkpoints" type="Node2D" parent="."]
 
 [node name="Araci" parent="." instance=ExtResource("22_nrtxk")]
-position = Vector2(-54, 88)
+position = Vector2(-49, 103)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
@@ -3399,8 +3399,10 @@ editor_description = "Nó necessário para possibilitar o aparecimento dos páss
 position = Vector2(4379, 205)
 scale = Vector2(-1, 1)
 
-[node name="drone" parent="enemies" instance=ExtResource("19_cqt52")]
-position = Vector2(4102, 93)
+[node name="drone" parent="enemies/drone_controller" instance=ExtResource("19_cqt52")]
+position = Vector2(277, -112)
+rotation = 3.1415927
+scale = Vector2(1, -1)
 
 [node name="shooter" parent="enemies" instance=ExtResource("31_gyxc4")]
 position = Vector2(8781, 217)
@@ -3524,7 +3526,6 @@ speed = 1100.0
 [node name="rat5" parent="animals_agressives" instance=ExtResource("17_cqt52")]
 position = Vector2(7860, 243)
 speed = 800.0
-flip_sprite = false
 
 [node name="interface" parent="." instance=ExtResource("37_m6bbk")]
 offset_left = -398.0

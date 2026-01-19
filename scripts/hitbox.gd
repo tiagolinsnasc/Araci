@@ -4,7 +4,7 @@ extends Area2D
 #O finciona para silgle enemy. Se o enimigo estiver dentro de um nó 2d owner.animation_enemy não funciona
 func _on_body_entered(body: Node2D) -> void:
 	#print("Colidiu com:")
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		body.velocity.y = body.JUMP_VELOCITY #Pula quando mata
 		#owner.animation_enemy.play("hurt") #Dá erro poque considerar pegar as informações no no 2D em vez de ser em enemy_protrol (CharacterBody2d)
 		owner.animation_enemy.play("hurt")

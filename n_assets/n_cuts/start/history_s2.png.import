@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbkmjeo5br6x6"
-path="res://.godot/imported/Araci_arco.png-5516b7735836d500745254c7041734b0.ctex"
+uid="uid://cmmacee6cn1b4"
+path="res://.godot/imported/history_s2.png-a05525863ff3ddf554a087470a776df1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://n_assets/n_tiles_actors/Araci_arco.png"
-dest_files=["res://.godot/imported/Araci_arco.png-5516b7735836d500745254c7041734b0.ctex"]
+source_file="res://n_assets/n_cuts/start/history_s2.png"
+dest_files=["res://.godot/imported/history_s2.png-a05525863ff3ddf554a087470a776df1.ctex"]
 
 [params]
 

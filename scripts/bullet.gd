@@ -15,7 +15,7 @@ var knockback_vector := Vector2.ZERO
 var knockback_power := 2
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		#Não pula, knockback_power := 0 e -1, só fica vermelha
 		var knockback = Vector2((global_position.x - body.global_position.x)*knockback_power,-1)
 		body.take_damage(knockback) 

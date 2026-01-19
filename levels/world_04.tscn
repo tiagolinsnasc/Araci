@@ -2154,7 +2154,7 @@ position = Vector2(7601, 22)
 position = Vector2(13860, -521)
 
 [node name="Araci" parent="." instance=ExtResource("17_4kf1e")]
-position = Vector2(19088, 450)
+position = Vector2(-82, 135)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
@@ -2494,6 +2494,13 @@ position = Vector2(7800, 302)
 position = Vector2(35.25, 2)
 shape = SubResource("RectangleShape2D_dm8ns")
 
+[node name="trigger_off_sound2" parent="objects" instance=ExtResource("41_fexhl")]
+position = Vector2(4522, 301)
+
+[node name="collision" parent="objects/trigger_off_sound2" index="0"]
+position = Vector2(35.25, 2)
+shape = SubResource("RectangleShape2D_dm8ns")
+
 [node name="traps" type="Node2D" parent="."]
 
 [node name="trap" parent="traps" instance=ExtResource("33_fdk5e")]
@@ -2526,4 +2533,5 @@ next_level = "res://levels/world_05.tscn"
 [editable path="objects/sand_slow2"]
 [editable path="objects/sand_slow3"]
 [editable path="objects/trigger_off_sound"]
+[editable path="objects/trigger_off_sound2"]
 [editable path="messages/cabure_popup"]

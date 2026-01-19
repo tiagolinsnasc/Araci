@@ -6,5 +6,5 @@ extends Node2D
 
 
 func _on_area_info_body_entered(body: Node2D) -> void:
-	if body.name == "Araci":
+	if Globals.is_player(body):
 		Globals.show_side_mensage(item_description,enemy_icon,show_time)

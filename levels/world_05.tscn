@@ -2431,7 +2431,7 @@ position = Vector2(10226, -538)
 scale = Vector2(1.0010655, 1)
 
 [node name="Araci" parent="." instance=ExtResource("19_lpku0")]
-position = Vector2(-6, 148)
+position = Vector2(-25, 71)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"

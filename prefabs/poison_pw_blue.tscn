@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://yvg3rnxn2nf6"]
 
-[ext_resource type="Script" uid="uid://dd50d3phpchv1" path="res://scripts/poison_pw_azul.gd" id="1_ppwgd"]
+[ext_resource type="Script" uid="uid://dd50d3phpchv1" path="res://scripts/pw_blue_poison.gd" id="1_ppwgd"]
 [ext_resource type="Texture2D" uid="uid://cwadcu777kp11" path="res://n_assets/Mini FX, Items & UI/Effects/Bright_Sparkle (16 x 16).png" id="2_lga73"]
 [ext_resource type="Texture2D" uid="uid://4adv754n6i8k" path="res://n_assets/n_scenes/elements/blue_poison.png" id="3_ggvsa"]
 
@@ -86,5 +86,5 @@ frame_progress = 0.68624705
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_2d2mm")
 
-[connection signal="body_shape_entered" from="blue_poison" to="blue_poison" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="blue_poison" to="blue_poison" method="_on_body_entered"]
 [connection signal="animation_finished" from="blue_poison/amination_life" to="blue_poison" method="_on_amination_life_animation_finished"]

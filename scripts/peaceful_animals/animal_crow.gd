@@ -3,7 +3,7 @@ extends Node2D
 @export var idle = true
 @onready var anime: AnimatedSprite2D = $crow/anime
 @onready var animation: AnimationPlayer = $animation
-@export var animal_name = ""
+@export var animal_name = "gralha cancão"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if idle:

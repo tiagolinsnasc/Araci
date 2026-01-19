@@ -1,4 +1,5 @@
 extends Control
+
 var cards = [
 	preload("res://n_assets/n_cuts/final/s1.png"),
 	preload("res://n_assets/n_cuts/final/s2.png"),
@@ -9,15 +10,70 @@ var cards = [
 	preload("res://n_assets/n_cuts/final/s7.png")
 ]
 
+var texts = [
+	"Em uma ação conjunta desnecadeada pela jovem Araci, autoridades ambientais e policiais, Victor Grand, magnata e fundador da VGR Holdings, foi detido nesta manhã sob acusações graves de crimes ambientais.",
+	
+	"As investigações apontam que a corporação estaria envolvida em desmatamento em larga escala, poluição de rios, caça ilegal, mineração clandestina e contrabando de animais silvestres.",
+	
+	"Segundo os investigadores, a rede de empresas de Grand operava em diversos países, mascarando atividades ilícitas sob o pretexto de desenvolvimento econômico. A prisão marca um dos maiores golpes já desferidos contra o crime ambiental corporativo, e abre caminho para processos que podem redefinir a responsabilidade de grandes conglomerados frente à preservação da natureza.",
+	
+	"Araci caminha de volta para casa.
+	O silêncio da floresta é esperança.
+	Onde havia destruição, brotam raízes.
+	Mãos se unem para plantar o futuro.
+	Rios correm limpos outra vez.
+	Animais retornam às margens.
+	A comunidade protege o que é seu.
+	Educação e vigilância guardam o amanhã.
+	Araci sorri. A natureza começa a se recuperar.",
+	
+	"Com base em provas robustas, mas não completas, o tribunal condenou Victor Grand a 20 anos de prisão e ao pagamento de multas milionárias. Apesar de não ter sido a pena máxima, especialistas afirmam que a decisão representa um duro golpe contra a VGR Holdings e suas práticas ilegais.",
+	
+	"Araci, protagonista de uma jornada marcada pela defesa da natureza, decidiu seguir um novo caminho. Motivada pelas experiências vividas durante a luta contra crimes ambientais, ela ingressou na universidade e, após anos de dedicação, conquistou o diploma de Bacharel em Direito.",
+    "Fim"
+]
+
+var left :Vector2 = Vector2(40, 40)
+var right :Vector2 = Vector2(300, 40)
+var center :Vector2 = Vector2(450, 300)
+
+var positions = [
+	right, 
+	left, 
+	left, 
+	right,
+	right,
+	left,
+	center
+]
+
 var current_index = 0
 
 func _ready():
 	show_card(current_index)
 
 func show_card(index):
+	# fundo
 	$TextureRect.texture = cards[index]
-	$ColorRect.modulate.a = 1.0
-	$AnimationPlayer.play("fade_in")
+	$ColorRect.modulate = Color(0,0,0,1)
+
+	var tween_bg = create_tween()
+	tween_bg.tween_property($ColorRect, "modulate:a", 0.0, 1.0)
+
+	# texto principal
+	$Label.text = texts[index]
+	$Label.position = positions[index]
+	$Label.modulate = Color(0,0,0,0)
+
+	#Texto de instruções
+	$Label_instructions.position = Vector2(220,340)
+	$Label_instructions.modulate = Color(0,0,0,0)
+	
+	# fade-in com atraso
+	var tween_text = create_tween()
+	tween_text.tween_interval(0.5) # atraso de meio segundo
+	tween_text.tween_property($Label, "modulate:a", 1.0, 1.0)
+	tween_text.tween_property($Label_instructions, "modulate:a", 1.0, 1.0)
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # espaço
@@ -25,6 +81,6 @@ func _input(event):
 			current_index += 1
 			show_card(current_index)
 		else:
-			queue_free() # ou mude para outra cena
-	elif event.is_action_pressed("ui_cancel"): # ESC
-		queue_free() # encerra a exibição
+			queue_free()
+	elif event.is_action_pressed("ui_cancel"): # esc
+		queue_free()
