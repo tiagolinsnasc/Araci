@@ -182,6 +182,7 @@ autowrap_mode = 2
 justification_flags = 162
 
 [node name="pause_menu" parent="." instance=ExtResource("5_oi3g5")]
+editor_description = "Fiz ajustes no código pelo fato do menu de pause estar dentro de um nó Control."
 
 [node name="transition" type="CanvasLayer" parent="."]
 script = ExtResource("6_65w62")

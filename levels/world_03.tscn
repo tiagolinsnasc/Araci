@@ -2795,7 +2795,7 @@ position = Vector2(9564, -235)
 position = Vector2(5209, -91)
 
 [node name="Araci" parent="." instance=ExtResource("17_36tbm")]
-position = Vector2(-67, 138)
+position = Vector2(-54, 137)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
@@ -3238,7 +3238,7 @@ shape = SubResource("RectangleShape2D_4cqjh")
 
 [node name="blue_poison" parent="objects" instance=ExtResource("45_7r0q1")]
 editor_description = "Porção azul. Ativa o poweup do superpulo."
-position = Vector2(13698, 246)
+position = Vector2(13556, 282)
 
 [node name="traps" type="Node2D" parent="."]
 

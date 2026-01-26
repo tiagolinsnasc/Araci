@@ -621,107 +621,109 @@ func _teleport():
 #associada a uma characterBody2d contendo uma aux_area marcada como ly_info (deve colidir com curiosity).
 #Lembrar de colocar os animais no grupo animals (a função requer isso)
 var default_icon_animals_info = "res://n_assets/n_scenes/elements/book_icon.png"
+var red_icon_animals_info = "res://n_assets/n_scenes/elements/red_page_book_icon.png"
+var green_icon_animals_info = "res://n_assets/n_scenes/elements/green_page_book_icon.png"
 #Biblioteca de informações
 var animals_info := {
 	"arara azul": {
 		"descricao": "Arara azul da Mata Atlântica, nativa e símbolo vibrante da biodiversidade.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"boi": {
 		"descricao": "Boi, espécie exótica introduzida, importante na pecuária brasileira.",
-		"icone": default_icon_animals_info,
+		"icone": red_icon_animals_info,
 		"tempo": 5.0
 	},
 	"caramujo africano": {
 		"descricao": "Caramujo africano, espécie exótica invasora que ameaça ecossistemas locais.",
-		"icone": default_icon_animals_info,
+		"icone": red_icon_animals_info,
 		"tempo": 5.0
 	},
 	"cobra coral verdadeira": {
 		"descricao": "Cobra coral verdadeira, nativa da Mata Atlântica, venenosa e colorida.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"gafanhoto": {
 		#"descricao": "Gafanhoto, inseto nativo, essencial no equilíbrio ecológico da Caatinga e Mata Atlântica.",
 		"descricao": "Em enxames, os gafanhotos, devastam lavouras e exigem controle químico ou biológico.",
-		"icone": default_icon_animals_info,
+		"icone": red_icon_animals_info,
 		"tempo": 5.0
 	},
 	"gralha cancão": {
 		"descricao": "Gralha cancão, ave nativa da Caatinga, conhecida pelo canto forte e marcante.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"javali": {
 		"descricao": "Javali, espécie exótica invasora, ameaça cultivos e fauna nativa brasileira.",
-		"icone": default_icon_animals_info,
+		"icone": red_icon_animals_info,
 		"tempo": 5.0
 	},
 	"macuco": {
 		"descricao": "Macuco, ave nativa da Mata Atlântica, discreta e habitante do sub-bosque.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"mainá": {
 		"descricao": "Mainá, ave exótica introduzida, adaptada a áreas urbanas e agrícolas.",
-		"icone": default_icon_animals_info,
+		"icone": red_icon_animals_info,
 		"tempo": 5.0
 	},
 	"onça pintada": {
 		"descricao": "Onça pintada, nativa da Mata Atlântica, maior felino das Américas e predador topo.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"raposa da caatinga": {
 		"descricao": "Cachorro-do-mato, ou Raposa da Caatinga é nativa, ágil e adaptada ao clima semiárido do Nordeste.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"rolinha caldo de feijão": {
 		"descricao": "Rolinha caldo de feijão, ave nativa, comum em áreas abertas da Caatinga.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"sabiá de laranjeira": {
 		"descricao": "Sabiá de laranjeira, nativa da Mata Atlântica, ave símbolo do Brasil.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"saira sete cores": {
 		"descricao": "Saíra sete cores, nativa da Mata Atlântica, famosa pela plumagem vibrante.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"tamanduá-bandeira": {
 		"descricao": "Tamanduá-bandeira, nativo da Mata Atlântica e Caatinga, especialista em formigas.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"tatú-peba": {
 		"descricao": "Tatú-peba, nativo da Caatinga, escavador ágil com carapaça resistente.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"teiu": {
 		"descricao": "Teiú, lagarto nativo da Caatinga e Mata Atlântica, robusto e onívoro.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"tie sangue": {
 		"descricao": "Tiê-sangue, nativo da Mata Atlântica, ave de plumagem vermelha intensa.",
-		"icone": default_icon_animals_info,
+		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
 	"rato doméstico": {
 	"descricao": "Rato doméstico, pequeno roedor urbano, adaptável e associado a ambientes humanos.",
-	"icone": default_icon_animals_info,
+	"icone": red_icon_animals_info,
 	"tempo": 3.0
 	},
 	"pombo": {
 	"descricao": "Pombos-domésticos, são considerados uma praga urbana, um risco à saúde pública",
-	"icone": default_icon_animals_info,
+	"icone": red_icon_animals_info,
 	"tempo": 3.0
 	}
 }

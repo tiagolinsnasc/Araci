@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bnhonyg6ek11y" path="res://sounds/enemies/explosion.ogg" id="4_b7f0j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
-size = Vector2(65, 18)
+size = Vector2(65, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rj2ow"]
 atlas = ExtResource("1_ivuxx")
@@ -86,7 +86,7 @@ animations = [{
 radius = 56.008926
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg8i3"]
-size = Vector2(11, 17)
+size = Vector2(11, 14)
 
 [node name="dinamite" type="Node2D"]
 editor_description = "Dinamite, explode quando o player chaga a uma distância específica, mas depende de um ocntadoe (em segundos), 5 segundos é o máximo para adequar ao final do som de fogo no pavio."
@@ -101,7 +101,7 @@ collision_layer = 128
 collision_mask = 2
 
 [node name="collision" type="CollisionShape2D" parent="dinamite/activation_area"]
-position = Vector2(0.5, 5)
+position = Vector2(0.5, 4)
 shape = SubResource("RectangleShape2D_vafyd")
 debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
 
@@ -128,7 +128,7 @@ max_distance = 200.0
 stream = ExtResource("4_b7f0j")
 
 [node name="body" type="CollisionShape2D" parent="dinamite"]
-position = Vector2(0.5, 5.5)
+position = Vector2(0.5, 4)
 shape = SubResource("RectangleShape2D_tg8i3")
 
 [connection signal="area_entered" from="dinamite/activation_area" to="dinamite" method="_on_activation_area_area_entered"]

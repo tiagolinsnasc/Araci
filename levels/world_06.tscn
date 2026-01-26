@@ -3344,7 +3344,7 @@ shape = SubResource("RectangleShape2D_sy8p5")
 [node name="checkpoints" type="Node2D" parent="."]
 
 [node name="Araci" parent="." instance=ExtResource("22_nrtxk")]
-position = Vector2(-15, 200)
+position = Vector2(4, 58)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
