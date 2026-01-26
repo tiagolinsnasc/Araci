@@ -130,3 +130,7 @@ func eliminate_all_enemies():
 	for enemy in squad:
 		if is_instance_valid(enemy):
 			enemy.queue_free()
+
+func _on_enemy_hitbox_area_entered(area: Area2D) -> void:
+	if Globals.is_player_hurtbox(area):
+			area.owner.take_damage(Vector2(-50,-350))
