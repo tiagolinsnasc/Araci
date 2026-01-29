@@ -2,7 +2,7 @@ extends Node
 #Equivalente a evidência
 var coins := 0
 var score := 0
-var player_life := 0
+var player_life := 3
 
 #Variáveis de estatisticas
 var stat_game_time := 0.0 #Em segundos

@@ -34,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhqrgqgwpjpy" path="res://prefabs/jaguar_traped.tscn" id="30_exbfv"]
 [ext_resource type="PackedScene" uid="uid://x1yhxbdj4y7t" path="res://prefabs/animals/sabia.tscn" id="32_7if6l"]
 [ext_resource type="PackedScene" uid="uid://fp2fluhv4tkl" path="res://prefabs/interface.tscn" id="33_i58k7"]
-[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/maina.tscn" id="33_wjlc6"]
+[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/sparrow.tscn" id="33_wjlc6"]
 [ext_resource type="PackedScene" uid="uid://be7p8k1o2ya7p" path="res://prefabs/spikes_area.tscn" id="34_6iijb"]
 [ext_resource type="Texture2D" uid="uid://c1abgeb4rffgn" path="res://n_assets/n_scenes/elements/mid_spikes.png" id="35_1pyfj"]
 [ext_resource type="PackedScene" uid="uid://dienyhwvyyjae" path="res://prefabs/fallzone.tscn" id="36_oc5g5"]

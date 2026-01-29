@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dqt0jckn53c02" path="res://prefabs/animals/tie.tscn" id="27_85etp"]
 [ext_resource type="PackedScene" uid="uid://bdhqrgqgwpjpy" path="res://prefabs/jaguar_traped.tscn" id="27_y5ite"]
 [ext_resource type="PackedScene" uid="uid://blqnv2ldi7eh6" path="res://prefabs/tie_traped.tscn" id="28_7qssf"]
-[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/maina.tscn" id="28_8h3ws"]
+[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/sparrow.tscn" id="28_8h3ws"]
 [ext_resource type="Script" uid="uid://bo7hr01n47pap" path="res://scripts/spikes_area.gd" id="29_d86sg"]
 [ext_resource type="PackedScene" uid="uid://dhr78op1qxo35" path="res://prefabs/animals/wild_boar.tscn" id="29_wjrim"]
 [ext_resource type="PackedScene" uid="uid://bj80s1ob0y7u5" path="res://prefabs/moving_plataform.tscn" id="30_8h3ws"]
@@ -2793,36 +2793,25 @@ position = Vector2(11317, 188)
 
 [node name="animals_agressives" type="Node2D" parent="."]
 
-[node name="maina" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(3908, 185)
 
-[node name="maina2" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow2" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(6372, -82)
 
-[node name="maina3" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow3" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(6349, 301)
 
-[node name="maina4" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow4" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(6461, 296)
 
-[node name="maina" parent="animals_agressives/maina4" index="0"]
-velocity_scale_speed = 0.9
-speed = 0.0
-
-[node name="anime" parent="animals_agressives/maina4/maina" index="0"]
-flip_h = true
-
-[node name="animator" parent="animals_agressives/maina4" index="2"]
+[node name="animator" parent="animals_agressives/sparrow4" index="2"]
 speed_scale = 0.614
 
-[node name="maina5" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow5" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(6524, 297)
 
-[node name="maina" parent="animals_agressives/maina5" index="0"]
-velocity_scale_speed = 0.7
-speed = 0.0
-
-[node name="animator" parent="animals_agressives/maina5" index="2"]
+[node name="animator" parent="animals_agressives/sparrow5" index="2"]
 speed_scale = 0.614
 
 [node name="macuco2" parent="animals_agressives" instance=ExtResource("25_qauss")]
@@ -2850,17 +2839,17 @@ speed = 2000.0
 [node name="wild_boar5" parent="animals_agressives" instance=ExtResource("29_wjrim")]
 position = Vector2(11711, 244)
 
-[node name="maina6" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow6" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(10708, 48)
 scale = Vector2(-1, 1)
 
-[node name="animator" parent="animals_agressives/maina6" index="2"]
+[node name="animator" parent="animals_agressives/sparrow6" index="2"]
 speed_scale = 1.084
 
 [node name="african_snail2" parent="animals_agressives" instance=ExtResource("33_ncdwf")]
 position = Vector2(10573, 332)
 
-[node name="maina7" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
+[node name="sparrow7" parent="animals_agressives" instance=ExtResource("28_8h3ws")]
 position = Vector2(13213, 307)
 
 [node name="african_snail3" parent="animals_agressives" instance=ExtResource("33_ncdwf")]
@@ -3005,9 +2994,9 @@ dialog_texts = Array[String](["Olá, Araci", "Os papéis que você encontrou no 
 [editable path="goal"]
 [editable path="feroz"]
 [editable path="animals_peacefuls/tie6"]
-[editable path="animals_agressives/maina4"]
-[editable path="animals_agressives/maina5"]
+[editable path="animals_agressives/sparrow4"]
+[editable path="animals_agressives/sparrow5"]
 [editable path="animals_agressives/wild_boar4"]
-[editable path="animals_agressives/maina6"]
+[editable path="animals_agressives/sparrow6"]
 [editable path="messages/cabure_popup"]
 [editable path="messages/cabure_popup2"]
