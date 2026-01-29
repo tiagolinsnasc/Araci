@@ -726,6 +726,11 @@ var animals_info := {
 	"descricao": "Pombos-domésticos, são considerados uma praga urbana, um risco à saúde pública",
 	"icone": red_icon_animals_info,
 	"tempo": 3.0
+	},
+	"pardal": {
+	"descricao": "O pardal é uma ave exótica invasora que ameaça a biodiversidade da Mata Atlântica.",
+	"icone": red_icon_animals_info,
+	"tempo": 5.0
 	}
 }
 

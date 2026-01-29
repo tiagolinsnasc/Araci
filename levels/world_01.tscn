@@ -34,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://d2ux85q33ohvw" path="res://actors/yaguarete.tscn" id="35_lqgom"]
 [ext_resource type="PackedScene" uid="uid://cuu1ef4eo0cx0" path="res://prefabs/animals/macuco.tscn" id="38_q0cxt"]
 [ext_resource type="PackedScene" uid="uid://nqgw18mplheq" path="res://prefabs/animals/african_snail.tscn" id="40_0aqq2"]
-[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/maina.tscn" id="40_brbtt"]
+[ext_resource type="PackedScene" uid="uid://frp3ffhtt8li" path="res://prefabs/animals/sparrow.tscn" id="40_brbtt"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lqgom"]
 
@@ -1921,28 +1921,22 @@ position = Vector2(5529, 95)
 [node name="wild_boar6" parent="enemies" instance=ExtResource("19_0uwfl")]
 position = Vector2(3329, 191)
 
-[node name="maina" parent="enemies" instance=ExtResource("40_brbtt")]
+[node name="sparrow" parent="enemies" instance=ExtResource("40_brbtt")]
 position = Vector2(1751, 118)
 
-[node name="maina2" parent="enemies" instance=ExtResource("40_brbtt")]
+[node name="sparrow2" parent="enemies" instance=ExtResource("40_brbtt")]
 position = Vector2(3535, 172)
 
-[node name="maina3" parent="enemies" instance=ExtResource("40_brbtt")]
+[node name="sparrow3" parent="enemies" instance=ExtResource("40_brbtt")]
 position = Vector2(3623, 176)
 
-[node name="maina" parent="enemies/maina3" index="0"]
-speed = 1000.0
-
-[node name="anime" parent="enemies/maina3/maina" index="0"]
-speed_scale = 2.0
-
-[node name="animator" parent="enemies/maina3" index="2"]
+[node name="animator" parent="enemies/sparrow3" index="2"]
 speed_scale = 0.866
 
-[node name="maina4" parent="enemies" instance=ExtResource("40_brbtt")]
+[node name="sparrow4" parent="enemies" instance=ExtResource("40_brbtt")]
 position = Vector2(3718, 159)
 
-[node name="maina5" parent="enemies" instance=ExtResource("40_brbtt")]
+[node name="sparrow5" parent="enemies" instance=ExtResource("40_brbtt")]
 position = Vector2(7243, 229)
 
 [node name="african_snail" parent="enemies" instance=ExtResource("40_0aqq2")]
@@ -2085,6 +2079,6 @@ shape = SubResource("RectangleShape2D_ln4kl")
 [connection signal="body_entered" from="informations/popup/first_contact" to="informations/popup/first_contact" method="_on_body_entered"]
 [connection signal="body_entered" from="informations/instructions" to="informations/instructions" method="_on_body_entered"]
 
-[editable path="enemies/maina3"]
+[editable path="enemies/sparrow3"]
 [editable path="peaceful_animals/tie4"]
 [editable path="informations/cabure_popup"]
