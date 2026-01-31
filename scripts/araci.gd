@@ -15,10 +15,13 @@ extends CharacterBody2D
 @export var max_time_to_fall := 0.6
 
 ## Velocidade máxima no chão
-@export var max_speed := 150.0                  
-@export var acceleration := 2000.0              # Aceleração horizontal
-@export var deceleration := 1800.0              # Desaceleração horizontal
-@export var apex_bonus := 80.0                  # Bônus de controle no topo do pulo
+@export var max_speed := 150.0
+## Aceleração horizontal                  
+@export var acceleration := 2000.0              
+## Desaceleração horizontal
+@export var deceleration := 1800.0              
+## Bônus de controle no topo do pulo (mais fácil de se mover lateralmente quando está no ar, próximo ao topo do pulo - 80 causa uma alteração discreta).
+@export var apex_bonus := 80.0                  
 
 ##Tempo para pular da plataforma - adiciona um tempo extra para reação depois que a plataforma cai
 @export var coyote_time := 0.12                 # Tempo para pular após sair da plataforma
@@ -439,8 +442,9 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	
 	#print("Chamou take damage, deveria mudar de cor")
 	# reduz vida
-	if Globals.player_life > 0:
-		Globals.player_life -= 1
+	if Globals.get_life() > 1:
+		Globals.loss_of_life()
+		#print("Take Damage:"+str(Globals.get_life()))
 	else:
 		queue_free()
 		emit_signal("player_has_died")
@@ -484,15 +488,15 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 # ============================================================
 
 func handle_death_zone() -> void:
-	if Globals.player_life >= 0:
-		
-		if Globals.player_life > 0:
-			Globals.player_life -= 1
+	#if Globals.player_life >= 0:
+	if Globals.get_life() > 0:
+		if Globals.get_life() > 1:
+			Globals.loss_of_life()
 			Globals.stat_die_number += 1
 		else:
 			Globals.stat_die_number += 1
 			Globals.stat_colectable_lifes = 3
-			Globals.player_life = 3
+			Globals.reset_life()
 			
 		visible = false
 		set_physics_process(false)

@@ -3,6 +3,7 @@ extends Node
 var coins := 0
 var score := 0
 var player_life := 3
+var default_player_life := 3
 
 #Variáveis de estatisticas
 var stat_game_time := 0.0 #Em segundos
@@ -74,6 +75,18 @@ func add_coin(add_coins:=1):
 ##Retorna o número de vidas
 func get_life():
 	return player_life
+	
+##Altera o número de vidas
+func set_life(life_value):
+	player_life = life_value
+
+##Reseta o número padrão de vidas definido em default_player_life
+func reset_life():
+	set_life(default_player_life)
+
+##Perde uma vida
+func loss_of_life():
+	player_life -= 1
 	
 ##Adiciona vidas, se não hover parâmetro adiciona apenas 1 vida
 func add_life(life_adicted:=1):
