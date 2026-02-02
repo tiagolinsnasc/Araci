@@ -317,10 +317,10 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.1,
 "texture": SubResource("AtlasTexture_pgtrv")
 }, {
-"duration": 1.0,
+"duration": 0.1,
 "texture": SubResource("AtlasTexture_yhp4d")
 }, {
 "duration": 1.0,
@@ -329,7 +329,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_15tsu")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_rllmr")
 }],
 "loop": false,
@@ -540,7 +540,9 @@ z_index = 300
 texture_filter = 1
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_0yxgj")
-animation = &"idle"
+animation = &"jump"
+frame = 4
+frame_progress = 1.0
 
 [node name="body" type="CollisionShape2D" parent="."]
 editor_description = "Apenas deve detectar chão, paredes e física em geral. Não deve aceitar dano."
