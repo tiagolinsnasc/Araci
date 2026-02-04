@@ -56,23 +56,23 @@ region = Rect2(64, 1600, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgtrv"]
 atlas = ExtResource("2_yhp4d")
-region = Rect2(0, 1856, 64, 64)
+region = Rect2(448, 1856, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhp4d"]
 atlas = ExtResource("2_yhp4d")
-region = Rect2(64, 1856, 64, 64)
+region = Rect2(512, 1856, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8g7fx"]
 atlas = ExtResource("2_yhp4d")
-region = Rect2(128, 1856, 64, 64)
+region = Rect2(576, 1856, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_15tsu"]
 atlas = ExtResource("2_yhp4d")
-region = Rect2(192, 1856, 64, 64)
+region = Rect2(640, 1856, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rllmr"]
 atlas = ExtResource("2_yhp4d")
-region = Rect2(256, 1856, 64, 64)
+region = Rect2(704, 1856, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vwq3j"]
 atlas = ExtResource("2_yhp4d")
@@ -540,9 +540,7 @@ z_index = 300
 texture_filter = 1
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_0yxgj")
-animation = &"jump"
-frame = 4
-frame_progress = 1.0
+animation = &"run"
 
 [node name="body" type="CollisionShape2D" parent="."]
 editor_description = "Apenas deve detectar chão, paredes e física em geral. Não deve aceitar dano."

@@ -3631,6 +3631,9 @@ monitorable = false
 monitoring = false
 monitorable = false
 
+[node name="life_bar" parent="actors/dt_boss" index="9"]
+visible = false
+
 [node name="speech_bubble" parent="actors/dt_boss" index="10"]
 visible = false
 
