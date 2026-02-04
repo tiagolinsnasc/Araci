@@ -1,4 +1,5 @@
 .import/
 .godot/
 *.tmp/
-
+*.exe
+*.x86_64
