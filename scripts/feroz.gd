@@ -63,7 +63,10 @@ func _physics_process(delta: float):
 	var dist = global_position.distance_to(player.global_position)
 	if dist > max_distance:
 		visible = false
-		#print("Eliminou o pet da cena!")
+		#Elimina o per quando ele se distancia do player
+		print("Eliminou o pet da cena!")
+		player.despawn_pet()
+		
 		#Resolve o problema de ter que pressionar Q 2x, mas cria várias instâncias de Feroz (resolver depois)
 		#Globals.araci.pet_instance = null
 		#queue_free()
@@ -168,7 +171,7 @@ func _input(event):
 func _set_target_for_attack():
 	if enemy_detec and enemy_detec.is_colliding():
 		var hit = enemy_detec.get_collider()
-		if hit and hit.is_in_group("enemies"):
+		if hit and hit.is_in_group("human_enemy"):
 			current_target = hit
 
 
@@ -186,7 +189,7 @@ func _update_raycasts_direction():
 
 
 func _attack(target: Node):
-	if not can_attack:
+	if not can_attack or not target.is_in_group("human_enemy"):
 		return
 
 	anime.play("attack")

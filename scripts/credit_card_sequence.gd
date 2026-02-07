@@ -1,22 +1,24 @@
 extends Control
 
+@onready var logo_ufal: Sprite2D = $logoUfal
+@onready var logo_profbio: Sprite2D = $logoProfbio
+
 var cards = [
 	preload("res://n_assets/n_cuts/start/credit_bg.png"),
 	#preload("res://n_assets/n_cuts/final/s2.png"),
 ]
 
 var texts = [
-	"
+	"[center][b]ARACI: UMA JORNADA DE RESISTÊNCIA E RENOVAÇÃO[/b][/center]
+	
 	[b]Desenvolvedor:[/b]  Thiago Lins do Nascimento
-	[b]Narrativa principal:[/b] Thiago Lins do Nascimento
-	[b]Histórias iniciais:[/b] Turma do 1º ANO A do curso técnico de Redes de Computadores do Ensino Médio da ETE Francisco de Matos Sobrinho (2025)
+		
+	Este jogo faz parte do recurso educacional produzido a partir da dissertação \"Construção de narrativas e produção de um jogo digital para ensino de ecologia\" do Mestrado Profissional em Ensino de Biologia em Rede Nacional - ProfBio - Universidade Federal de Alagoas. 
 	
-	[b]Recursos visuais:[/b] Uso de IA https://copilot.microsoft.com/ e poteriores adaptações e alterações. Universal LPC Spritesheet Generator.
-	
-	[b]Recursos auditivos:[/b] Uso de IA: https://suno.com/me e biblioteca do Pixabay (https://pixabay.com/)
-	
-	[b]Edição de imagens:[/b] Gimp, krita e Inkscape
-	[b]Edição de sons:[/b] Audacity
+	[b]Mestrando:[/b] Thiago Lins do Nascimento.
+	[b]Orientador:[/b]Prof. Dr. Marcos Vinícius Carneiro Vital.
+
+	[b]Histórias iniciais:[/b] Colaboração da turma do 1º ANO A do curso técnico de Redes de Computadores do Ensino Médio da ETE Francisco de Matos Sobrinho (2025)
 	
 	[b]Plataforma de desenvolvimento:[/b] Godot 4.5.1 no Linux Mint 22.2 Cinnamon
 	",
@@ -62,7 +64,17 @@ func show_card(index):
 	tween_text.tween_interval(0.5) # atraso de meio segundo
 	tween_text.tween_property($Label, "modulate:a", 1.0, 1.0)
 	tween_text.tween_property($Label_instructions, "modulate:a", 1.0, 1.0)
+	# Logos começam invisíveis
+	logo_ufal.modulate = Color(1,1,1,0)
+	logo_profbio.modulate = Color(1,1,1,0)
 
+	# Tween para fade-in dos logos
+	var tween_logo = create_tween()
+	tween_logo.tween_interval(1.0) # atraso de 1 segundo
+	tween_logo.tween_property(logo_ufal, "modulate:a", 1.0, 1.0)
+	tween_logo.tween_property(logo_profbio, "modulate:a", 1.0, 1.0)
+	
+	
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # espaço
 		if current_index < cards.size() - 1:

@@ -2946,14 +2946,14 @@ position = Vector2(10792, -75)
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="lumberjack" parent="enemies" instance=ExtResource("23_b6uik")]
+[node name="lumberjack" parent="enemies" groups=["human_enemy"] instance=ExtResource("23_b6uik")]
 position = Vector2(6927, 217)
 
-[node name="lumberjack2" parent="enemies" instance=ExtResource("23_b6uik")]
+[node name="lumberjack2" parent="enemies" groups=["human_enemy"] instance=ExtResource("23_b6uik")]
 position = Vector2(7877, 232)
 start_direction = 1
 
-[node name="lumberjack3" parent="enemies" instance=ExtResource("23_b6uik")]
+[node name="lumberjack3" parent="enemies" groups=["human_enemy"] instance=ExtResource("23_b6uik")]
 position = Vector2(6619, -137)
 
 [node name="female_guard" parent="enemies" instance=ExtResource("23_ii4fh")]
@@ -2969,7 +2969,7 @@ speed = 900.0
 [node name="female_guard4" parent="enemies" instance=ExtResource("23_ii4fh")]
 position = Vector2(6554, 185)
 
-[node name="lumberjack4" parent="enemies" instance=ExtResource("23_b6uik")]
+[node name="lumberjack4" parent="enemies" groups=["human_enemy"] instance=ExtResource("23_b6uik")]
 position = Vector2(10090, 200)
 
 [node name="animals_in_traps" type="Node2D" parent="."]

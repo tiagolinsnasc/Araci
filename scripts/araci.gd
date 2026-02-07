@@ -175,6 +175,7 @@ func spawn_pet():
 
 	is_spawning_pet = false   # libera novamente
 
+##Dispensa o pet
 func despawn_pet():
 	if pet_instance != null:
 		pet_instance.queue_free()

@@ -33,6 +33,7 @@ player_stomp=""
 animals=""
 boss_squad="Grupo dos inimigos que voltam quando o player morre no final, antes de matar o boos."
 player="Contém apenas o player, para facilitar ações."
+human_enemy=""
 
 [input]
 

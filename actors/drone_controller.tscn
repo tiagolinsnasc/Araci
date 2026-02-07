@@ -51,7 +51,7 @@ size = Vector2(22, 42)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qa0um"]
 size = Vector2(22, 6)
 
-[node name="drone_controller" type="CharacterBody2D" groups=["enemies"]]
+[node name="drone_controller" type="CharacterBody2D" groups=["enemies", "human_enemy"]]
 editor_description = "Controlador de drone. Pode ter mais de um drone controlado, basta adicionar o drone como filho deste nó."
 collision_layer = 16
 collision_mask = 256

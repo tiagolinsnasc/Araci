@@ -10,7 +10,7 @@ var texts = [
 Neta do pajé do Povo Jaguara, guardiã da floresta e dos segredos dos Encantados.
 Desde criança, os animais a seguiam, as plantas floresciam ao seu redor, e os espíritos sussurravam em seus sonhos.
 
-O Povo Jaguara vive entre a mata atlântica e a caatinga, onde cada rio é sagrado e cada árvore tem alma.
+O Povo Jaguara vive entre a Mata Atlântica e a Caatinga, onde cada rio é sagrado e cada árvore tem alma.
 A natureza não é recurso - é parente, é espírito, é memória viva.",
 	
 "Nos limites do território, a onça sagrada vigia em silêncio.

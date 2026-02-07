@@ -1973,7 +1973,7 @@ size = Vector2(7.243992, 16.378277)
 size = Vector2(6.839837, 16.378277)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm8ns"]
-size = Vector2(169.5, 66)
+size = Vector2(169.5, 33)
 
 [node name="World-04" type="Node2D"]
 editor_description = "Estágio 4: Eventos de criação de gado e solo desgastado."
@@ -2509,14 +2509,14 @@ shape = SubResource("RectangleShape2D_q8t3g")
 position = Vector2(7800, 302)
 
 [node name="collision" parent="objects/trigger_off_sound" index="0"]
-position = Vector2(35.25, 2)
+position = Vector2(35, -40)
 shape = SubResource("RectangleShape2D_dm8ns")
 
 [node name="trigger_off_sound2" parent="objects" instance=ExtResource("41_fexhl")]
 position = Vector2(4522, 301)
 
 [node name="collision" parent="objects/trigger_off_sound2" index="0"]
-position = Vector2(35.25, 2)
+position = Vector2(35.25, 1.5)
 shape = SubResource("RectangleShape2D_dm8ns")
 
 [node name="traps" type="Node2D" parent="."]

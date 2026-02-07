@@ -142,7 +142,7 @@ size = Vector2(22, 42)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qa0um"]
 size = Vector2(22, 6)
 
-[node name="miner" type="CharacterBody2D" groups=["enemies"]]
+[node name="miner" type="CharacterBody2D" groups=["enemies", "human_enemy"]]
 collision_layer = 16
 collision_mask = 256
 script = ExtResource("1_a635u")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bco1w4sj2qdi2"]
+[gd_scene load_steps=10 format=3 uid="uid://bco1w4sj2qdi2"]
 
 [ext_resource type="Script" uid="uid://boxitix36c80r" path="res://scripts/credit_card_sequence.gd" id="1_4qgiy"]
 [ext_resource type="FontFile" uid="uid://cusalemk0k0kb" path="res://general_fonts/Comic_Sans_MS.ttf" id="2_4qgiy"]
 [ext_resource type="FontFile" uid="uid://b4ufdn4liosy6" path="res://general_fonts/Comic_Sans_MS_Bold.ttf" id="3_2vtag"]
+[ext_resource type="Texture2D" uid="uid://wgemlf2bm56q" path="res://n_assets/n_cuts/final/logoUfalVT.svg" id="4_8nrb0"]
+[ext_resource type="Texture2D" uid="uid://dc0ss7yx7j82x" path="res://n_assets/n_cuts/final/logo_profbioVT.svg" id="5_ln3tn"]
 
 [sub_resource type="Animation" id="Animation_1xvye"]
 length = 0.001
@@ -99,3 +101,13 @@ autowrap_mode = 2
 
 [node name="background_music" type="AudioStreamPlayer" parent="."]
 autoplay = true
+
+[node name="logoUfal" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(535, 324)
+texture = ExtResource("4_8nrb0")
+
+[node name="logoProfbio" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(592, 325)
+texture = ExtResource("5_ln3tn")
