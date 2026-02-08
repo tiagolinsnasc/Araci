@@ -2635,7 +2635,7 @@ position = Vector2(16982, 30)
 next_level = "res://levels/world_03.tscn"
 
 [node name="Araci" parent="." instance=ExtResource("19_6ki2q")]
-position = Vector2(8222, 198)
+position = Vector2(-69, 37)
 
 [node name="feroz" parent="." instance=ExtResource("31_wjrim")]
 position = Vector2(9421, 361)
