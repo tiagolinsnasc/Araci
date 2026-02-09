@@ -15,22 +15,22 @@ func get_sentence():
 		evidence_percent = int(round((float(Globals.coins) / float(Globals.stat_disponible_evidences)) * 100.0))
 		
 	if evidence_percent < 30:
-		return """Condenação leve (%s%% das evidências)
-				"Victor Grand escapa com punição branda"
+		return """Condenação leve (%s%% das evidências).
+				"Victor Grand escapa com punição branda."
 				Com poucas provas, o tribunal aplicou apenas multas simbólicas e restrições menores.""" % int(round(evidence_percent))
 	elif evidence_percent < 70:
-		return """Condenação moderada (%s%% das evidências)
-				"Victor Grand sofre, mas ainda mantém poder"
+		return """Condenação moderada (%s%% das evidências).
+				"Victor Grand sofre, mas ainda mantém poder."
 				Com provas razoáveis, o tribunal aplicou 10 anos de prisão e multas pesadas.""" % int(round(evidence_percent))
 	else:
 		return """Condenação severa (%s%% das evidências)
-			"Victor Grand pega pena pesada no tribunal"
+			"Victor Grand pega pena pesada no tribunal."
 			Com base em provas robustas, mas não completas, o tribunal condenou Victor Grand a 20 anos de prisão e ao pagamento de multas milionárias. Apesar de não ter sido a pena máxima, especialistas afirmam que a decisão representa um duro golpe contra a VGR Holdings e suas práticas ilegais.""" % int(round(evidence_percent))
 	
 		
 
 var texts = [
-	"Em uma ação conjunta desnecadeada pela jovem Araci, autoridades ambientais e policiais, Victor Grand, magnata e fundador da VGR Holdings, foi detido nesta manhã sob acusações graves de crimes ambientais.",
+	"Em uma ação conjunta desencadeada pela jovem Araci, autoridades ambientais e policiais, Victor Grand, magnata e fundador da VGR Holdings, foi detido nesta manhã sob acusações graves de crimes ambientais.",
 	
 	"As investigações apontam que a corporação estaria envolvida em desmatamento em larga escala, poluição de rios, caça ilegal, mineração clandestina e contrabando de animais silvestres.",
 	

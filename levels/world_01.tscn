@@ -2045,7 +2045,7 @@ position = Vector2(0, -28)
 scale = Vector2(1, 0.18970104)
 collision_layer = 2
 script = ExtResource("17_ln80i")
-dialog_texts = Array[String](["Olá, aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "Pressione i quando estiver próximo e de frente com  um animal para saber mais sobre ele.", "As espécie nativas são inofensivas, mas os animais invasores e são agressivos, tenha cuidado!"])
+dialog_texts = Array[String](["Olá, aventureira!", "Você deve investigar os estranhos eventos ocorridos na mata, colete as evidências (representadas por uma câmera fotográfica).", "Pressione i quando estiver próximo e de frente com  um animal para saber mais sobre ele.", "As espécie nativas são inofensivas, mas os animais invasores são agressivos, tenha cuidado!"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="informations/popup/hit_pop"]
 position = Vector2(7.500061, 18.450073)
@@ -2065,7 +2065,7 @@ debug_color = Color(0, 0.9647059, 0.5176471, 0.49803922)
 position = Vector2(8138, 194)
 
 [node name="hit_pop" parent="informations/cabure_popup" index="2"]
-dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as avidências.", "A floresta precisa de você!"])
+dialog_texts = Array[String](["Olá, aventureira!", "Yaguareté, nossa protetora, foi morta, provavelmente por caçadores.", "Pare os invasores e continue coletando as evidências.", "A floresta precisa de você!"])
 
 [node name="instructions" type="Area2D" parent="informations"]
 editor_description = "Área com informações preliminares de andar e pular."

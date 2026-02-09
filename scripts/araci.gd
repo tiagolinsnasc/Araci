@@ -678,7 +678,7 @@ var animals_info := {
 		"tempo": 5.0
 	},
 	"onça pintada": {
-		"descricao": "Onça pintada, nativa da Mata Atlântica, maior felino das Américas e predador topo.",
+		"descricao": "Onça pintada, nativa da Mata Atlântica, maior felino das Américas e predador de topo.",
 		"icone": green_icon_animals_info,
 		"tempo": 5.0
 	},
