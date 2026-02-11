@@ -247,7 +247,7 @@ point_count = 2
 
 [node name="shooter" type="Node2D" groups=["enemies", "human_enemy"]]
 
-[node name="shooter_enemy" type="CharacterBody2D" parent="." groups=["enemies"]]
+[node name="shooter_enemy" type="CharacterBody2D" parent="." groups=["enemies", "human_enemy"]]
 position = Vector2(-1, 1)
 collision_layer = 16
 script = ExtResource("1_d5hos")

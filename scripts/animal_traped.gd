@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready() -> void:
 	Globals.stat_disponible_animal_traps += 1
-	Globals.stat_disponible_score =+ score
+	Globals.add_disponible_score_stat(score)
 
 func _on_area_body_entered(body: Node2D) -> void:
 	if Globals.is_player(body):

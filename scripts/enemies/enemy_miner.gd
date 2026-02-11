@@ -11,7 +11,7 @@ func _ready():
 	_update_detectors()  # ajusta os RayCasts para o lado inicial
 	_on_direction_changed()  # atualiza flip do sprite
 	Globals.stat_disponible_enemy += 1
-	Globals.stat_disponible_score = enemy_score
+	Globals.add_disponible_score_stat(enemy_score)
 
 func play_anim(anime_name: String) -> void:
 	anime.play(anime_name)

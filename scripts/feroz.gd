@@ -53,7 +53,7 @@ func _ready():
 	Globals.pet = self
 	active = true
 	
-
+#TODO: verificar também se o pet está disponível para não gastar recursos exeutando essa função
 func _physics_process(delta: float):
 	if not active or not player:
 		#print("Pet não ativo ou sem referência do player")
@@ -64,7 +64,7 @@ func _physics_process(delta: float):
 	if dist > max_distance:
 		visible = false
 		#Elimina o per quando ele se distancia do player
-		print("Eliminou o pet da cena!")
+		#print("Eliminou o pet da cena!")
 		player.despawn_pet()
 		
 		#Resolve o problema de ter que pressionar Q 2x, mas cria várias instâncias de Feroz (resolver depois)
@@ -170,9 +170,12 @@ func _input(event):
 
 func _set_target_for_attack():
 	if enemy_detec and enemy_detec.is_colliding():
-		var hit = enemy_detec.get_collider()
-		if hit and hit.is_in_group("human_enemy"):
-			current_target = hit
+			var hit = enemy_detec.get_collider()
+			if hit:
+				print("RayCast detectou:", hit.name, "Classe:", hit.get_class(), "Grupos:", hit.get_groups(), "Pai:", hit.get_parent().name)
+			if hit and hit.is_in_group("human_enemy"):
+				print("Travou o alvo")
+				current_target = hit
 
 
 func _update_raycasts_direction():
@@ -189,12 +192,15 @@ func _update_raycasts_direction():
 
 
 func _attack(target: Node):
+	print("Atacando:", target.name, "Classe:", target.get_class())
 	if not can_attack or not target.is_in_group("human_enemy"):
 		return
 
 	anime.play("attack")
 	if target.has_method("take_damage"):
 		target.take_damage()
+	else:
+		print("Inimigo sem o método take_damage!")
 
 	velocity.x = 0
 

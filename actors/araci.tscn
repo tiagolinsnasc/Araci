@@ -517,7 +517,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wp837"]
-size = Vector2(26, 43)
+size = Vector2(19, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bogxa"]
 size = Vector2(31, 1.75)
@@ -540,11 +540,11 @@ z_index = 300
 texture_filter = 1
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_0yxgj")
-animation = &"run"
+animation = &"idle"
 
 [node name="body" type="CollisionShape2D" parent="."]
 editor_description = "Apenas deve detectar chão, paredes e física em geral. Não deve aceitar dano."
-position = Vector2(-1, -2.5)
+position = Vector2(0.5, -2)
 shape = SubResource("RectangleShape2D_wp837")
 
 [node name="stompbox" type="Area2D" parent="." groups=["player_stomp"]]

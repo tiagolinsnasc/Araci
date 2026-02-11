@@ -59,7 +59,7 @@ func reload_game():
 	#Não reiniciar, ver comportamento
 	#Globals.coins = 0
 	#Globals.score = 0
-	Globals.player_life = 3
-	Globals.stat_disponible_lifes += 3
+	Globals.player_life = Globals.default_player_life
+	Globals.stat_disponible_lifes += Globals.default_player_life
 	
 	Globals.respaw_player()

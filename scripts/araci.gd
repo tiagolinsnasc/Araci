@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+#Melhoria de desempenho: Alteração do Physics process de Araci para melhorar o desempenho (Mantive função anterior)
 # ============================================================
 # CONFIGURAÇÕES DE MOVIMENTO E PULO (EDITÁVEIS NO INSPECTOR)
 # ============================================================
@@ -169,6 +170,7 @@ func spawn_pet():
 
 	# Cria o pet apenas se ainda não existe
 	if pet_instance == null:
+		pet_scene = preload("res://actors/feroz.tscn")
 		pet_instance = pet_scene.instantiate()
 		get_parent().add_child(pet_instance)
 		pet_instance.global_position = global_position + Vector2(32, 0)
@@ -196,124 +198,343 @@ func play_upgrade():
 # LOOP PRINCIPAL DE FÍSICA
 # ============================================================
 
-func _physics_process(delta: float) -> void:
-	var on_floor := is_on_floor()
-	
-	#Condição onde o player está paralizado, não realiza qualquer tipo de movimento
-	if is_paralyzed:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return   # sai da função aqui
-
-	#Trata da aniamção de leitura na interação com i
-	if estado == "read":
-		velocity = Vector2.ZERO
+#func _physics_process(delta: float) -> void:
+	#var on_floor := is_on_floor()
+	#
+	##Condição onde o player está paralizado, não realiza qualquer tipo de movimento
+	#if is_paralyzed:
+		#velocity = Vector2.ZERO
+		#move_and_slide()
+		#return   # sai da função aqui
+#
+	##Trata da aniamção de leitura na interação com i
+	#if estado == "read":
+		#velocity = Vector2.ZERO
+		##move_and_slide()
+		##return
+#
+	## --------------------------------------------------------
+	## BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
+	## --------------------------------------------------------
+	#if is_hurt or estado == "upgrade":
+		##velocity = Vector2.ZERO
+		#velocity = knockback_vector
 		#move_and_slide()
 		#return
+#
+	## --------------------------------------------------------
+	## ATUALIZAÇÃO DE TIMERS (TIRO E JANELAS DE PULO)
+	## --------------------------------------------------------
+	#if time_shoot > 0.0:
+		#time_shoot -= delta
+#
+	## Coyote time
+	#if on_floor:
+		#coyote_timer = coyote_time
+	#else:
+		#coyote_timer -= delta
+#
+	## Jump buffer
+	#if Input.is_action_just_pressed("ui_accept"):
+		#jump_buffer = jump_buffer_time
+	#else:
+		#jump_buffer -= delta
+#
+#
+	## --------------------------------------------------------
+## PULO (COYOTE + BUFFER) E ESTADO "JUMP"
+## --------------------------------------------------------
+	#if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
+		##Macanimsmo do superpulo pular x vezes mais quando segura o W + BARRA
+		## Se W (superjump) estiver pressionado e flag ativa
+		#if Input.is_action_pressed("call_superjump") and Globals.flag_pw_superjump and can_jump:
+			##print("Superpulo")
+			#var super_height = jump_height * superjump_factor * Globals.superjump_adiction  # aumenta altura do pulo
+			#var super_velocity = -sqrt(2.0 * gravity * super_height)
+			#velocity.y = super_velocity
+		#else:
+			## Pulo normal
+			#if can_jump:
+				#velocity.y = jump_velocity
+#
+		#jump_buffer = 0.0
+		#coyote_timer = 0.0
+		#estado = "jump"
+		#time_jump = 0.1
+#
+	## --------------------------------------------------------
+	## GRAVIDADE COM PULO VARIÁVEL
+	## --------------------------------------------------------
+	#if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
+		## Soltou o botão enquanto sobe → pulo menor
+		#velocity.y += gravity * 1.5 * delta
+	#elif velocity.y > 0.0:
+		## Caindo
+		#velocity.y += fall_gravity * delta
+	#else:
+		## Subindo normalmente
+		#velocity.y += gravity * delta
+#
+	## Se está em pet_attack, não atualiza movimento
+	#if estado == "pet_attack":
+		#velocity.x = 0
+		#move_and_slide()
+		#return
+#
+	## --------------------------------------------------------
+	## MOVIMENTO HORIZONTAL
+	## --------------------------------------------------------
+	#var input_dir := Input.get_axis("ui_left", "ui_right")
+#
+	#
+	## Apex bonus → mais controle no topo do pulo
+	#var apex: float = clamp(abs(velocity.y) / 200.0, 0.0, 1.0)
+	#var apex_speed: float = lerp(apex_bonus, 0.0, apex)
+	#
+	##ignora ações quando estiver na animação de pet ataque, caso contrário, corre enquanto anima
+	#if estado != "pet_attack" and estado != "teleport":
+		#if input_dir != 0.0:
+			#velocity.x = move_toward(velocity.x, input_dir * (max_speed + apex_speed), acceleration * delta)
+			#animation.scale.x = input_dir
+			#curiosity.scale.x = input_dir #move a área de curiosidade
+			#
+			## Cancel window: movimento cancela ataque/tiro
+			#if can_cancel and estado in ["shoot", "atack"]:
+				#estado = "run"
+#
+			## Só define run se não estiver em ações prioritárias
+			#if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
+				#estado = "run"
+		#else:
+			#velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
+#
+			## Se está no chão, parado e não está em outra ação, fica idle
+			#if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
+				#estado = "idle"
+#
+	## --------------------------------------------------------
+	## TIRO E ATAQUE
+	## Agora com cancel window
+	## --------------------------------------------------------
+	#if Input.is_action_just_pressed("shoot") and time_shoot <= 0.0:
+		#estado = "shoot"
+		#time_shoot = cooldown_tiro
+		#_start_cancel_window()
+#
+	#if Input.is_action_just_pressed("atack") and time_shoot <= 0.0:
+		#estado = "atack"
+		#time_shoot = cooldown_tiro
+		#_start_cancel_window()
+#
+	##is_instance_valid garante que ele não duplica feroz quando ele já existe na fase 2
+	#if Input.is_action_just_pressed("call_feroz") and !is_instance_valid(feroz_s2):		
+		#if pet_instance == null and Globals.flag_pw_feroz_enable:
+			#print("Chamou o feroz!")
+			#spawn_pet()
+		#else:
+			#print("Feroz ainda existe!")
+			#despawn_pet()
+#
+	#if Input.is_action_just_pressed("feroz_companion_attack"):
+		#estado = "pet_attack"
+		#_start_cancel_window()
+#
+	## --------------------------------------------------------
+	## TELETRANSPORTE
+	## --------------------------------------------------------
+	#if Input.is_action_just_pressed("teleport") and Globals.flag_pw_teletransport:
+		#estado = "teleport"
+		#_teleport()
+		#
+	## --------------------------------------------------------
+	## APLICA KNOCKBACK (apenas visual, o real está no bloco is_hurt)
+	## --------------------------------------------------------
+	#if knockback_vector != Vector2.ZERO:
+		#velocity = knockback_vector
+#
+	## --------------------------------------------------------
+	## MOVIMENTO FINAL
+	## --------------------------------------------------------
+	#move_and_slide()
+#
+	#on_floor = is_on_floor()  # atualiza após o movimento
+#
+	## --------------------------------------------------------
+	## CORRIGE ESTADO APÓS ATERRISSAR
+	## --------------------------------------------------------
+	#if on_floor and estado == "jump":
+		#if abs(velocity.x) > 10.0:
+			#estado = "run"
+		#else:
+			#estado = "idle"
+#
+	## --------------------------------------------------------
+	## PLATAFORMAS QUE CAEM
+	## --------------------------------------------------------
+	#for i: int in range(get_slide_collision_count()):
+		#var collision: KinematicCollision2D = get_slide_collision(i)
+		#if collision.get_collider().has_method("has_collided_with"):
+			#collision.get_collider().has_collided_with(collision, self)
+#
+#
+	## --------------------------------------------------------
+	## ANIMAÇÕES BASEADAS NO ESTADO
+	## --------------------------------------------------------
+	#match estado:
+		#"jump":
+			#animation.play("jump")
+		#"shoot":
+			#animation.play("shoot")
+		#"atack":
+			#animation.play("atack")
+		#"run":
+			#if force_walk:
+				##Força a animação de caminhada
+				#animation.play("walk")
+				##Reduz a velocidade do player
+				#velocity.x *= 0.4   # reduz 60% a velocidade
+			#else:
+				#animation.play("run")
+		#"idle":
+			#animation.play("idle")
+		#"hurt":
+			#animation.play("hurt")
+		#"pet_attack":
+			#animation.play("pet_attack")
+		#"teleport":
+			#animation.play("teleport")
+		#"read":
+			#animation.play("read")
+	#
+
+func _physics_process(delta: float) -> void:
+	var on_floor := is_on_floor()
 
 	# --------------------------------------------------------
-	# BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
+	# ESTADOS ESPECIAIS (encerram cedo)
 	# --------------------------------------------------------
+	if is_paralyzed:
+		velocity = Vector2.ZERO
+		estado = "idle"
+		return _apply_movement()
+
 	if is_hurt or estado == "upgrade":
-		#velocity = Vector2.ZERO
 		velocity = knockback_vector
-		move_and_slide()
-		return
+		return _apply_movement()
+
+	if estado == "pet_attack":
+		velocity.x = 0
+		return _apply_movement()
+
+	if estado == "read":
+		velocity = Vector2.ZERO
+		return _apply_movement()
 
 	# --------------------------------------------------------
-	# ATUALIZAÇÃO DE TIMERS (TIRO E JANELAS DE PULO)
+	# LÓGICA NORMAL DE MOVIMENTO
 	# --------------------------------------------------------
+	_update_timers(delta, on_floor)
+	_handle_jump()
+	_apply_gravity(delta)
+	_handle_horizontal(delta,on_floor)
+	_handle_actions()
+
+	# --------------------------------------------------------
+	# MOVE AND SLIDE (UMA VEZ POR FRAME)
+	# --------------------------------------------------------
+	_apply_movement()
+
+func _update_timers(delta: float, on_floor: bool) -> void:
 	if time_shoot > 0.0:
 		time_shoot -= delta
 
-	# Coyote time
 	if on_floor:
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
 
-	# Jump buffer
 	if Input.is_action_just_pressed("ui_accept"):
 		jump_buffer = jump_buffer_time
 	else:
 		jump_buffer -= delta
 
 
-	# --------------------------------------------------------
-# PULO (COYOTE + BUFFER) E ESTADO "JUMP"
-# --------------------------------------------------------
+func _handle_jump() -> void:
 	if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
-		#Macanimsmo do superpulo pular x vezes mais quando segura o W + BARRA
-		# Se W (superjump) estiver pressionado e flag ativa
 		if Input.is_action_pressed("call_superjump") and Globals.flag_pw_superjump and can_jump:
-			#print("Superpulo")
-			var super_height = jump_height * superjump_factor * Globals.superjump_adiction  # aumenta altura do pulo
+			var super_height = jump_height * superjump_factor * Globals.superjump_adiction
 			var super_velocity = -sqrt(2.0 * gravity * super_height)
 			velocity.y = super_velocity
-		else:
-			# Pulo normal
-			if can_jump:
-				velocity.y = jump_velocity
+		elif can_jump:
+			velocity.y = jump_velocity
 
 		jump_buffer = 0.0
 		coyote_timer = 0.0
 		estado = "jump"
 		time_jump = 0.1
 
-	# --------------------------------------------------------
-	# GRAVIDADE COM PULO VARIÁVEL
-	# --------------------------------------------------------
+
+func _apply_gravity(delta: float) -> void:
 	if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
-		# Soltou o botão enquanto sobe → pulo menor
 		velocity.y += gravity * 1.5 * delta
 	elif velocity.y > 0.0:
-		# Caindo
 		velocity.y += fall_gravity * delta
 	else:
-		# Subindo normalmente
 		velocity.y += gravity * delta
 
-	# Se está em pet_attack, não atualiza movimento
-	if estado == "pet_attack":
-		velocity.x = 0
-		move_and_slide()
-		return
 
-	# --------------------------------------------------------
-	# MOVIMENTO HORIZONTAL
-	# --------------------------------------------------------
+func _handle_horizontal(delta: float,on_floor: bool) -> void:
 	var input_dir := Input.get_axis("ui_left", "ui_right")
-
-	
-	# Apex bonus → mais controle no topo do pulo
 	var apex: float = clamp(abs(velocity.y) / 200.0, 0.0, 1.0)
 	var apex_speed: float = lerp(apex_bonus, 0.0, apex)
-	
-	#ignora ações quando estiver na animação de pet ataque, caso contrário, corre enquanto anima
-	if estado != "pet_attack" and estado != "teleport":
+
+	if estado != "teleport":
 		if input_dir != 0.0:
 			velocity.x = move_toward(velocity.x, input_dir * (max_speed + apex_speed), acceleration * delta)
 			animation.scale.x = input_dir
-			curiosity.scale.x = input_dir #move a área de curiosidade
-			
-			# Cancel window: movimento cancela ataque/tiro
+			curiosity.scale.x = input_dir
+
 			if can_cancel and estado in ["shoot", "atack"]:
 				estado = "run"
 
-			# Só define run se não estiver em ações prioritárias
 			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
 				estado = "run"
 		else:
 			velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
-
-			# Se está no chão, parado e não está em outra ação, fica idle
 			if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
 				estado = "idle"
 
-	# --------------------------------------------------------
-	# TIRO E ATAQUE
-	# Agora com cancel window
-	# --------------------------------------------------------
+func _apply_movement() -> void:
+	move_and_slide()
+	var on_floor := is_on_floor()
+
+	if on_floor and estado == "jump":
+		estado = "run" if abs(velocity.x) > 10.0 else "idle"
+
+	for i in range(get_slide_collision_count()):
+		var collision: KinematicCollision2D = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider and collider.has_method("has_collided_with"):
+			collider.has_collided_with(collision, self)
+
+	match estado:
+		"jump": animation.play("jump")
+		"shoot": animation.play("shoot")
+		"atack": animation.play("atack")
+		"run":
+			if force_walk:
+				animation.play("walk")
+				velocity.x *= 0.4
+			else:
+				animation.play("run")
+		"idle": animation.play("idle")
+		"hurt": animation.play("hurt")
+		"pet_attack": animation.play("pet_attack")
+		"teleport": animation.play("teleport")
+		"read": animation.play("read")
+
+
+func _handle_actions() -> void:
 	if Input.is_action_just_pressed("shoot") and time_shoot <= 0.0:
 		estado = "shoot"
 		time_shoot = cooldown_tiro
@@ -324,86 +545,19 @@ func _physics_process(delta: float) -> void:
 		time_shoot = cooldown_tiro
 		_start_cancel_window()
 
-	#is_instance_valid garante que ele não duplica feroz quando ele já existe na fase 2
-	if Input.is_action_just_pressed("call_feroz") and !is_instance_valid(feroz_s2):		
+	if Input.is_action_just_pressed("call_feroz") and !is_instance_valid(feroz_s2):
 		if pet_instance == null and Globals.flag_pw_feroz_enable:
-			print("Chamou o feroz!")
 			spawn_pet()
 		else:
-			print("Feroz ainda existe!")
 			despawn_pet()
 
 	if Input.is_action_just_pressed("feroz_companion_attack"):
 		estado = "pet_attack"
 		_start_cancel_window()
 
-	# --------------------------------------------------------
-	# TELETRANSPORTE
-	# --------------------------------------------------------
 	if Input.is_action_just_pressed("teleport") and Globals.flag_pw_teletransport:
 		estado = "teleport"
 		_teleport()
-		
-	# --------------------------------------------------------
-	# APLICA KNOCKBACK (apenas visual, o real está no bloco is_hurt)
-	# --------------------------------------------------------
-	if knockback_vector != Vector2.ZERO:
-		velocity = knockback_vector
-
-	# --------------------------------------------------------
-	# MOVIMENTO FINAL
-	# --------------------------------------------------------
-	move_and_slide()
-
-	on_floor = is_on_floor()  # atualiza após o movimento
-
-	# --------------------------------------------------------
-	# CORRIGE ESTADO APÓS ATERRISSAR
-	# --------------------------------------------------------
-	if on_floor and estado == "jump":
-		if abs(velocity.x) > 10.0:
-			estado = "run"
-		else:
-			estado = "idle"
-
-	# --------------------------------------------------------
-	# PLATAFORMAS QUE CAEM
-	# --------------------------------------------------------
-	for i: int in range(get_slide_collision_count()):
-		var collision: KinematicCollision2D = get_slide_collision(i)
-		if collision.get_collider().has_method("has_collided_with"):
-			collision.get_collider().has_collided_with(collision, self)
-
-
-	# --------------------------------------------------------
-	# ANIMAÇÕES BASEADAS NO ESTADO
-	# --------------------------------------------------------
-	match estado:
-		"jump":
-			animation.play("jump")
-		"shoot":
-			animation.play("shoot")
-		"atack":
-			animation.play("atack")
-		"run":
-			if force_walk:
-				#Força a animação de caminhada
-				animation.play("walk")
-				#Reduz a velocidade do player
-				velocity.x *= 0.4   # reduz 60% a velocidade
-			else:
-				animation.play("run")
-		"idle":
-			animation.play("idle")
-		"hurt":
-			animation.play("hurt")
-		"pet_attack":
-			animation.play("pet_attack")
-		"teleport":
-			animation.play("teleport")
-		"read":
-			animation.play("read")
-	
 
 
 
@@ -418,13 +572,18 @@ func _start_cancel_window() -> void:
 
 
 # ============================================================
-# ✅ DANO, KNOCKBACK E INVENCIBILIDADE (AJUSTADO)
+#DANO, KNOCKBACK E INVENCIBILIDADE (AJUSTADO)
 # ============================================================
 @onready var hurt_sound: AudioStreamPlayer2D = $hurt_sound
 
 func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
-	# evita dano repetido
+	print("Aplicou o take_damage")
+	# Se já está invencível, não perde vida, mas ainda aplica knockback
 	if invincible:
+		if knockback_force != Vector2.ZERO:
+			knockback_force = knockback_force.normalized() * 350
+			knockback_force = knockback_force.limit_length(500)
+			knockback_vector = knockback_force
 		return
 
 	Globals.stat_die_number += 1
@@ -433,56 +592,116 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	is_hurt = true
 	estado = "hurt"
 	
-	############ Som do dano ################
+	# Som do dano
 	if hurt_sound.stream:
-		print("Deve tocar o som!")	
 		hurt_sound.volume_db = 0
 		hurt_sound.play()
-	else:
-		print("Nenhum stream configurado em $hurt_sound")
-	
-	#print("Chamou take damage, deveria mudar de cor")
-	# reduz vida
+
+	# Reduz vida
 	if Globals.get_life() > 1:
 		Globals.loss_of_life()
-		#print("Take Damage:"+str(Globals.get_life()))
 	else:
 		queue_free()
 		emit_signal("player_has_died")
 
-	# aplica knockback
-	knockback_vector = knockback_force
+	# Normaliza e limita knockback
+	if knockback_force != Vector2.ZERO:
+		knockback_force = knockback_force.normalized() * 300
+		knockback_force = knockback_force.limit_length(400)
+		knockback_vector = knockback_force
 
 	# Tween para suavizar knockback e piscada
 	var tween: Tween = get_tree().create_tween()
-
-	# Knockback suaviza em paralelo
 	tween.parallel().tween_property(self, "knockback_vector", Vector2.ZERO, duration)
 
-	# Cor: primeiro vermelho, depois branco (sequencial)
-	animation.modulate = Color(1, 0, 0) # já começa vermelho
+	animation.modulate = Color(1, 0, 0)
 	tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1)
 	tween.tween_property(animation, "modulate", Color(1, 0, 0), 0.1)
 	tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1)
-	tween.tween_property(animation, "modulate", Color(1, 0, 0), 0.1) # piscada extra
-	tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1) # volta ao normal
+	tween.tween_property(animation, "modulate", Color(1, 0, 0), 0.1)
+	tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1)
 
-	# ✅ espera o knockback acabar
+	# Espera o knockback acabar
 	await get_tree().create_timer(duration).timeout
 	is_hurt = false
 
-	# ✅ volta ao estado correto
+	# Volta ao estado correto
 	if is_on_floor():
-		if abs(velocity.x) > 10:
-			estado = "run"
-		else:
-			estado = "idle"
+		estado = "run" if abs(velocity.x) > 10 else "idle"
 	else:
 		estado = "jump"
 
-	# ✅ espera invencibilidade acabar
+	# Espera invencibilidade acabar
 	await get_tree().create_timer(invincible_time).timeout
 	invincible = false
+
+##Versão antiga - Araci consegue ficar em cima dos inimigos
+#func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
+	## evita dano repetido
+	#if invincible:
+		#return
+#
+	#Globals.stat_die_number += 1
+#
+	#invincible = true
+	#is_hurt = true
+	#estado = "hurt"
+	#
+	############# Som do dano ################
+	#if hurt_sound.stream:
+		#print("Deve tocar o som!")	
+		#hurt_sound.volume_db = 0
+		#hurt_sound.play()
+	#else:
+		#print("Nenhum stream configurado em $hurt_sound")
+	#
+	##print("Chamou take damage, deveria mudar de cor")
+	## reduz vida
+	#if Globals.get_life() > 1:
+		#Globals.loss_of_life()
+		##print("Take Damage:"+str(Globals.get_life()))
+	#else:
+		#queue_free()
+		#emit_signal("player_has_died")
+	#
+	##normaliza e limita knockback
+	#if knockback_force != Vector2.ZERO:
+		#knockback_force = knockback_force.normalized() * 300  # valor fixo
+		#knockback_force = knockback_force.limit_length(400)   # limite máximo - Evita que o jogador seja projetado para muito longe
+		#
+	## aplica knockback
+	#knockback_vector = knockback_force
+#
+	## Tween para suavizar knockback e piscada
+	#var tween: Tween = get_tree().create_tween()
+#
+	## Knockback suaviza em paralelo
+	#tween.parallel().tween_property(self, "knockback_vector", Vector2.ZERO, duration)
+#
+	## Cor: primeiro vermelho, depois branco (sequencial)
+	#animation.modulate = Color(1, 0, 0) # já começa vermelho
+	#tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1)
+	#tween.tween_property(animation, "modulate", Color(1, 0, 0), 0.1)
+	#tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1)
+	#tween.tween_property(animation, "modulate", Color(1, 0, 0), 0.1) # piscada extra
+	#tween.tween_property(animation, "modulate", Color(1, 1, 1), 0.1) # volta ao normal
+#
+	##espera o knockback acabar
+	#await get_tree().create_timer(duration).timeout
+	#is_hurt = false
+#
+	##volta ao estado correto
+	#if is_on_floor():
+		#if abs(velocity.x) > 10:
+			#estado = "run"
+		#else:
+			#estado = "idle"
+	#else:
+		#estado = "jump"
+#
+	##espera invencibilidade acabar
+	#await get_tree().create_timer(invincible_time).timeout
+	#invincible = false
 
 # ============================================================
 # OUTROS
@@ -740,13 +959,14 @@ var animals_info := {
 }
 
 var current_animal_name: String = ""   # guarda o nome do animal mais próximo
+var is_showing_message := false #Fag de uma trava para o botão enquanto uma mensagem aparece
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("interact") and current_animal_name != "":
+	if Input.is_action_just_pressed("interact") and current_animal_name != "" and not is_showing_message:
 		var info = animals_info.get(current_animal_name, null)
 		if info != null:
 			var icon = load(info["icone"])
-			#if info:
+			is_showing_message = true
 			Globals.show_side_mensage(info["descricao"], icon, info["tempo"])
 			
 			if is_on_floor():#Só toca a animação de ler se estiver no chão
@@ -754,6 +974,15 @@ func _process(_delta: float) -> void:
 				estado = "read"
 				velocity = Vector2.ZERO   # trava movimento enquanto lê
 				#animation.play("read")
+				
+			# libera o botão depois que o tempo da mensagem passar
+			await get_tree().create_timer(info["tempo"]).timeout
+			is_showing_message = false
+
+# Quando a mensagem terminar reativa a  ação do botão i
+func _on_message_finished():
+	is_showing_message = false
+	estado = "idle"
 
 func _on_curiosity_area_entered(area: Area2D) -> void:
 	var parent = area.get_parent()

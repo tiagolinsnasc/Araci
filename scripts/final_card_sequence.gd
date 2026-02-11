@@ -7,6 +7,7 @@ var cards = [
 	preload("res://n_assets/n_cuts/final/s4.png"),
 	preload("res://n_assets/n_cuts/final/s5.png"),
 	preload("res://n_assets/n_cuts/final/s6.png"),
+	preload("res://n_assets/n_cuts/final/s7.png"),
 	preload("res://n_assets/n_cuts/final/s7.png")
 ]
 func get_sentence():
@@ -55,7 +56,7 @@ var texts = [
 
 var left :Vector2 = Vector2(40, 40)
 var right :Vector2 = Vector2(300, 40)
-var center :Vector2 = Vector2(450, 300)
+var center :Vector2 = Vector2(300, 130)
 var left_top :Vector2 = Vector2(35, 35)
 var positions = [
 	right, 
@@ -84,17 +85,28 @@ func show_card(index):
 	# texto principal
 	$Label.text = texts[index]
 	$Label.position = positions[index]
-	$Label.modulate = Color(0,0,0,0)
+	$Label.modulate = Color(0,0,0,0) # começa invisível
 
-	#Texto de instruções
-	$Label_instructions.position = Vector2(220,340)
-	$Label_instructions.modulate = Color(0,0,0,0)
+	if texts[index] == "Fim":
+		# fonte maior e centralizado
+		$Label.add_theme_font_size_override("font_size", 32)
+		$Label.position = center
+
+		# fade-in lento (5 segundos)
+		var tween_fim = create_tween()
+		tween_fim.tween_property($Label, "modulate:a", 1.0, 5.0)
+	else:
+		# instruções
+		$Label_instructions.position = Vector2(220,340)
+		$Label_instructions.modulate = Color(0,0,0,0)
+
+		# fade-in normal
+		var tween_text = create_tween()
+		tween_text.tween_interval(0.5)
+		tween_text.tween_property($Label, "modulate:a", 1.0, 1.0)
+		tween_text.tween_property($Label_instructions, "modulate:a", 1.0, 1.0)
+
 	
-	# fade-in com atraso
-	var tween_text = create_tween()
-	tween_text.tween_interval(0.5) # atraso de meio segundo
-	tween_text.tween_property($Label, "modulate:a", 1.0, 1.0)
-	tween_text.tween_property($Label_instructions, "modulate:a", 1.0, 1.0)
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # espaço

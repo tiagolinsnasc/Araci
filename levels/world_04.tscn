@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=4 uid="uid://disrnmbi1psf"]
+[gd_scene load_steps=77 format=4 uid="uid://disrnmbi1psf"]
 
 [ext_resource type="Script" uid="uid://rrcccix26aeh" path="res://scripts/world.gd" id="1_fexhl"]
 [ext_resource type="Texture2D" uid="uid://cfmvolocmwr6i" path="res://n_assets/n_scenes/bgs/5 - Sky_color.png" id="2_dm8ns"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://jf3dqnoiq35n" path="res://prefabs/animals/fox.tscn" id="17_ttfg3"]
 [ext_resource type="PackedScene" uid="uid://b8h566kknekrh" path="res://prefabs/animals/teiu.tscn" id="18_uj3c2"]
 [ext_resource type="PackedScene" uid="uid://b0h3uvrcdue05" path="res://prefabs/animals/coral.tscn" id="19_q86qd"]
+[ext_resource type="PackedScene" uid="uid://bsecwsynxsn8y" path="res://actors/feroz.tscn" id="20_dm8ns"]
 [ext_resource type="PackedScene" uid="uid://d2d37lp6sidfm" path="res://prefabs/animals/arara.tscn" id="20_j511d"]
 [ext_resource type="PackedScene" uid="uid://blybxtxruhhih" path="res://prefabs/wild_boar_traped.tscn" id="20_vewje"]
 [ext_resource type="PackedScene" uid="uid://lntsrumo4fv5" path="res://prefabs/life.tscn" id="21_t3vra"]
@@ -2172,7 +2173,20 @@ position = Vector2(7601, 22)
 position = Vector2(13860, -521)
 
 [node name="Araci" parent="." instance=ExtResource("17_4kf1e")]
-position = Vector2(-82, 135)
+position = Vector2(-71, 124)
+jump_height = 120.0
+superjump_factor = 3
+max_time_to_peak = 0.5
+max_time_to_fall = 0.6
+max_speed = 150.0
+acceleration = 2000.0
+deceleration = 1800.0
+apex_bonus = 80.0
+coyote_time = 0.12
+jump_buffer_time = 0.12
+teleport_delay = 0.1
+pet_scene = ExtResource("20_dm8ns")
+cancel_window = 0.15
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"

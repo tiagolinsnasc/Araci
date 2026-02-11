@@ -14,7 +14,6 @@ extends CharacterBody2D
 @onready var life_progress_bar: ProgressBar = $life_bar/progress_bar
 @onready var speech_bubble: Node2D = $speech_bubble
 
-
 var IS_ACTIVE = true
 var is_invulnerable = false
 

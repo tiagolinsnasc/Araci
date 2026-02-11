@@ -120,3 +120,8 @@ func stop_attack():
 func _on_shoot_timer_timeout():
 	if attacking:
 		shoot_bullet()
+		
+func take_damage():
+	Globals.stat_enemy_eliminated += 1
+	Globals.give_points_to_player(enemy_score, global_position, self)
+	queue_free()

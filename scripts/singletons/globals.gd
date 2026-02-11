@@ -1,4 +1,14 @@
 extends Node
+
+#Feitos recentes:
+#Consertei feroz
+#Consertei o impacto gigantesco com os gafanhotos
+#Consertei a direção do pulo quando leva o tiro
+#Consertei os pontos disponíveis (Não verificado)
+#Consertei mensagens iguais acumulando
+#Ajustado - plataforma móveis com mais possibilidade de pulo (facilitando o percurso)
+#Consertei - feroz atacando os atiradores (Faltava o método take_damage no characterbody2d) - Verificado
+
 #Equivalente a evidência
 var coins := 0
 var score := 0
@@ -54,6 +64,14 @@ var pet = null
 #Contadores para o estágio 3 - mecânica de plantar árvores
 var count_planted_trees_w3 = 0
 var max_planted_trees_w3 = 5
+
+#Flag para exibir mensagens de evolução de powerups
+var flag_pw_sj_l2 = false;
+var flag_pw_sj_l3 = false;
+
+var flag_pw_tp_l2 = false;
+var flag_pw_tp_l3 = false;
+
 
 ##Adiciona a pontuação disponível às estatísticas (deve ser chamada na instanciação do elemento)
 func add_disponible_score_stat(score_added: int):
@@ -158,6 +176,8 @@ func respaw_player():
 		
 ##Adiciona pontos para o player
 func add_score(sc):
+	#print("Pontos:",str(score))
+	#print("Pontos disponíveis:",str(stat_disponible_score))
 	score += sc
 
 #Mecanismo para contar o tempo entre ataques do pet (Feroz)

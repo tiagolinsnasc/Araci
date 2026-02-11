@@ -7,8 +7,8 @@ extends EnemyBase
 @onready var enemy_head: Area2D = $enemy_head
 @onready var body: CollisionShape2D = $body
 
-func _ready():
-	pass
+#func _ready():
+	#pass
 
 # inimigo fixo, não se move
 func _physics_process(_delta: float) -> void:
