@@ -24,8 +24,7 @@ func get_sentence():
 				"Victor Grand sofre, mas ainda mantém poder."
 				Com provas razoáveis, o tribunal aplicou 10 anos de prisão e multas pesadas.""" % int(round(evidence_percent))
 	else:
-		return """Condenação severa (%s%% das evidências)
-			"Victor Grand pega pena pesada no tribunal."
+		return """"Victor Grand pega pena pesada no tribunal." (%s%% das evidências)
 			Com base em provas robustas, mas não completas, o tribunal condenou Victor Grand a 20 anos de prisão e ao pagamento de multas milionárias. Apesar de não ter sido a pena máxima, especialistas afirmam que a decisão representa um duro golpe contra a VGR Holdings e suas práticas ilegais.""" % int(round(evidence_percent))
 	
 		

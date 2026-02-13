@@ -36,6 +36,7 @@ func _process(_delta: float):
 	#Cuida da dinâmica de mostrar na tela os íncones com a evolução dos superpoderes
 	#superjump_level e teleport_level já alteram o fator de multiplicação do superpulo e teleport
 	var v_superjump_level = Globals.superjump_level();
+	var v_teleport_level = Globals.teleport_level();
 	#print("Nivel do superpulo: "+str(v_superjump_level))
 	if v_superjump_level == 1:
 		super_jump.icon.texture = pw_sj_icon_l1
@@ -50,14 +51,14 @@ func _process(_delta: float):
 			Globals.flag_pw_sj_l3 = true
 		super_jump.icon.texture = pw_sj_icon_l3
 		
-	if Globals.teleport_level() == 1:
+	if v_teleport_level == 1:
 		teleport.icon.texture = pw_tp_icon_l1
-	elif Globals.teleport_level() == 2:
+	elif v_teleport_level == 2:
 		if not Globals.flag_pw_tp_l2:#Mensagem do aumento
 			Globals.show_side_mensage("Distância de teletransporte aumentou em 10%!",pw_tp_icon_l2,5.0)
 			Globals.flag_pw_tp_l2 = true	
 		teleport.icon.texture = pw_tp_icon_l2
-	elif Globals.teleport_level() == 3:
+	elif v_teleport_level == 3:
 		if not Globals.flag_pw_tp_l3:#Mensagem do aumento
 			Globals.show_side_mensage("Distância de teletransporte aumentou em 30%!",pw_tp_icon_l3,5.0)
 			Globals.flag_pw_tp_l3 = true	

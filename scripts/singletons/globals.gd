@@ -1,19 +1,33 @@
 extends Node
 
 #Feitos recentes:
-#Consertei feroz
-#Consertei o impacto gigantesco com os gafanhotos
-#Consertei a direção do pulo quando leva o tiro
-#Consertei os pontos disponíveis (Não verificado)
-#Consertei mensagens iguais acumulando
+#Conserto do impacto gigantesco com os gafanhotos (verificado)
+#Conserto da direção do pulo quando leva o tiro (verificado)
+#Conserto os pontos disponíveis (Não verificado)
+#Conserto das mensagens iguais acumulando (verificado)
 #Ajustado - plataforma móveis com mais possibilidade de pulo (facilitando o percurso)
-#Consertei - feroz atacando os atiradores (Faltava o método take_damage no characterbody2d) - Verificado
+#Conserto - feroz atacando os atiradores (Faltava o método take_damage no characterbody2d) - Verificado
+#Conserto: não exibe a mensagem de update dos powerups (Distância de teleport em 10% e 30% aparecem) - OK [Verificado]
+#Conserto: Ajuste do andar do Boss depois de preso, inicia depois de se mover[Ajustado]
+#Conserto: Falha Quando o caminhão para as rodas não param no desafio final [Corrigido]
+#Falha - fica em cima do animal após o dano
+#Falha no coodown de feroz no estágio 5 anterior a mineração [Não detectado]
+#Melhoria no código - variáveis com os limites de upgrade de powerups
+#Melhorado: limite no final do estágio 5
+#Ajuaste no visual do cenário
+#Adição de placas para indicar minas/cavernas
+#Adição de opção de voltar à tela inicial do jogo (ainda sem salvamento)
 
 #Equivalente a evidência
 var coins := 0
 var score := 0
 var player_life := 3
 var default_player_life := 3
+
+#Controle de powerups
+var flag_pw_feroz_enable = false
+var flag_pw_superjump = false
+var flag_pw_teletransport = false
 
 #Variáveis de estatisticas
 var stat_game_time := 0.0 #Em segundos
@@ -50,10 +64,7 @@ var flag_stay_on_sand = false
 #Indica que já existe uma mensagem ativa na tela (serve para informações dos inimigos)
 var flag_message_active = false 
 
-#Controle de powerups
-var flag_pw_feroz_enable = false
-var flag_pw_superjump = false
-var flag_pw_teletransport = false
+
 
 #Criados para permitir o mecanismo de checkpoint:
 var araci = null #Carregado
@@ -72,6 +83,11 @@ var flag_pw_sj_l3 = false;
 var flag_pw_tp_l2 = false;
 var flag_pw_tp_l3 = false;
 
+#Limites para o upgrade dos superpoderes
+var init_sj_l1 := 4200
+var init_sj_l2 := 4850
+var init_tp_l1 := 6150
+var init_tp_l2 := 7150
 
 ##Adiciona a pontuação disponível às estatísticas (deve ser chamada na instanciação do elemento)
 func add_disponible_score_stat(score_added: int):
@@ -378,18 +394,20 @@ Inimigos: %s""" % [
 
 ##Retorna o nível do superpulo e aumenta a altura em 10% N2 e 20% N3 para cada nível (L1: 4200; L2 4850; L3: 5550)
 func superjump_level() -> int:
+	if not Globals.can_super_jump():
+		return 0
 	#print("Score em:"+str(score))
-	if score < 4200:#Nivel 1
+	if score < init_sj_l1:#Nivel 1
 		#print("Superpulo no nível 1:"+str(score))
 		superjump_adiction = 1 #aumento de 0
 		return 1
 		
-	if score >= 4200 and score < 4850: #Nivel 2
+	if score >= init_sj_l1 and score < init_sj_l2: #Nivel 2
 		#print("Superpulo no nível 2 (10%):"+str(score))
 		superjump_adiction = 1.1 #aumento de 10%
 		return 2
 	
-	if score >= 4850: #Nivel 3
+	if score >= init_sj_l2: #Nivel 3
 		#print("Superpulo no nível 3 (30%):"+str(score))
 		superjump_adiction = 1.3 #aumento de 30%
 		return 3
@@ -398,15 +416,20 @@ func superjump_level() -> int:
 
 ##Retorna o nível do teleport (L1: 6150; L2: 7150; L3:8150)
 func teleport_level():
-	if score < 6150:#Nivel 1
+	if not Globals.can_teleport():
+		return 0
+	if score < init_tp_l1:#Nivel 1
+		#print("Teleport nível 1 obtido!")
 		teleport_distance_adiction = 1.0 #aumento de 0%
 		return 1
 	
-	if score >= 6150 and score < 7150: #Nivel 3
+	if score >= init_tp_l1 and score < init_tp_l2: #Nivel 3
+		#print("Teleport nível 2 obtido!")
 		teleport_distance_adiction = 1.1 #aumento de 10%
 		return 2
 	
-	if score >= 7150: #Nivel 3
+	if score >= init_tp_l2: #Nivel 3
+		#print("Teleport nível 3 obtido!")
 		teleport_distance_adiction = 1.3 #aumento de 20%
 		return 3
 		

@@ -198,215 +198,6 @@ func play_upgrade():
 # LOOP PRINCIPAL DE FÍSICA
 # ============================================================
 
-#func _physics_process(delta: float) -> void:
-	#var on_floor := is_on_floor()
-	#
-	##Condição onde o player está paralizado, não realiza qualquer tipo de movimento
-	#if is_paralyzed:
-		#velocity = Vector2.ZERO
-		#move_and_slide()
-		#return   # sai da função aqui
-#
-	##Trata da aniamção de leitura na interação com i
-	#if estado == "read":
-		#velocity = Vector2.ZERO
-		##move_and_slide()
-		##return
-#
-	## --------------------------------------------------------
-	## BLOQUEIA MOVIMENTO DURANTE KNOCKBACK
-	## --------------------------------------------------------
-	#if is_hurt or estado == "upgrade":
-		##velocity = Vector2.ZERO
-		#velocity = knockback_vector
-		#move_and_slide()
-		#return
-#
-	## --------------------------------------------------------
-	## ATUALIZAÇÃO DE TIMERS (TIRO E JANELAS DE PULO)
-	## --------------------------------------------------------
-	#if time_shoot > 0.0:
-		#time_shoot -= delta
-#
-	## Coyote time
-	#if on_floor:
-		#coyote_timer = coyote_time
-	#else:
-		#coyote_timer -= delta
-#
-	## Jump buffer
-	#if Input.is_action_just_pressed("ui_accept"):
-		#jump_buffer = jump_buffer_time
-	#else:
-		#jump_buffer -= delta
-#
-#
-	## --------------------------------------------------------
-## PULO (COYOTE + BUFFER) E ESTADO "JUMP"
-## --------------------------------------------------------
-	#if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
-		##Macanimsmo do superpulo pular x vezes mais quando segura o W + BARRA
-		## Se W (superjump) estiver pressionado e flag ativa
-		#if Input.is_action_pressed("call_superjump") and Globals.flag_pw_superjump and can_jump:
-			##print("Superpulo")
-			#var super_height = jump_height * superjump_factor * Globals.superjump_adiction  # aumenta altura do pulo
-			#var super_velocity = -sqrt(2.0 * gravity * super_height)
-			#velocity.y = super_velocity
-		#else:
-			## Pulo normal
-			#if can_jump:
-				#velocity.y = jump_velocity
-#
-		#jump_buffer = 0.0
-		#coyote_timer = 0.0
-		#estado = "jump"
-		#time_jump = 0.1
-#
-	## --------------------------------------------------------
-	## GRAVIDADE COM PULO VARIÁVEL
-	## --------------------------------------------------------
-	#if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
-		## Soltou o botão enquanto sobe → pulo menor
-		#velocity.y += gravity * 1.5 * delta
-	#elif velocity.y > 0.0:
-		## Caindo
-		#velocity.y += fall_gravity * delta
-	#else:
-		## Subindo normalmente
-		#velocity.y += gravity * delta
-#
-	## Se está em pet_attack, não atualiza movimento
-	#if estado == "pet_attack":
-		#velocity.x = 0
-		#move_and_slide()
-		#return
-#
-	## --------------------------------------------------------
-	## MOVIMENTO HORIZONTAL
-	## --------------------------------------------------------
-	#var input_dir := Input.get_axis("ui_left", "ui_right")
-#
-	#
-	## Apex bonus → mais controle no topo do pulo
-	#var apex: float = clamp(abs(velocity.y) / 200.0, 0.0, 1.0)
-	#var apex_speed: float = lerp(apex_bonus, 0.0, apex)
-	#
-	##ignora ações quando estiver na animação de pet ataque, caso contrário, corre enquanto anima
-	#if estado != "pet_attack" and estado != "teleport":
-		#if input_dir != 0.0:
-			#velocity.x = move_toward(velocity.x, input_dir * (max_speed + apex_speed), acceleration * delta)
-			#animation.scale.x = input_dir
-			#curiosity.scale.x = input_dir #move a área de curiosidade
-			#
-			## Cancel window: movimento cancela ataque/tiro
-			#if can_cancel and estado in ["shoot", "atack"]:
-				#estado = "run"
-#
-			## Só define run se não estiver em ações prioritárias
-			#if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
-				#estado = "run"
-		#else:
-			#velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
-#
-			## Se está no chão, parado e não está em outra ação, fica idle
-			#if on_floor and estado not in ["shoot", "atack", "hurt", "jump", "pet_attack", "read"]:
-				#estado = "idle"
-#
-	## --------------------------------------------------------
-	## TIRO E ATAQUE
-	## Agora com cancel window
-	## --------------------------------------------------------
-	#if Input.is_action_just_pressed("shoot") and time_shoot <= 0.0:
-		#estado = "shoot"
-		#time_shoot = cooldown_tiro
-		#_start_cancel_window()
-#
-	#if Input.is_action_just_pressed("atack") and time_shoot <= 0.0:
-		#estado = "atack"
-		#time_shoot = cooldown_tiro
-		#_start_cancel_window()
-#
-	##is_instance_valid garante que ele não duplica feroz quando ele já existe na fase 2
-	#if Input.is_action_just_pressed("call_feroz") and !is_instance_valid(feroz_s2):		
-		#if pet_instance == null and Globals.flag_pw_feroz_enable:
-			#print("Chamou o feroz!")
-			#spawn_pet()
-		#else:
-			#print("Feroz ainda existe!")
-			#despawn_pet()
-#
-	#if Input.is_action_just_pressed("feroz_companion_attack"):
-		#estado = "pet_attack"
-		#_start_cancel_window()
-#
-	## --------------------------------------------------------
-	## TELETRANSPORTE
-	## --------------------------------------------------------
-	#if Input.is_action_just_pressed("teleport") and Globals.flag_pw_teletransport:
-		#estado = "teleport"
-		#_teleport()
-		#
-	## --------------------------------------------------------
-	## APLICA KNOCKBACK (apenas visual, o real está no bloco is_hurt)
-	## --------------------------------------------------------
-	#if knockback_vector != Vector2.ZERO:
-		#velocity = knockback_vector
-#
-	## --------------------------------------------------------
-	## MOVIMENTO FINAL
-	## --------------------------------------------------------
-	#move_and_slide()
-#
-	#on_floor = is_on_floor()  # atualiza após o movimento
-#
-	## --------------------------------------------------------
-	## CORRIGE ESTADO APÓS ATERRISSAR
-	## --------------------------------------------------------
-	#if on_floor and estado == "jump":
-		#if abs(velocity.x) > 10.0:
-			#estado = "run"
-		#else:
-			#estado = "idle"
-#
-	## --------------------------------------------------------
-	## PLATAFORMAS QUE CAEM
-	## --------------------------------------------------------
-	#for i: int in range(get_slide_collision_count()):
-		#var collision: KinematicCollision2D = get_slide_collision(i)
-		#if collision.get_collider().has_method("has_collided_with"):
-			#collision.get_collider().has_collided_with(collision, self)
-#
-#
-	## --------------------------------------------------------
-	## ANIMAÇÕES BASEADAS NO ESTADO
-	## --------------------------------------------------------
-	#match estado:
-		#"jump":
-			#animation.play("jump")
-		#"shoot":
-			#animation.play("shoot")
-		#"atack":
-			#animation.play("atack")
-		#"run":
-			#if force_walk:
-				##Força a animação de caminhada
-				#animation.play("walk")
-				##Reduz a velocidade do player
-				#velocity.x *= 0.4   # reduz 60% a velocidade
-			#else:
-				#animation.play("run")
-		#"idle":
-			#animation.play("idle")
-		#"hurt":
-			#animation.play("hurt")
-		#"pet_attack":
-			#animation.play("pet_attack")
-		#"teleport":
-			#animation.play("teleport")
-		#"read":
-			#animation.play("read")
-	#
-
 func _physics_process(delta: float) -> void:
 	var on_floor := is_on_floor()
 
@@ -472,7 +263,6 @@ func _handle_jump() -> void:
 		coyote_timer = 0.0
 		estado = "jump"
 		time_jump = 0.1
-
 
 func _apply_gravity(delta: float) -> void:
 	if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
@@ -575,14 +365,15 @@ func _start_cancel_window() -> void:
 #DANO, KNOCKBACK E INVENCIBILIDADE (AJUSTADO)
 # ============================================================
 @onready var hurt_sound: AudioStreamPlayer2D = $hurt_sound
-
+var knockback_force_normalize = 700
+var knockback_force_limit = 750
 func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 	print("Aplicou o take_damage")
 	# Se já está invencível, não perde vida, mas ainda aplica knockback
 	if invincible:
 		if knockback_force != Vector2.ZERO:
-			knockback_force = knockback_force.normalized() * 350
-			knockback_force = knockback_force.limit_length(500)
+			knockback_force = knockback_force.normalized() * knockback_force_normalize
+			knockback_force = knockback_force.limit_length(knockback_force_limit)
 			knockback_vector = knockback_force
 		return
 
@@ -606,8 +397,8 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25) -> void:
 
 	# Normaliza e limita knockback
 	if knockback_force != Vector2.ZERO:
-		knockback_force = knockback_force.normalized() * 300
-		knockback_force = knockback_force.limit_length(400)
+		knockback_force = knockback_force.normalized() * knockback_force_normalize
+		knockback_force = knockback_force.limit_length(knockback_force_limit)
 		knockback_vector = knockback_force
 
 	# Tween para suavizar knockback e piscada
@@ -754,44 +545,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		var direction_jump:float = sign(global_position.x - area.global_position.x)
 		var knockback:Vector2 = Vector2(600 * direction_jump, -350)
 		take_damage(knockback)
-
-
-#func _teleport():
-	#var dir = sign(animation.scale.x)
-	#if dir == 0:
-		#dir = 1
-#
-	#var target_pos = global_position + Vector2(teleport_distance * dir, 0)
-#
-	#var space_state = get_world_2d().direct_space_state
-	#var params = PhysicsPointQueryParameters2D.new()
-	#params.position = target_pos
-	#params.exclude = [self]
-	#params.collide_with_bodies = true
-	#params.collide_with_areas = false #Ingnora areas 2D
-#
-	## Só checar colisões com camadas 5, 6 e 9 (Sem funcionar)
-	#params.collision_mask = (1 << 4) | (1 << 5) | (1 << 8)
-	#
-	#var result = space_state.intersect_point(params)
-#
-	#if result.is_empty():
-		#teleport_sound()
-		## destino livre - teleporta
-		#visible = false
-		#await get_tree().create_timer(teleport_delay).timeout
-		#global_position = target_pos
-		#velocity.x = 0
-		#visible = true
-	#else:
-		## destino dentro de parede - cancela
-		#print("Teleport cancelado: destino bloqueado")
-#
-	## Ajusta estado
-	#if is_on_floor():
-		#estado = "run" if abs(velocity.x) > 10 else "idle"
-	#else:
-		#estado = "jump"
 
 
 func _teleport():

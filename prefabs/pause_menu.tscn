@@ -37,10 +37,24 @@ theme = ExtResource("2_ntkjb")
 shortcut = SubResource("Shortcut_ntkjb")
 text = "VOLTAR"
 
+[node name="inicio_btn" type="Button" parent="menu_holder"]
+layout_mode = 2
+theme = ExtResource("2_ntkjb")
+shortcut = SubResource("Shortcut_ntkjb")
+text = "IR PARA O MENU INICIAL"
+
 [node name="quit_btn" type="Button" parent="menu_holder"]
 layout_mode = 2
 theme = ExtResource("2_ntkjb")
 text = "SAIR"
 
+[node name="ConfirmResetDialog" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+title = "Confirme"
+size = Vector2i(352, 100)
+dialog_text = "\"Tem certeza? Seu progresso será perdido.\""
+
 [connection signal="pressed" from="menu_holder/resume_btn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="menu_holder/inicio_btn" to="." method="_on_inicio_btn_pressed"]
 [connection signal="pressed" from="menu_holder/quit_btn" to="." method="_on_quit_btn_pressed"]
+[connection signal="confirmed" from="ConfirmResetDialog" to="." method="_on_confirm_reset_dialog_confirmed"]

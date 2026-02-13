@@ -63,14 +63,13 @@ func stomped() -> void:
 func take_damage() -> void:
 	if is_dead:
 		return
-
+	#Executa apenas a animação (o efeito do take_damage é dano no script do player)
 	is_dead = true
 	play_anim("hurt")
 
 ##Animação finalizada
 func on_anim_finished(anim_name: String) -> void:
 	if anim_name == "hurt":
-		#TODO: chamar o método (Problema, alguns scripts são chamados no nó2d e não no nó principal)
 		Globals.add_score(enemy_score)
 		queue_free()
 

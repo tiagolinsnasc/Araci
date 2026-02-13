@@ -1,39 +1,34 @@
-[gd_scene load_steps=57 format=4 uid="uid://cgft5s4m2mvpf"]
+[gd_scene load_steps=43 format=4 uid="uid://dgnfygmuspgfp"]
 
-[ext_resource type="Script" uid="uid://rrcccix26aeh" path="res://scripts/world.gd" id="1_sejcc"]
-[ext_resource type="Texture2D" uid="uid://cxbyvg17wg0j5" path="res://n_assets/n_scenes/bgs/world6/5 - Sky_color.png" id="2_s0drr"]
-[ext_resource type="Texture2D" uid="uid://crs55phve2adm" path="res://n_assets/n_scenes/bgs/4 - Cloud_cover_2.png" id="3_jlhxg"]
-[ext_resource type="Shader" uid="uid://dwdjnyyfl1r1l" path="res://shaders/clouds_movements.gdshader" id="4_xih0p"]
-[ext_resource type="Texture2D" uid="uid://dl5rtqib44s32" path="res://n_assets/n_scenes/bgs/world6/3 - Cloud_cover_1.png" id="5_s5djv"]
-[ext_resource type="Texture2D" uid="uid://c3v7w2qq463ke" path="res://n_assets/n_scenes/bgs/world6/2 - City.png" id="6_x1jju"]
-[ext_resource type="Texture2D" uid="uid://dfkhdcqi18wim" path="res://n_assets/n_scenes/bgs/world6/1 - Foreground_scenary06.png" id="7_cousx"]
-[ext_resource type="Texture2D" uid="uid://bjklygknvd3si" path="res://n_assets/n_scenes/bgs/world4/1 - Foreground_scenery_cave4V3.png" id="8_5s8e7"]
-[ext_resource type="Texture2D" uid="uid://d21donffcxnko" path="res://n_assets/n_scenes/elements/fire_large.png" id="9_mhxjd"]
-[ext_resource type="Texture2D" uid="uid://dw0kfi0o178gu" path="res://n_assets/n_scenes/elements/fire_tiny.png" id="10_rna6k"]
-[ext_resource type="Texture2D" uid="uid://djk6q7de5q1px" path="res://n_assets/n_scenes/elements/elements01_w06.png" id="11_34oul"]
-[ext_resource type="Texture2D" uid="uid://byr64nh53asih" path="res://n_assets/n_scenes/elements/vegetacao_city_w06.png" id="12_n0p51"]
-[ext_resource type="Texture2D" uid="uid://440t4iq3ltrv" path="res://n_assets/n_scenes/elements/buildings_w6.png" id="13_1k0ci"]
-[ext_resource type="Texture2D" uid="uid://cuvyqe5j7v5gr" path="res://n_assets/n_scenes/elements/cleanWater01.png" id="14_0ut8w"]
-[ext_resource type="Texture2D" uid="uid://cp4pegy0t2p4c" path="res://n_assets/n_scenes/elements/contamineted_mercury_water.png" id="15_q8fsn"]
-[ext_resource type="Texture2D" uid="uid://t0qsmnsbu6wy" path="res://n_assets/n_scenes/elements/dirty_water_anime.png" id="16_j75wn"]
-[ext_resource type="PackedScene" uid="uid://ba3xbkuiqhtyn" path="res://actors/araci.tscn" id="20_sllfr"]
-[ext_resource type="PackedScene" uid="uid://nmttg7xvlcs7" path="res://actors/anna.tscn" id="21_flaou"]
-[ext_resource type="PackedScene" uid="uid://ii3eqvp3g631" path="res://actors/agenor.tscn" id="22_qncpy"]
-[ext_resource type="PackedScene" uid="uid://ucremkhce8lc" path="res://actors/agent_santos.tscn" id="23_jnjlc"]
-[ext_resource type="PackedScene" uid="uid://dtsrir1x6h5lp" path="res://actors/agent_tommy.tscn" id="24_vvnsv"]
-[ext_resource type="PackedScene" uid="uid://b3yywnh2pcj1d" path="res://actors/dt_boss.tscn" id="25_vvnsv"]
-[ext_resource type="Script" uid="uid://xuukh7wq4xkw" path="res://scripts/trigger_on_police.gd" id="26_bata5"]
-[ext_resource type="Script" uid="uid://8td61s8iucfd" path="res://scripts/on_report_trigger.gd" id="26_tdb0o"]
-[ext_resource type="Script" uid="uid://b4850lwrt0b07" path="res://scripts/trigger_no_jump_and_walk.gd" id="27_bata5"]
-[ext_resource type="PackedScene" uid="uid://b2ppqse552ubd" path="res://prefabs/federal_police_car.tscn" id="28_8uyt1"]
-[ext_resource type="PackedScene" uid="uid://cb4v4tski4aq2" path="res://prefabs/civil_police_car.tscn" id="29_6qhvh"]
-[ext_resource type="PackedScene" uid="uid://fp2fluhv4tkl" path="res://prefabs/interface.tscn" id="35_prkmg"]
-[ext_resource type="PackedScene" uid="uid://c738o3mpr3is3" path="res://prefabs/goal.tscn" id="38_rnpiw"]
+[ext_resource type="Script" uid="uid://rrcccix26aeh" path="res://scripts/world.gd" id="1_fks85"]
+[ext_resource type="Texture2D" uid="uid://cxbyvg17wg0j5" path="res://n_assets/n_scenes/bgs/world6/5 - Sky_color.png" id="2_ntjfu"]
+[ext_resource type="Texture2D" uid="uid://crs55phve2adm" path="res://n_assets/n_scenes/bgs/4 - Cloud_cover_2.png" id="3_p8ibd"]
+[ext_resource type="Shader" uid="uid://dwdjnyyfl1r1l" path="res://shaders/clouds_movements.gdshader" id="4_o1yrl"]
+[ext_resource type="Texture2D" uid="uid://dl5rtqib44s32" path="res://n_assets/n_scenes/bgs/world6/3 - Cloud_cover_1.png" id="5_61pg0"]
+[ext_resource type="Texture2D" uid="uid://c3v7w2qq463ke" path="res://n_assets/n_scenes/bgs/world6/2 - City.png" id="6_6tv6x"]
+[ext_resource type="Texture2D" uid="uid://dfkhdcqi18wim" path="res://n_assets/n_scenes/bgs/world6/1 - Foreground_scenary06.png" id="7_wk10b"]
+[ext_resource type="Texture2D" uid="uid://bjklygknvd3si" path="res://n_assets/n_scenes/bgs/world4/1 - Foreground_scenery_cave4V3.png" id="8_uqxdd"]
+[ext_resource type="Texture2D" uid="uid://d21donffcxnko" path="res://n_assets/n_scenes/elements/fire_large.png" id="9_amluf"]
+[ext_resource type="Texture2D" uid="uid://dw0kfi0o178gu" path="res://n_assets/n_scenes/elements/fire_tiny.png" id="10_pogwi"]
+[ext_resource type="Texture2D" uid="uid://djk6q7de5q1px" path="res://n_assets/n_scenes/elements/elements01_w06.png" id="11_vl2pp"]
+[ext_resource type="Texture2D" uid="uid://byr64nh53asih" path="res://n_assets/n_scenes/elements/vegetacao_city_w06.png" id="12_j3fef"]
+[ext_resource type="Texture2D" uid="uid://440t4iq3ltrv" path="res://n_assets/n_scenes/elements/buildings_w6.png" id="13_wld1c"]
+[ext_resource type="Texture2D" uid="uid://cuvyqe5j7v5gr" path="res://n_assets/n_scenes/elements/cleanWater01.png" id="14_0it1p"]
+[ext_resource type="Texture2D" uid="uid://cp4pegy0t2p4c" path="res://n_assets/n_scenes/elements/contamineted_mercury_water.png" id="15_4ffnb"]
+[ext_resource type="Texture2D" uid="uid://t0qsmnsbu6wy" path="res://n_assets/n_scenes/elements/dirty_water_anime.png" id="16_aqqs3"]
+[ext_resource type="PackedScene" uid="uid://ba3xbkuiqhtyn" path="res://actors/araci.tscn" id="17_xnx4j"]
+[ext_resource type="PackedScene" uid="uid://fp2fluhv4tkl" path="res://prefabs/interface.tscn" id="18_rlpi5"]
+[ext_resource type="PackedScene" uid="uid://c738o3mpr3is3" path="res://prefabs/goal.tscn" id="19_q3p6c"]
+[ext_resource type="PackedScene" uid="uid://blqnv2ldi7eh6" path="res://prefabs/tie_traped.tscn" id="20_hdnjw"]
+[ext_resource type="PackedScene" uid="uid://blybxtxruhhih" path="res://prefabs/wild_boar_traped.tscn" id="21_563mf"]
+[ext_resource type="PackedScene" uid="uid://bdhqrgqgwpjpy" path="res://prefabs/jaguar_traped.tscn" id="22_fbn44"]
+[ext_resource type="PackedScene" uid="uid://ck7g1uishorpa" path="res://prefabs/fox_traped.tscn" id="23_5occh"]
+[ext_resource type="PackedScene" uid="uid://7wg1hampnlwy" path="res://prefabs/machine_cargo_truck.tscn" id="24_563mf"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6qhvh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rwgp"]
-shader = ExtResource("4_xih0p")
+shader = ExtResource("4_o1yrl")
 shader_parameter/move_speed = 0.02
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0my74"]
@@ -48,7 +43,7 @@ tile_data = PackedInt32Array(0, 851973, 15, 65536, 851973, 16, 131072, 851973, 1
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7qssf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6qqlq"]
-texture = ExtResource("9_mhxjd")
+texture = ExtResource("9_amluf")
 0:0/animation_columns = 4
 0:0/animation_mode = 1
 0:0/animation_frame_0/duration = 1.0
@@ -64,7 +59,7 @@ texture = ExtResource("9_mhxjd")
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdmrd"]
-texture = ExtResource("10_rna6k")
+texture = ExtResource("10_pogwi")
 0:0/animation_columns = 2
 0:0/animation_mode = 1
 0:0/animation_frame_0/duration = 1.0
@@ -77,7 +72,7 @@ texture = ExtResource("10_rna6k")
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cqt52"]
-texture = ExtResource("11_34oul")
+texture = ExtResource("11_vl2pp")
 5:1/0 = 0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0 = 0
@@ -348,7 +343,7 @@ pattern_1 = SubResource("TileMapPattern_apb4h")
 pattern_2 = SubResource("TileMapPattern_uug5j")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_apb4h"]
-texture = ExtResource("12_n0p51")
+texture = ExtResource("12_j3fef")
 32:1/0 = 0
 33:1/0 = 0
 34:1/0 = 0
@@ -1197,7 +1192,7 @@ texture = ExtResource("12_n0p51")
 sources/0 = SubResource("TileSetAtlasSource_apb4h")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5lodh"]
-texture = ExtResource("13_1k0ci")
+texture = ExtResource("13_wld1c")
 9:2/0 = 0
 10:2/0 = 0
 11:2/0 = 0
@@ -3038,7 +3033,7 @@ texture = ExtResource("13_1k0ci")
 sources/3 = SubResource("TileSetAtlasSource_5lodh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lqgom"]
-texture = ExtResource("14_0ut8w")
+texture = ExtResource("14_0it1p")
 0:0/animation_columns = 2
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
@@ -3046,7 +3041,7 @@ texture = ExtResource("14_0ut8w")
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcg0y"]
-texture = ExtResource("15_q8fsn")
+texture = ExtResource("15_4ffnb")
 0:0/animation_columns = 2
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
@@ -3055,7 +3050,7 @@ texture = ExtResource("15_q8fsn")
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyqtd"]
-texture = ExtResource("16_j75wn")
+texture = ExtResource("16_aqqs3")
 0:0/animation_columns = 2
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
@@ -3067,368 +3062,10 @@ sources/0 = SubResource("TileSetAtlasSource_lqgom")
 sources/2 = SubResource("TileSetAtlasSource_qyqtd")
 sources/1 = SubResource("TileSetAtlasSource_mcg0y")
 
-[sub_resource type="Animation" id="Animation_8uyt1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Anna:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(556, 203)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Anna:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Agenor:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(600, 211)]
-}
-
-[sub_resource type="Animation" id="Animation_bata5"]
-resource_name = "report"
-length = 40.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Anna:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(556, 203), Vector2(316, 203)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Anna:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.033333335),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2(1, -1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Agenor:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(600, 211), Vector2(339, 211)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Anna/anime")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 6.0666666),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"idle", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Agenor/anime")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.06666667, 7, 39.966667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"film", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"idle", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Anna")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(6.5, 14.533334, 19.8, 30.933332),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"values": [{
-"args": ["Olá, Araci! Quero, primeiro te agradecer.", 8.0],
-"method": &"say"
-}, {
-"args": ["Sei que você impediu que os bandidos me matassem!", 5.0],
-"method": &"say"
-}, {
-"args": ["Você conseguiu as evidências?", 3.0],
-"method": &"say"
-}, {
-"args": ["Sim. Irei ajudar e farei o que for preciso!", 5.0],
-"method": &"say"
-}]
-}
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../Araci")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(22.8, 36.5, 40),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": ["Consegui! Foi uma longa jornada, mas sobrevivi e quero ir até o fim com as denúncias. Preciso de sua ajuda!", 8.0],
-"method": &"say"
-}, {
-"args": ["Obrigado!", 2.0],
-"method": &"say"
-}, {
-"args": [],
-"method": &"release_player"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qhvh"]
-_data = {
-&"RESET": SubResource("Animation_8uyt1"),
-&"report": SubResource("Animation_bata5")
-}
-
-[sub_resource type="Animation" id="Animation_dsjnt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("agent_Santos:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(831, 206)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("agent_Tommy:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(968, 206)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("dt_boss:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(900, 206)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("dt_boss:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, -1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("agent_Tommy:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, -1)]
-}
-
-[sub_resource type="Animation" id="Animation_6qhvh"]
-resource_name = "arrest"
-length = 40.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("agent_Santos:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2.5, 20),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(831, 206), Vector2(863, 206), Vector2(947, 203), Vector2(1376, 203)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("agent_Tommy:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(968, 206), Vector2(1428, 206)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("dt_boss:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.33333334, 2.5, 20),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(900, 206), Vector2(1007, 206), Vector2(1467, 206)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("agent_Santos/anime")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.0333, 20),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"idle", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("dt_boss:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.03333336),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2(1, 1)]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("dt_boss/anime")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.03333336, 20),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"idle", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("agent_Tommy:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(2.5),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, -1)]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("agent_Tommy/anime")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(2.5, 20),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"idle", 1.0, false],
-"method": &"play"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dsjnt"]
-_data = {
-&"RESET": SubResource("Animation_dsjnt"),
-&"arrest": SubResource("Animation_6qhvh")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvnsv"]
-size = Vector2(247, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdb0o"]
-size = Vector2(247, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bata5"]
-size = Vector2(300, 12)
-
 [node name="World-07" type="Node2D"]
 editor_description = "Cena com animação final"
 position = Vector2(134, 135)
-script = ExtResource("1_sejcc")
+script = ExtResource("1_fks85")
 stage_number = 6
 
 [node name="fundoBranco" type="TextureRect" parent="."]
@@ -3450,7 +3087,7 @@ repeat_size = Vector2(700, 0)
 texture_repeat = 2
 position = Vector2(159.00003, -338.21875)
 scale = Vector2(701, 1129.5625)
-texture = ExtResource("2_s0drr")
+texture = ExtResource("2_ntjfu")
 region_enabled = true
 region_rect = Rect2(0, 0, 1, 1)
 
@@ -3463,7 +3100,7 @@ repeat_size = Vector2(700, 0)
 texture_repeat = 2
 position = Vector2(153.00006, -54.41999)
 scale = Vector2(2.4305556, 2.2459617)
-texture = ExtResource("3_jlhxg")
+texture = ExtResource("3_p8ibd")
 region_enabled = true
 region_rect = Rect2(0, 0, 288, 208)
 
@@ -3477,21 +3114,21 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_8rwgp")
 position = Vector2(164.00002, -105.00002)
 scale = Vector2(2.4652777, 2.2692308)
-texture = ExtResource("5_s5djv")
+texture = ExtResource("5_61pg0")
 
 [node name="03_top_clouds2" type="Sprite2D" parent="Paralax2D/BG_3_top_clouds"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_8rwgp")
 position = Vector2(164.00002, -382.99997)
 scale = Vector2(2.4652777, 2.2692308)
-texture = ExtResource("5_s5djv")
+texture = ExtResource("5_61pg0")
 
 [node name="03_top_clouds3" type="Sprite2D" parent="Paralax2D/BG_3_top_clouds"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_8rwgp")
 position = Vector2(162.00002, -693.99994)
 scale = Vector2(2.4652777, 2.2692308)
-texture = ExtResource("5_s5djv")
+texture = ExtResource("5_61pg0")
 
 [node name="BG_2_montains" type="Parallax2D" parent="Paralax2D"]
 texture_repeat = 2
@@ -3502,7 +3139,7 @@ repeat_size = Vector2(700, 0)
 texture_repeat = 2
 position = Vector2(167.99997, -96.500015)
 scale = Vector2(2.4375, 3.0432694)
-texture = ExtResource("6_x1jju")
+texture = ExtResource("6_6tv6x")
 
 [node name="BG_1_forest" type="Parallax2D" parent="Paralax2D"]
 texture_repeat = 2
@@ -3514,7 +3151,7 @@ texture_filter = 1
 texture_repeat = 2
 position = Vector2(174.75002, 60.00001)
 scale = Vector2(2.4505901, 2.3365386)
-texture = ExtResource("7_cousx")
+texture = ExtResource("7_wk10b")
 
 [node name="caverna" type="Sprite2D" parent="Paralax2D/BG_1_forest"]
 visible = false
@@ -3522,7 +3159,7 @@ texture_filter = 1
 texture_repeat = 2
 position = Vector2(178.00002, 545)
 scale = Vector2(2.4505901, 2.3365386)
-texture = ExtResource("8_5s8e7")
+texture = ExtResource("8_uqxdd")
 
 [node name="level" type="TileMap" parent="."]
 position = Vector2(11, 36)
@@ -3564,8 +3201,8 @@ z_index = 300
 position = Vector2(3423.352, -128)
 tile_set = SubResource("TileSet_av01a")
 
-[node name="Araci" parent="." instance=ExtResource("20_sllfr")]
-position = Vector2(57, 181)
+[node name="Araci" parent="." instance=ExtResource("17_xnx4j")]
+position = Vector2(10, 164)
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"
@@ -3578,7 +3215,7 @@ limit_left = -50
 limit_smoothed = true
 editor_draw_limits = true
 
-[node name="interface" parent="." instance=ExtResource("35_prkmg")]
+[node name="interface" parent="." instance=ExtResource("18_rlpi5")]
 offset_left = -398.0
 offset_top = 110.0
 offset_right = -398.0
@@ -3587,104 +3224,35 @@ offset_bottom = 110.0
 [node name="messages" type="Node2D" parent="."]
 visible = false
 
-[node name="goal" parent="." instance=ExtResource("38_rnpiw")]
+[node name="goal" parent="." instance=ExtResource("19_q3p6c")]
 position = Vector2(2646, 195)
 next_level = "res://prefabs/cutscene_final_card_sequence.tscn"
 
 [node name="actors" type="Node2D" parent="."]
 
-[node name="Anna" parent="actors" instance=ExtResource("21_flaou")]
-position = Vector2(556, 203)
-scale = Vector2(-1, 1)
+[node name="tie_traped" parent="." instance=ExtResource("20_hdnjw")]
+position = Vector2(343, 216)
+score = 4200
 
-[node name="Agenor" parent="actors" instance=ExtResource("22_qncpy")]
-z_index = 350
-position = Vector2(600, 211)
-rotation = 3.1415927
-scale = Vector2(1, -1)
+[node name="wild_boar_traped" parent="." instance=ExtResource("21_563mf")]
+position = Vector2(526, 221)
+score = 650
 
-[node name="anime" parent="actors/Agenor" index="2"]
-autoplay = ""
+[node name="jaguar_traped" parent="." instance=ExtResource("22_fbn44")]
+position = Vector2(694, 224)
+score = 1300
 
-[node name="agent_Santos" parent="actors" instance=ExtResource("23_jnjlc")]
-position = Vector2(831, 206)
+[node name="fox_traped" parent="." instance=ExtResource("23_5occh")]
+position = Vector2(835, 221)
+score = 1000
 
-[node name="agent_Tommy" parent="actors" instance=ExtResource("24_vvnsv")]
-position = Vector2(968, 206)
-rotation = 3.1415927
-scale = Vector2(-1, -1)
+[node name="tie_traped2" parent="." instance=ExtResource("20_hdnjw")]
+position = Vector2(949, 219)
 
-[node name="dt_boss" parent="actors" instance=ExtResource("25_vvnsv")]
-position = Vector2(900, 206)
-rotation = 3.1415927
-scale = Vector2(-1, -1)
+[node name="machine_cargo_truck" parent="." groups=["boss_squad"] instance=ExtResource("24_563mf")]
+position = Vector2(1317, 175)
 
-[node name="anime" parent="actors/dt_boss" index="0"]
-frame = 0
-frame_progress = 0.0
+[node name="anime" parent="machine_cargo_truck/truck" index="2"]
+position = Vector2(0.99893564, -15)
 
-[node name="enemy_hitbox" parent="actors/dt_boss" index="4"]
-monitoring = false
-monitorable = false
-
-[node name="enemy_head" parent="actors/dt_boss" index="5"]
-monitoring = false
-monitorable = false
-
-[node name="life_bar" parent="actors/dt_boss" index="9"]
-visible = false
-
-[node name="speech_bubble" parent="actors/dt_boss" index="10"]
-visible = false
-
-[node name="animator_report" type="AnimationPlayer" parent="actors"]
-libraries = {
-&"": SubResource("AnimationLibrary_6qhvh")
-}
-
-[node name="animator_police" type="AnimationPlayer" parent="actors"]
-libraries = {
-&"": SubResource("AnimationLibrary_dsjnt")
-}
-
-[node name="trigger_on_report" type="Area2D" parent="actors"]
-position = Vector2(348, 229)
-script = ExtResource("26_tdb0o")
-
-[node name="report_area" type="CollisionShape2D" parent="actors/trigger_on_report"]
-shape = SubResource("RectangleShape2D_vvnsv")
-
-[node name="trigger_on_police" type="Area2D" parent="actors"]
-editor_description = "Área que mostra a polícia levando o criminoso."
-position = Vector2(756, 235)
-script = ExtResource("26_bata5")
-
-[node name="report_area" type="CollisionShape2D" parent="actors/trigger_on_police"]
-shape = SubResource("RectangleShape2D_tdb0o")
-
-[node name="trigger_no_jump_and_walk" type="Area2D" parent="actors"]
-editor_description = "Gatilho para desligar o pulo e manter Araci andando em vez de correndo."
-script = ExtResource("27_bata5")
-
-[node name="walk_area" type="CollisionShape2D" parent="actors/trigger_no_jump_and_walk"]
-position = Vector2(25, 228)
-shape = SubResource("RectangleShape2D_bata5")
-
-[node name="civil_police_car" parent="." instance=ExtResource("29_6qhvh")]
-position = Vector2(1619, 199)
-
-[node name="federal_police_car" parent="." instance=ExtResource("28_8uyt1")]
-position = Vector2(1801, 199)
-
-[node name="federal_police_car2" parent="." instance=ExtResource("28_8uyt1")]
-position = Vector2(2132, 201)
-
-[connection signal="body_entered" from="actors/trigger_on_report" to="actors/trigger_on_report" method="_on_body_entered"]
-[connection signal="body_entered" from="actors/trigger_on_police" to="actors/trigger_on_police" method="_on_body_entered"]
-[connection signal="body_entered" from="actors/trigger_no_jump_and_walk" to="actors/trigger_no_jump_and_walk" method="_on_body_entered"]
-
-[editable path="actors/Anna"]
-[editable path="actors/Agenor"]
-[editable path="actors/agent_Santos"]
-[editable path="actors/agent_Tommy"]
-[editable path="actors/dt_boss"]
+[editable path="machine_cargo_truck"]
