@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cycbgrq2loeu8"]
+
+[ext_resource type="Texture2D" uid="uid://dk037ojpbp1nb" path="res://n_assets/n_scenes/elements/machine.png" id="2_fmxnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(220, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xec5s"]
+atlas = ExtResource("2_fmxnq")
+region = Rect2(530, 0, 265, 183)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy5cv"]
+atlas = ExtResource("2_fmxnq")
+region = Rect2(265, 0, 265, 183)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8diip"]
+atlas = ExtResource("2_fmxnq")
+region = Rect2(0, 0, 265, 183)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xec5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy5cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8diip")
+}],
+"loop": true,
+"name": &"action",
+"speed": 2.0
+}]
+
+[node name="machine" type="Node2D"]
+
+[node name="machine_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="machine_area"]
+position = Vector2(2, 17.5)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+autoplay = "action"
+frame_progress = 0.82546407

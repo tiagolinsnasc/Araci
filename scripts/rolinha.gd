@@ -1,0 +1,16 @@
+extends Node2D
+
+@onready var animator: AnimationPlayer = $animator
+@onready var anime: AnimatedSprite2D = $rolinha/anime
+@onready var wings_sound: AudioStreamPlayer2D = $wings_sound
+
+func _on_on_fly_body_entered(body: Node2D) -> void:
+	if Globals.is_player(body):
+		anime.play("fly")
+		animator.play("fly_out")
+		wings_sound.play()
+
+
+func _on_animator_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fly_out":
+		queue_free()

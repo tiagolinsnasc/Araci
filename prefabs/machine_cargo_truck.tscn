@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://7wg1hampnlwy"]
+
+[ext_resource type="Script" uid="uid://ddla3sktntkjq" path="res://scripts/truck_boss.gd" id="1_am6nw"]
+[ext_resource type="Texture2D" uid="uid://cs3gjsdr85psv" path="res://n_assets/n_scenes/elements/cargo_truck.png" id="1_xe568"]
+[ext_resource type="AudioStream" uid="uid://bvo37b58lhp6r" path="res://sounds/machines/truck_move.ogg" id="3_jecii"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(270, 77.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am6nw"]
+size = Vector2(326, 633)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am6nw"]
+atlas = ExtResource("1_xe568")
+region = Rect2(0, 0, 300, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtc62"]
+atlas = ExtResource("1_xe568")
+region = Rect2(300, 0, 300, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jecii"]
+atlas = ExtResource("1_xe568")
+region = Rect2(0, 0, 300, 170)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am6nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtc62")
+}],
+"loop": true,
+"name": &"move",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jecii")
+}],
+"loop": false,
+"name": &"stop",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xe568"]
+size = Vector2(538.5, 439)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtc62"]
+size = Vector2(277, 66)
+
+[node name="machine_cargo_truck" type="Node2D"]
+
+[node name="truck" type="CharacterBody2D" parent="."]
+position = Vector2(0, -81)
+collision_layer = 65536
+collision_mask = 273
+script = ExtResource("1_am6nw")
+
+[node name="collision" type="CollisionShape2D" parent="truck"]
+position = Vector2(0, 50.25)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="body_cabin" type="CollisionShape2D" parent="truck"]
+position = Vector2(190, -264.5)
+shape = SubResource("RectangleShape2D_am6nw")
+
+[node name="anime" type="AnimatedSprite2D" parent="truck"]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"stop"
+
+[node name="move_sound" type="AudioStreamPlayer2D" parent="truck"]
+stream = ExtResource("3_jecii")
+volume_db = 12.292
+autoplay = true
+max_distance = 627.0
+parameters/looping = true
+
+[node name="detect_player" type="Area2D" parent="truck"]
+
+[node name="collision" type="CollisionShape2D" parent="truck/detect_player"]
+position = Vector2(-238.75, -167)
+shape = SubResource("RectangleShape2D_xe568")
+debug_color = Color(0.59404373, 0.52404267, 0.4355465, 0.41960785)
+
+[node name="truck_stop" type="Area2D" parent="."]
+position = Vector2(2246, 0)
+collision_layer = 256
+collision_mask = 65536
+
+[node name="area_truck" type="CollisionShape2D" parent="truck_stop"]
+position = Vector2(128.5, 2)
+shape = SubResource("RectangleShape2D_dtc62")
+debug_color = Color(0.74509805, 1, 0, 0.41960785)
+
+[connection signal="body_entered" from="truck/detect_player" to="truck" method="_on_detect_player_body_entered"]
+[connection signal="body_exited" from="truck/detect_player" to="truck" method="_on_detect_player_body_exited"]
+[connection signal="body_entered" from="truck_stop" to="truck" method="_on_truck_stop_body_entered"]

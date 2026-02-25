@@ -1,0 +1,17 @@
+extends Node2D
+
+var active_trap := true
+@onready var trap_sound: AudioStreamPlayer2D = $trap_sound
+
+func _on_trap_area_area_entered(area: Area2D) -> void:
+	#print("Contato com a armadilha!", area.name)
+	if Globals.is_player_hurtbox(area) and active_trap: #hutbox é o nome do nó que recebe danos em Araci
+		#print("Araci na armadilha!")
+		$anime.play("action")
+		active_trap = false
+		trap_sound.play() #Toca o som do desarme
+		var player = area.get_parent()  # sobe um nível para pegar o CharacterBody2D
+		if player.has_method("take_damage"):
+			var direction_jump:float = sign(player.global_position.x - area.global_position.x)
+			var knockback:Vector2 = Vector2(600 * direction_jump, -350)
+			player.take_damage(knockback)

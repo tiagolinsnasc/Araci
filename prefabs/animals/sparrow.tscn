@@ -1,0 +1,153 @@
+[gd_scene load_steps=15 format=3 uid="uid://frp3ffhtt8li"]
+
+[ext_resource type="Script" uid="uid://dkr1q4mfbn2e7" path="res://scripts/enemies/animal_enemy_sparrow.gd" id="1_cj5fn"]
+[ext_resource type="Texture2D" uid="uid://slg1v0wtpj51" path="res://n_assets/n_scenes/elements/pardal.png" id="2_gkyy2"]
+[ext_resource type="AudioStream" uid="uid://crd1d0trtve61" path="res://sounds/animals/sparrow_song.ogg" id="3_gkyy2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tye7"]
+atlas = ExtResource("2_gkyy2")
+region = Rect2(0, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a7pp"]
+atlas = ExtResource("2_gkyy2")
+region = Rect2(34, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhir6"]
+atlas = ExtResource("2_gkyy2")
+region = Rect2(17, 0, 17, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irtl7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tye7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a7pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhir6")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y10go"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxv7g"]
+size = Vector2(18, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj5fn"]
+size = Vector2(18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlw78"]
+size = Vector2(29.5, 20.5)
+
+[sub_resource type="Animation" id="Animation_172ag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sparrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h7w04"]
+resource_name = "flying"
+length = 2.0
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sparrow:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7, -104)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ims68"]
+_data = {
+&"RESET": SubResource("Animation_172ag"),
+&"flying": SubResource("Animation_h7w04")
+}
+
+[node name="sparrow" type="Node2D"]
+
+[node name="sparrow" type="CharacterBody2D" parent="." groups=["animals", "enemies"]]
+editor_description = "Lembrar que aqui, o AnimatedSprite2D deve ter o mesmo nome utilizado em hitbox (no script), assim como o nome da animação deve ser igual ao que foi chamado no script de hitbox. Speed só funciona para seres terrestres, para aumentar a velocidade alterar o spped scale do animator"
+collision_layer = 16
+collision_mask = 258
+script = ExtResource("1_cj5fn")
+
+[node name="anime" type="AnimatedSprite2D" parent="sparrow"]
+sprite_frames = SubResource("SpriteFrames_irtl7")
+animation = &"flying"
+autoplay = "flying"
+frame = 2
+frame_progress = 0.90155524
+
+[node name="body" type="CollisionShape2D" parent="sparrow"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_y10go")
+
+[node name="enemy_head" type="Area2D" parent="sparrow"]
+editor_description = "A mascara do hitbox está disabilitada (não ser morto pelo player"
+collision_layer = 64
+collision_mask = 4
+
+[node name="collision" type="CollisionShape2D" parent="sparrow/enemy_head"]
+position = Vector2(0, -4.75)
+shape = SubResource("RectangleShape2D_kxv7g")
+debug_color = Color(0.9394873, 1.5209317e-05, 0.6213183, 0.41960785)
+
+[node name="enemy_hitbox" type="Area2D" parent="sparrow"]
+collision_layer = 32
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="sparrow/enemy_hitbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_cj5fn")
+debug_color = Color(0.93344843, 0.15352938, 0.523355, 0.41960785)
+
+[node name="aux_area" type="Area2D" parent="sparrow"]
+editor_description = "Área utilizada para que o player detecte os animais, consigo mi"
+collision_layer = 32768
+collision_mask = 2
+
+[node name="colision" type="CollisionShape2D" parent="sparrow/aux_area"]
+position = Vector2(0.25, 3.25)
+shape = SubResource("RectangleShape2D_hlw78")
+debug_color = Color(0.784106, 0.55720806, 3.85046e-07, 0.41960785)
+
+[node name="spawn_enemy" type="Marker2D" parent="."]
+
+[node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ims68")
+}
+autoplay = "flying"
+speed_scale = 0.3
+
+[node name="sparrow_song" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gkyy2")
+autoplay = true
+max_distance = 500.0
+parameters/looping = true

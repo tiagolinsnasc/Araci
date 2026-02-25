@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmfwyr3oinn3y"]
+
+[ext_resource type="Script" uid="uid://ccbvk334spmod" path="res://scripts/mobile_controls.gd" id="1_d1ui5"]
+[ext_resource type="Texture2D" uid="uid://bu5c64onqguj1" path="res://n_assets/n_scenes/elements/mobile_but_jump.png" id="4_hb1ed"]
+[ext_resource type="Texture2D" uid="uid://dsaskkaqa6h0e" path="res://n_assets/n_scenes/elements/mobile_but_esc.png" id="10_oyycr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21dcj"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydqyc"]
+size = Vector2(30, 30)
+
+[node name="mobile_controls_single" type="CanvasLayer"]
+script = ExtResource("1_d1ui5")
+
+[node name="Control" type="Control" parent="."]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_top = 328.0
+offset_right = 642.0
+offset_bottom = 357.0
+
+[node name="jump_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
+position = Vector2(600, 2)
+texture_normal = ExtResource("4_hb1ed")
+shape = SubResource("RectangleShape2D_21dcj")
+action = "ui_accept"
+
+[node name="esc_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
+position = Vector2(559, -1)
+texture_normal = ExtResource("10_oyycr")
+shape = SubResource("RectangleShape2D_ydqyc")
+action = "ui_cancel"

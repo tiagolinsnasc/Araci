@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://coarmqx54kxug"]
+
+[ext_resource type="Script" uid="uid://qit8h2sfd5rs" path="res://scripts/trigger_off_sound.gd" id="1_t48bg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrbbq"]
+size = Vector2(99, 70)
+
+[node name="trigger_off_sound" type="Area2D"]
+editor_description = "Liga ou desliga o som ambiente. Útil em área de cavernas"
+collision_layer = 2048
+script = ExtResource("1_t48bg")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jrbbq")
+debug_color = Color(0.03714967, 0.62537354, 0.51521254, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

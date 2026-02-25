@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://delwjpgy8r48g"]
+
+[ext_resource type="Texture2D" uid="uid://4mtpxx214ydl" path="res://n_assets/n_scenes/elements/machine_dredge.png" id="2_3t40g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vafyd"]
+size = Vector2(289, 158)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t40g"]
+atlas = ExtResource("2_3t40g")
+region = Rect2(0, 0, 320, 205)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g063o"]
+atlas = ExtResource("2_3t40g")
+region = Rect2(320, 0, 320, 205)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsfuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3t40g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g063o")
+}],
+"loop": true,
+"name": &"action",
+"speed": 2.0
+}]
+
+[node name="machine_dredge" type="Node2D"]
+
+[node name="machine_area" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="machine_area"]
+position = Vector2(7.5, 15)
+shape = SubResource("RectangleShape2D_vafyd")
+debug_color = Color(0.35024676, 0.4889043, 0.98589724, 0.41960785)
+
+[node name="anime" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jsfuh")
+animation = &"action"
+autoplay = "action"
+frame_progress = 0.79584306
