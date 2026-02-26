@@ -82,7 +82,6 @@ texture_filter = 1
 position = Vector2(518, 9)
 texture_normal = ExtResource("5_vdbwn")
 shape = SubResource("RectangleShape2D_203w8")
-action = "call_superjump"
 script = ExtResource("6_ad2tt")
 
 [node name="teleport_but" type="TouchScreenButton" parent="Control/HBoxContainer"]

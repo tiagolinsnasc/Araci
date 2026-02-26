@@ -16,6 +16,7 @@ func _ready():
 	Globals.update_super_jump_visibility()
 	Globals.update_teleport_visibility()
 	Globals.ambient_player = ambient_sound
+	EventBus.emit_signal("update_mobile_hud")
 	
 #Icones variáveis do estado dos poweups
 var pw_sj_icon_l1 = preload("res://n_assets/n_scenes/elements/superjump_icon_l1.png")
@@ -124,11 +125,15 @@ func show_notification(text: String, image: Texture2D = null, duration := 2.0):
 @onready var super_jump = $container/powerups_container/powerupIcon2
 @onready var teleport = $container/powerups_container/powerupIcon3
 
+
 func add_powerup(texture: Texture2D, key: String):
 	var icon_scene = preload("res://prefabs/powerup_icon.tscn")
 	var icon_instance = icon_scene.instantiate()
 	icon_instance.setup(texture, key)
 	powerups_box.add_child(icon_instance)
+	EventBus.emit_signal("update_mobile_hud")
+	print("Adicionou powerup")
+
 
 ##Permite deixar o icone desabilitado
 func update_pet_icon(available: bool):

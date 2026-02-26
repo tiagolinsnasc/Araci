@@ -31,13 +31,13 @@ offset_right = 642.0
 offset_bottom = 357.0
 
 [node name="jump_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(600, 2)
+position = Vector2(601, -5)
 texture_normal = ExtResource("4_hb1ed")
 shape = SubResource("RectangleShape2D_21dcj")
 action = "ui_accept"
 
 [node name="esc_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(559, -1)
+position = Vector2(559, 1)
 texture_normal = ExtResource("10_oyycr")
 shape = SubResource("RectangleShape2D_ydqyc")
 action = "ui_cancel"

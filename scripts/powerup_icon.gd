@@ -11,6 +11,7 @@ func _ready():
 		icon.texture = icon_texture
 	key_label.text = key_text
 
+	
 # Atualiza cor/borda conforme disponibilidade
 func set_available(available: bool):
 	print("set_attack_available chamado:", available)

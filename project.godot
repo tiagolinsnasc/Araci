@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogManager="*res://prefabs/dialog_manager.tscn"
 Globals="*res://scripts/singletons/globals.gd"
+EventBus="*res://scripts/singletons/event_bus.gd"
 
 [display]
 

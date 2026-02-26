@@ -1,13 +1,9 @@
 extends TouchScreenButton
 
-
 func _on_pressed() -> void:
-	# Simula os dois inputs juntos
-	Input.action_press("ui_accept")          # pulo
-	Input.action_press("call_superjump")     # superpulo
-	
+	if Globals.araci:
+		Globals.araci.do_superjump()
 
 func _on_released() -> void:
-	# Simula os dois inputs juntos
-	Input.action_press("ui_accept")          # pulo
-	Input.action_press("call_superjump")     # superpulo
+	if Globals.araci:
+		Globals.araci.do_superjump()

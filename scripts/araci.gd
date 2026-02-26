@@ -249,20 +249,42 @@ func _update_timers(delta: float, on_floor: bool) -> void:
 	else:
 		jump_buffer -= delta
 
+func do_jump():
+	if can_jump:
+		velocity.y = jump_velocity
+		estado = "jump"
+		jump_buffer = 0.0
+		coyote_timer = 0.0
+
+func do_superjump():
+	if can_jump and is_on_floor() and Globals.flag_pw_superjump:
+		var super_height = jump_height * superjump_factor * Globals.superjump_adiction
+		var super_velocity = -sqrt(2.0 * gravity * super_height)
+		velocity.y = super_velocity
+		estado = "jump"
+		jump_buffer = 0.0
+		coyote_timer = 0.0
+		
+#func _handle_jump() -> void:
+	#if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
+		#if Input.is_action_pressed("call_superjump") and Globals.flag_pw_superjump and can_jump:
+			#var super_height = jump_height * superjump_factor * Globals.superjump_adiction
+			#var super_velocity = -sqrt(2.0 * gravity * super_height)
+			#velocity.y = super_velocity
+		#elif can_jump:
+			#velocity.y = jump_velocity
+#
+		#jump_buffer = 0.0
+		#coyote_timer = 0.0
+		#estado = "jump"
+		##time_jump = 0.1
 
 func _handle_jump() -> void:
 	if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
-		if Input.is_action_pressed("call_superjump") and Globals.flag_pw_superjump and can_jump:
-			var super_height = jump_height * superjump_factor * Globals.superjump_adiction
-			var super_velocity = -sqrt(2.0 * gravity * super_height)
-			velocity.y = super_velocity
-		elif can_jump:
-			velocity.y = jump_velocity
-
-		jump_buffer = 0.0
-		coyote_timer = 0.0
-		estado = "jump"
-		#time_jump = 0.1
+		if Input.is_action_pressed("call_superjump"):
+			do_superjump()
+		else:
+			do_jump()
 
 func _apply_gravity(delta: float) -> void:
 	if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):

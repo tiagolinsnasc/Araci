@@ -17,16 +17,17 @@ extends Node
 #Ajuaste no visual do cenário
 #Adição de placas para indicar minas/cavernas
 #Adição de opção de voltar à tela inicial do jogo (ainda sem salvamento)
+#Implementação dos controle mobiles [ok]
 
 #Equivalente a evidência
 var coins := 0
 var score := 0
-var player_life := 99
+var player_life := 3
 var default_player_life := 3
 
 #Controle de powerups
-var flag_pw_feroz_enable = true
-var flag_pw_superjump = true
+var flag_pw_feroz_enable = false
+var flag_pw_superjump = false
 var flag_pw_teletransport = false
 
 #Variáveis de estatisticas
@@ -231,6 +232,7 @@ func show_side_mensage(mensage: String,image,time: float = 5.0):
 ##Ativa o poweup Feroz 
 func pw_feroz_enabled():
 	flag_pw_feroz_enable = true
+	EventBus.emit_signal("update_mobile_hud")
 	update_pet_visibility()
 
 ##Desativa o poweup Feroz 
@@ -245,6 +247,7 @@ func set_player(new_player: Node):
 		# Atualiza o pet para seguir o novo player
 		if is_instance_valid(pet):
 			pet.player = araci
+			
 
 ##Atualiza o estado do HUD com o valor na variável flag de Globals, deve chamar sempre que as variáveis flags do pet for alterada
 func update_pet_visibility():
