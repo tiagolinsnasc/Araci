@@ -88,6 +88,23 @@ var init_sj_l2 := 4850
 var init_tp_l1 := 6150
 var init_tp_l2 := 7150
 
+var pet_can_attack: bool = true
+var pet_attack_cooldown: float = 60.0
+
+signal pet_attack_ready
+
+func start_pet_cooldown():
+	pet_can_attack = false
+	update_pet_icon(false)
+	_run_cooldown()
+
+func _run_cooldown():
+	# Timer global, não depende do pet
+	await get_tree().create_timer(pet_attack_cooldown).timeout
+	pet_can_attack = true
+	update_pet_icon(true)
+	emit_signal("pet_attack_ready")
+	
 ##Adiciona a pontuação disponível às estatísticas (deve ser chamada na instanciação do elemento)
 func add_disponible_score_stat(score_added: int):
 	print("Score disponvel de ("+str(score_added)+") Total:" + str(stat_disponible_score))
@@ -239,6 +256,7 @@ func pw_feroz_enabled():
 func pw_feroz_disabled():
 	flag_pw_feroz_enable = false
 	update_pet_visibility()
+	EventBus.emit_signal("update_mobile_hud")
 
 ##Adiciona Araci como instância atual, associa ao Feroz automaticamente
 func set_player(new_player: Node):
@@ -261,11 +279,13 @@ func update_pet_visibility():
 func pw_superjump_enabled():
 	flag_pw_superjump = true
 	update_super_jump_visibility()
+	EventBus.emit_signal("update_mobile_hud")
 
 ##Desativa o poweup Superjump 
 func pw_superjump_disabled():
 	flag_pw_superjump = false
 	update_super_jump_visibility()
+	EventBus.emit_signal("update_mobile_hud")
 
 ##Verifica se o superpulo está disponível (se já foi habilitado para uso)
 func can_super_jump() -> bool: 
@@ -287,11 +307,13 @@ func can_teleport() -> bool:
 func pw_teleport_enabled():
 	flag_pw_teletransport = true
 	update_teleport_visibility()
+	EventBus.emit_signal("update_mobile_hud")
 
 ##Desativa o poweup Superjump 
 func pw_teleport_disabled():
 	flag_pw_teletransport = false
 	update_teleport_visibility()
+	EventBus.emit_signal("update_mobile_hud")
 
 ##Atualiza o estado do HUD com o valor na variável flag de Globals, deve chamar sempre que as variáveis flags do pet for alterada
 func update_teleport_visibility():

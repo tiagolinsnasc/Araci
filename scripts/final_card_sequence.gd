@@ -113,6 +113,7 @@ func _input(event):
 			current_index += 1
 			show_card(current_index)
 		else:
-			queue_free()
+			# Sai do jogo completamente
+			get_tree().quit()
 	elif event.is_action_pressed("ui_cancel"): # esc
-		queue_free()
+			get_tree().quit()

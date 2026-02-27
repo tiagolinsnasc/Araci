@@ -127,6 +127,17 @@ z_index = 301
 collision_layer = 8192
 collision_mask = 256
 script = ExtResource("1_hc8tf")
+follow_distance = null
+max_speed = null
+acceleration = null
+gravity = null
+stop_threshold = null
+attack_distance = null
+jump_force = null
+max_distance = null
+forward_offset_x = null
+ground_check_down_y = null
+obstacle_check_forward_x = null
 attack_cooldown = 20.0
 
 [node name="body" type="CollisionShape2D" parent="CharacterBody2D"]

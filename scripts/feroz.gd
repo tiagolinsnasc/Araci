@@ -26,7 +26,7 @@ extends CharacterBody2D
 
 # Variáveis para ajustar a espera entre os ataques
 @export var attack_cooldown: float = 60   # tempo em segundos
-var can_attack: bool = true
+#var can_attack: bool = true
 
 var ground_miss_frames: int = 0
 var current_target: Node = null
@@ -100,7 +100,7 @@ func _physics_process(delta: float):
 				velocity.y = jump_force
 
 	# --- Lógica de movimento ---
-	if current_target and is_instance_valid(current_target) and can_attack:
+	if current_target and is_instance_valid(current_target) and Globals.pet_can_attack:
 		#Rosna para atacar
 		growl()
 		# Persegue inimigo
@@ -146,7 +146,21 @@ func _physics_process(delta: float):
 
 	move_and_slide()
 
+#func _input(event):
+	#if event.is_action_pressed("call_feroz"):
+		#if Globals.flag_pw_feroz_enable:
+			#active = !active
+			#visible = active
+			#if active and is_instance_valid(player):
+				## Se estiver muito longe, teleporta para perto do player
+				#if global_position.distance_to(player.global_position) > max_distance:
+					#global_position = player.global_position + Vector2(-follow_distance, 0)
+			#else:
+				#current_target = null
+				#velocity = Vector2.ZERO
+				
 func _input(event):
+	# Ativar/desativar o pet
 	if event.is_action_pressed("call_feroz"):
 		if Globals.flag_pw_feroz_enable:
 			active = !active
@@ -159,10 +173,20 @@ func _input(event):
 				current_target = null
 				velocity = Vector2.ZERO
 
-	if event.is_action_pressed("feroz_companion_attack") and active and can_attack:
+	# Ataque do pet
+	if event.is_action_pressed("feroz_companion_attack") and active:
+		if Globals.pet_can_attack:
+			_set_target_for_attack()
+		else:
+			# Se ainda está em cooldown → latido após 1 segundo
+			await get_tree().create_timer(1.0).timeout
+			bark()
+
+
+	if event.is_action_pressed("feroz_companion_attack") and active and Globals.pet_can_attack:
 		_set_target_for_attack()
 	
-	if event.is_action_pressed("feroz_companion_attack") and active and !can_attack:
+	if event.is_action_pressed("feroz_companion_attack") and active and !Globals.pet_can_attack:
 		# Espera 2 segundos antes de executar o latido
 		await get_tree().create_timer(1.0).timeout
 		bark()
@@ -193,7 +217,7 @@ func _update_raycasts_direction():
 
 func _attack(target: Node):
 	print("Atacando:", target.name, "Classe:", target.get_class())
-	if not can_attack or not target.is_in_group("human_enemy"):
+	if not Globals.pet_can_attack or not target.is_in_group("human_enemy"):
 		return
 
 	anime.play("attack")
@@ -203,10 +227,11 @@ func _attack(target: Node):
 		print("Inimigo sem o método take_damage!")
 
 	velocity.x = 0
-
-	can_attack = false
-	Globals.update_pet_icon(false)
-	_start_attack_cooldown()
+	Globals.start_pet_cooldown()
+	#can_attack = false
+	#
+	#Globals.update_pet_icon(false)
+	#_start_attack_cooldown()
 
 
 func _sit_and_bark():
@@ -215,5 +240,5 @@ func _sit_and_bark():
 
 func _start_attack_cooldown():
 	await get_tree().create_timer(attack_cooldown).timeout
-	can_attack = true
+	Globals.pet_can_attack = true
 	Globals.update_pet_icon(true)

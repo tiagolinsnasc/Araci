@@ -3246,13 +3246,24 @@ position = Vector2(16982, 30)
 next_level = "res://levels/world_03.tscn"
 
 [node name="Araci" parent="." instance=ExtResource("19_6ki2q")]
-position = Vector2(-84, 129)
+position = Vector2(-31, 98)
 
 [node name="feroz" parent="." instance=ExtResource("31_wjrim")]
 position = Vector2(9421, 361)
 
 [node name="CharacterBody2D" parent="feroz" index="0" node_paths=PackedStringArray("player")]
 player = NodePath("../../Araci")
+follow_distance = 32.0
+max_speed = 200.0
+acceleration = 600.0
+gravity = 900.0
+stop_threshold = 50.0
+attack_distance = 350.0
+jump_force = -400.0
+max_distance = 400.0
+forward_offset_x = 16.0
+ground_check_down_y = 48.0
+obstacle_check_forward_x = 24.0
 
 [node name="araci_start_position" type="Marker2D" parent="."]
 editor_description = "Permite que o sistema use a localização do Mark2D para posicionar o Player no início do cenário, quando não tiver checkpointe obtido"

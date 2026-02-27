@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://du0jvhxaafuo"]
+[gd_scene load_steps=22 format=3 uid="uid://du0jvhxaafuo"]
 
 [ext_resource type="Script" uid="uid://ccbvk334spmod" path="res://scripts/mobile_controls.gd" id="1_t11yk"]
 [ext_resource type="Texture2D" uid="uid://dpiu5ixjb0aru" path="res://n_assets/n_scenes/elements/mobile_but_left.png" id="2_hy7no"]
 [ext_resource type="Texture2D" uid="uid://cj6psr231epnq" path="res://n_assets/n_scenes/elements/mobile_but_right.png" id="3_ad2tt"]
 [ext_resource type="Texture2D" uid="uid://bu5c64onqguj1" path="res://n_assets/n_scenes/elements/mobile_but_jump.png" id="4_h1u8o"]
+[ext_resource type="Script" uid="uid://bx5xrh8cm8igy" path="res://scripts/jump_but_mobile.gd" id="5_h1u8o"]
 [ext_resource type="Texture2D" uid="uid://cxhw33s8ogbrg" path="res://n_assets/n_scenes/elements/mobile_but_superjump.png" id="5_vdbwn"]
 [ext_resource type="Texture2D" uid="uid://binf5oyhst8xr" path="res://n_assets/n_scenes/elements/mobile_but_teleport.png" id="6_41s3t"]
 [ext_resource type="Script" uid="uid://cxaht0yd7bcpj" path="res://scripts/superjump_but_mobile.gd" id="6_ad2tt"]
@@ -13,16 +14,16 @@
 [ext_resource type="Texture2D" uid="uid://dsaskkaqa6h0e" path="res://n_assets/n_scenes/elements/mobile_but_esc.png" id="10_hy7no"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksrki"]
-size = Vector2(40, 40)
+size = Vector2(50, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb4s3"]
-size = Vector2(40, 40)
+size = Vector2(50, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21dcj"]
 size = Vector2(60, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_203w8"]
-size = Vector2(30, 30)
+size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgxk1"]
 size = Vector2(30, 30)
@@ -60,22 +61,22 @@ offset_right = 642.0
 offset_bottom = 357.0
 
 [node name="left_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(79, 8)
+position = Vector2(80, 3)
 texture_normal = ExtResource("2_hy7no")
 shape = SubResource("RectangleShape2D_ksrki")
 action = "ui_left"
 
 [node name="right_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(147, 8)
+position = Vector2(148, 3)
 texture_normal = ExtResource("3_ad2tt")
 shape = SubResource("RectangleShape2D_qb4s3")
 action = "ui_right"
 
 [node name="jump_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(586, 5)
+position = Vector2(592, -4)
 texture_normal = ExtResource("4_h1u8o")
 shape = SubResource("RectangleShape2D_21dcj")
-action = "ui_accept"
+script = ExtResource("5_h1u8o")
 
 [node name="superjump_but" type="TouchScreenButton" parent="Control/HBoxContainer"]
 texture_filter = 1
@@ -114,5 +115,7 @@ texture_normal = ExtResource("10_hy7no")
 shape = SubResource("RectangleShape2D_hy7no")
 action = "ui_cancel"
 
+[connection signal="pressed" from="Control/HBoxContainer/jump_but" to="Control/HBoxContainer/jump_but" method="_on_pressed"]
+[connection signal="released" from="Control/HBoxContainer/jump_but" to="Control/HBoxContainer/jump_but" method="_on_released"]
 [connection signal="pressed" from="Control/HBoxContainer/superjump_but" to="Control/HBoxContainer/superjump_but" method="_on_pressed"]
 [connection signal="released" from="Control/HBoxContainer/superjump_but" to="Control/HBoxContainer/superjump_but" method="_on_released"]

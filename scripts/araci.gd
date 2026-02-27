@@ -131,13 +131,19 @@ var invincible: bool = false          # impede dano repetido
 var invincible_time: float = 0.4      # tempo de invencibilidade após levar dano
 var is_hurt: bool = false             # trava o movimento durante knockback
 
-
+#Variável Global de Estado
+var jump_held := false
+var jump_requested := false
 
 # ============================================================
 # CÁLCULO DE FÍSICA DO PULO
 # ============================================================
 
 func _ready() -> void:
+	#Solução paliativa ajusta a altura do superpulo no mobile, já que não detecta tempo de pressão do botão
+	if OS.has_feature("mobile"):
+		superjump_factor *= 1.3
+	
 	# Gravidade para subir
 	gravity = (2.0 * jump_height) / pow(max_time_to_peak, 2.0)
 	# Gravidade para cair (um pouco maior, queda mais “pesada”)
@@ -244,8 +250,14 @@ func _update_timers(delta: float, on_floor: bool) -> void:
 	else:
 		coyote_timer -= delta
 
-	if Input.is_action_just_pressed("ui_accept"):
+	#if Input.is_action_just_pressed("ui_accept"):
+		#jump_buffer = jump_buffer_time
+	#else:
+		#jump_buffer -= delta
+
+	if jump_requested:
 		jump_buffer = jump_buffer_time
+		jump_requested = false
 	else:
 		jump_buffer -= delta
 
@@ -279,21 +291,53 @@ func do_superjump():
 		#estado = "jump"
 		##time_jump = 0.1
 
+#func _handle_jump() -> void:
+	#if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
+		#if Input.is_action_pressed("call_superjump"):
+			#do_superjump()
+		#else:
+			#do_jump()
+			
+var superjump_held := false
 func _handle_jump() -> void:
 	if jump_buffer > 0.0 and (coyote_timer > 0.0 or can_cancel):
-		if Input.is_action_pressed("call_superjump"):
+
+		if superjump_held:
 			do_superjump()
 		else:
 			do_jump()
 
+#func _apply_gravity(delta: float) -> void:
+	#if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
+		#velocity.y += gravity * 1.5 * delta
+	#elif velocity.y > 0.0:
+		#velocity.y += fall_gravity * delta
+	#else:
+		#velocity.y += gravity * delta
+
 func _apply_gravity(delta: float) -> void:
-	if velocity.y < 0.0 and not Input.is_action_pressed("ui_accept"):
+	if velocity.y < 0.0 and not jump_held:
 		velocity.y += gravity * 1.5 * delta
 	elif velocity.y > 0.0:
 		velocity.y += fall_gravity * delta
 	else:
 		velocity.y += gravity * delta
 
+func _input(event):
+	# PULO
+	if event.is_action_pressed("ui_accept"):
+		jump_requested = true
+		jump_held = true
+
+	if event.is_action_released("ui_accept"):
+		jump_held = false
+
+	# SUPERPULO
+	if event.is_action_pressed("call_superjump"):
+		superjump_held = true
+
+	if event.is_action_released("call_superjump"):
+		superjump_held = false
 
 func _handle_horizontal(delta: float,on_floor: bool) -> void:
 	var input_dir := Input.get_axis("ui_left", "ui_right")

@@ -22,6 +22,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if Globals.is_player(body):
 		$amination_life.play("collect")
 		await $CollisionShape2D.call_deferred("queue_free") #Espera a colisão acabar (impede que o item seja coletado duas vezes)
-		Globals.show_side_mensage("Você ganhou o poder do superpulo! Pressione W enquanto pula.",poison_image,8.0)
+		if OS.has_feature("mobile"):
+			Globals.show_side_mensage("Você ganhou o poder do superpulo! Toque no botão W.",poison_image,8.0)
+		else:
+			Globals.show_side_mensage("Você ganhou o poder do superpulo! Pressione W + Espaço.",poison_image,8.0)
 		Globals.pw_superjump_enabled()
 		Globals.araci.play_upgrade()
