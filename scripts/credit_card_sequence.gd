@@ -19,10 +19,10 @@ var texts = [
 	[b]Orientador:[/b]Prof. Dr. Marcos Vinícius Carneiro Vital.
 
 	[b]Histórias iniciais:[/b] Colaboração da turma do 1º ANO A do curso técnico de Redes de Computadores do Ensino Médio da ETE Francisco de Matos Sobrinho (2025)
+
+	[b]Licença:[/b] Este jogo está licenciado sob MIT License (Código) e Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0). Você pode compartilhar e adaptar este material, desde que atribua o crédito adequado, não o utilize para fins comerciais e distribua suas contribuições sob a mesma licença.
 	
-	[b]Plataforma de desenvolvimento:[/b] Godot 4.5.1 no Linux Mint 22.2 Cinnamon
-	
-	[b]Licença:[/b] Este jogo está licenciado sob a Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0). Você pode compartilhar e adaptar este material, desde que atribua o crédito adequado, não o utilize para fins comerciais e distribua suas contribuições sob a mesma licença.
+	Copyright (c) 2026 Thiago Lins do Nascimento
 	",
 	
 	#"Narrativa principal: Thiago Lins do Nascimento
