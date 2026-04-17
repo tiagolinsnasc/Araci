@@ -17,6 +17,8 @@ var texts = [
 	
 	[b]Mestrando:[/b] Thiago Lins do Nascimento.
 	[b]Orientador:[/b]Prof. Dr. Marcos Vinícius Carneiro Vital.
+	
+	O presente trabalho foi realizado com apoio da Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES)-Brasil-Código de Financiamento 001.
 
 	[b]Histórias iniciais:[/b] Colaboração da turma do 1º ANO A do curso técnico de Redes de Computadores do Ensino Médio da ETE Francisco de Matos Sobrinho (2025)
 
@@ -53,9 +55,9 @@ func show_card(index):
 	tween_bg.tween_property($ColorRect, "modulate:a", 0.0, 1.0)
 
 	# texto principal
-	$Label.text = texts[index]
-	$Label.position = positions[index]
-	$Label.modulate = Color(0,0,0,0)
+	$ScrollContainer/Label.text = texts[index]
+	$ScrollContainer/Label.position = positions[index]
+	$ScrollContainer/Label.modulate = Color(0,0,0,0)
 
 	#Texto de instruções
 	$Label_instructions.position = Vector2(260,340)
@@ -64,7 +66,7 @@ func show_card(index):
 	# fade-in com atraso
 	var tween_text = create_tween()
 	tween_text.tween_interval(0.5) # atraso de meio segundo
-	tween_text.tween_property($Label, "modulate:a", 1.0, 1.0)
+	tween_text.tween_property($ScrollContainer/Label, "modulate:a", 1.0, 1.0)
 	tween_text.tween_property($Label_instructions, "modulate:a", 1.0, 1.0)
 	# Logos começam invisíveis
 	logo_ufal.modulate = Color(1,1,1,0)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bco1w4sj2qdi2"]
+[gd_scene load_steps=12 format=3 uid="uid://bco1w4sj2qdi2"]
 
 [ext_resource type="Script" uid="uid://boxitix36c80r" path="res://scripts/credit_card_sequence.gd" id="1_4qgiy"]
 [ext_resource type="FontFile" uid="uid://cusalemk0k0kb" path="res://general_fonts/Comic_Sans_MS.ttf" id="2_4qgiy"]
+[ext_resource type="Script" uid="uid://bx2gklm5wd3wh" path="res://scripts/scroll_container.gd" id="2_fqxvo"]
 [ext_resource type="FontFile" uid="uid://b4ufdn4liosy6" path="res://general_fonts/Comic_Sans_MS_Bold.ttf" id="3_2vtag"]
 [ext_resource type="Texture2D" uid="uid://wgemlf2bm56q" path="res://n_assets/n_cuts/final/logoUfalVT.svg" id="4_8nrb0"]
 [ext_resource type="Texture2D" uid="uid://dc0ss7yx7j82x" path="res://n_assets/n_cuts/final/logo_profbioVT.svg" id="5_ln3tn"]
@@ -53,6 +54,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 script = ExtResource("1_4qgiy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -78,16 +80,34 @@ libraries = {
 &"": SubResource("AnimationLibrary_f57nv")
 }
 
-[node name="Label" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(580, 300)
-layout_mode = 0
-offset_right = 500.0
-offset_bottom = 200.0
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(630, 240)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.025
+anchor_right = 14.475
+anchor_bottom = 7.55
+offset_left = 4.0
+offset_top = 7.0
+offset_right = 54.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0062166, 0.95760286)
+mouse_filter = 0
+script = ExtResource("2_fqxvo")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer"]
+custom_minimum_size = Vector2(580, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_4qgiy")
 theme_override_fonts/bold_font = ExtResource("3_2vtag")
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
 bbcode_enabled = true
+scroll_active = false
 autowrap_mode = 2
 
 [node name="Label_instructions" type="Label" parent="."]
